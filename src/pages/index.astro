@@ -4,6 +4,7 @@ import TerminalWindow from '@/components/TerminalWindow/TerminalWindow.astro';
 import { differenceInYears } from 'date-fns';
 import { t } from 'i18next';
 import Layout from '../layouts/Layout.astro';
+import { marked } from 'marked';
 
 const age = differenceInYears(new Date(), new Date('1999-04-17'));
 ---
@@ -88,16 +89,19 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
           title={t('terminal.home.manOutput.description.title')}
         >
           <span
-            >{
+            class:list={['[&_a]:font-bold', '[&_a:hover]:underline']}
+            set:html={marked(
               t('terminal.home.manOutput.description.content.description', {
                 age,
               })
-            }
+            )}
+          />
 
-            <br /><br /></span
-          >
+          <span>
+            <br />
 
-          <span>{t('terminal.home.manOutput.description.content.hint')} </span>
+            {t('terminal.home.manOutput.description.content.hint')}
+          </span>
         </TerminalManSection>
       </div>
 

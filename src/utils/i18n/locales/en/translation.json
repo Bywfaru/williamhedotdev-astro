@@ -31,7 +31,7 @@
         "description": {
           "title": "DESCRIPTION",
           "content": {
-            "description": "William He is a {{age}}-year-old full-stack web developer with a burning passion for web design and development based in Vancouver, BC. He is a graduate of British Columbia Institute of Technology, where he completed his Computer Systems Technology (Web and Mobile Development Option) diploma and is pursuing a Bachelor of Science degree in Applied Computer Science (Wireless and Mobile Applications Option).",
+            "description": "William He is a {{age}}-year-old full-stack web developer based in Vancouver, BC with a burning passion for web design and development. He is a graduate of <a href=\"https://www.bcit.ca\" target=\"_blank\">British Columbia Institute of Technology</a>, where he completed his <a href=\"https://www.bcit.ca/programs/computer-systems-technology-diploma-full-time-5500dipma/\" target=\"_blank\">Computer Systems Technology (Web and Mobile Development Option)</a> diploma and is pursuing a Bachelor of Science degree in <a href=\"https://www.bcit.ca/programs/applied-computer-science-wireless-and-mobile-applications-development-option-bachelor-of-science-part-time-867fbsc/\" target=\"_blank\">Applied Computer Science (Wireless and Mobile Applications Option)</a>.",
             "hint": "Enter or click on one of the commands under \"SYNOPSIS\" to learn more about William He."
           }
         }
