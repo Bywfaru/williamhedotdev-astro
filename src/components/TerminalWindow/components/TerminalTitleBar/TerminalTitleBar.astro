@@ -1,7 +1,7 @@
 ---
 import { t } from '@/utils';
 import TerminalTitleBarButton from '../TerminalTitleBarButton/TerminalTitleBarButton.astro';
-
+import { Icon } from 'astro-icon/components';
 export type TerminalTitleBarProps = {
   title?: string;
 };
@@ -19,22 +19,34 @@ const { title = t('terminal.title') } = Astro.props;
     'items-center',
   ]}
 >
-  <TerminalTitleBarButton>+</TerminalTitleBarButton>
+  <TerminalTitleBarButton>
+    <Icon name="ubuntu-window-new-tab" />
+  </TerminalTitleBarButton>
 
   <span class:list={['text-ellipsis', 'select-none']}>
     {title}
   </span>
 
-  <div class:list={['flex', 'gap-3']}>
-    <div class:list={['flex', 'gap-1']}>
-      <TerminalTitleBarButton>o</TerminalTitleBarButton>
-      <TerminalTitleBarButton>=</TerminalTitleBarButton>
+  <div class:list={['flex', 'gap-3', 'items-center']}>
+    <div class:list={['flex', 'gap-2']}>
+      <TerminalTitleBarButton>
+        <Icon name="ubuntu-window-search" />
+      </TerminalTitleBarButton>
+      <TerminalTitleBarButton>
+        <Icon name="ubuntu-window-menu" />
+      </TerminalTitleBarButton>
     </div>
 
-    <div class:list={['flex', 'gap-3']}>
-      <TerminalTitleBarButton variant="circle">-</TerminalTitleBarButton>
-      <TerminalTitleBarButton variant="circle">[]</TerminalTitleBarButton>
-      <TerminalTitleBarButton variant="circle">x</TerminalTitleBarButton>
+    <div class:list={['flex', 'gap-3', 'items-center']}>
+      <TerminalTitleBarButton variant="circle">
+        <Icon name="ubuntu-window-minimize" size={8} />
+      </TerminalTitleBarButton>
+      <TerminalTitleBarButton variant="circle">
+        <Icon name="ubuntu-window-maximize" size={8} />
+      </TerminalTitleBarButton>
+      <TerminalTitleBarButton variant="circle">
+        <Icon name="ubuntu-window-close" size={8} />
+      </TerminalTitleBarButton>
     </div>
   </div>
 </div>

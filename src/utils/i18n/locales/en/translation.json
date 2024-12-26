@@ -11,7 +11,7 @@
       "manCommand": "man williamhe | cat",
       "manOutput": {
         "header": {
-          "namePage": "WILLIAMHE(1)",
+          "name": "WILLIAMHE",
           "title": "User Commands"
         },
         "name": {
@@ -30,7 +30,10 @@
         },
         "description": {
           "title": "DESCRIPTION",
-          "content": "William He is a {{age}}-year-old full-stack web developer with a burning passion for web design and development based in Vancouver, BC. He is a graduate of British Columbia Institute of Technology, where he completed his Computer Systems Technology (Web and Mobile Development Option) diploma and is pursuing a Bachelor of Science degree in Applied Computer Science (Wireless and Mobile Applications Option)."
+          "content": {
+            "description": "William He is a {{age}}-year-old full-stack web developer with a burning passion for web design and development based in Vancouver, BC. He is a graduate of British Columbia Institute of Technology, where he completed his Computer Systems Technology (Web and Mobile Development Option) diploma and is pursuing a Bachelor of Science degree in Applied Computer Science (Wireless and Mobile Applications Option).",
+            "hint": "Enter or click on one of the commands under \"SYNOPSIS\" to learn more about William He."
+          }
         }
       }
     }

@@ -16,12 +16,10 @@ const { variant = 'square' } = Astro.props;
     'items-center',
     'bg-terminal-menu-bar-btn-bg',
     'hover:bg-terminal-menu-bar-btn-hover-bg',
-    'aspect-square',
-    'h-6',
     'transition-colors',
     'select-none',
-    variant === 'square' && ['rounded-[4px]'],
-    variant === 'circle' && ['rounded-full'],
+    variant === 'square' && ['rounded-[4px]', 'h-9', 'w-10'],
+    variant === 'circle' && ['rounded-full', 'h-7', 'aspect-square'],
   ]}
 >
   <slot />
