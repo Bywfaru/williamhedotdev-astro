@@ -1,0 +1,37 @@
+---
+import { t } from '@/utils';
+import { differenceInYears } from 'date-fns';
+import TerminalBody from './components/TerminalBody/TerminalBody.astro';
+import TerminalManSection from './components/TerminalManSection/TerminalManSection.astro';
+import TerminalTitleBar from './components/TerminalTitleBar/TerminalTitleBar.astro';
+
+export type TerminalWindowProps = {
+  title?: string;
+};
+type Props = TerminalWindowProps;
+
+const { title } = Astro.props;
+---
+
+<!-- Terminal window -->
+<div
+  class:list={[
+    'flex',
+    'flex-col',
+    'w-full',
+    'h-[calc(100vh-1.5rem)]',
+    'text-terminal-text-1',
+    'rounded-t-lg',
+    'overflow-hidden',
+    'border',
+    'border-[black]',
+    'shadow-lg',
+    'max-w-screen-md',
+  ]}
+>
+  <TerminalTitleBar title={title} />
+
+  <TerminalBody>
+    <slot />
+  </TerminalBody>
+</div>

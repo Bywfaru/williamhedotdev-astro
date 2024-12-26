@@ -1,0 +1,40 @@
+---
+import { t } from '@/utils';
+import TerminalTitleBarButton from '../TerminalTitleBarButton/TerminalTitleBarButton.astro';
+
+export type TerminalTitleBarProps = {
+  title?: string;
+};
+type Props = TerminalTitleBarProps;
+
+const { title = t('terminal.title') } = Astro.props;
+---
+
+<div
+  class:list={[
+    'p-2',
+    'flex',
+    'justify-between',
+    'bg-terminal-menu-bar-bg',
+    'items-center',
+  ]}
+>
+  <TerminalTitleBarButton>+</TerminalTitleBarButton>
+
+  <span class:list={['text-ellipsis', 'select-none']}>
+    {title}
+  </span>
+
+  <div class:list={['flex', 'gap-3']}>
+    <div class:list={['flex', 'gap-1']}>
+      <TerminalTitleBarButton>o</TerminalTitleBarButton>
+      <TerminalTitleBarButton>=</TerminalTitleBarButton>
+    </div>
+
+    <div class:list={['flex', 'gap-3']}>
+      <TerminalTitleBarButton variant="circle">-</TerminalTitleBarButton>
+      <TerminalTitleBarButton variant="circle">[]</TerminalTitleBarButton>
+      <TerminalTitleBarButton variant="circle">x</TerminalTitleBarButton>
+    </div>
+  </div>
+</div>

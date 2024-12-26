@@ -1,0 +1,38 @@
+{
+  "site": {
+    "title": "William He | Software Engineer",
+    "description": "William He is a software engineer based in Vancouver, Canada. He specializes in full-stack web development and has experience with a variety of technologies."
+  },
+  "terminal": {
+    "title": "contact@williamhedotdev:~",
+    "user": "contact",
+    "domain": "williamhedotdev",
+    "home": {
+      "manCommand": "man williamhe | cat",
+      "manOutput": {
+        "header": {
+          "namePage": "WILLIAMHE(1)",
+          "title": "User Commands"
+        },
+        "name": {
+          "title": "NAME",
+          "content": "williamhe - software developer with a knack for web development"
+        },
+        "synopsis": {
+          "title": "SYNOPSIS",
+          "content": {
+            "portfolio": "williamhe --portfolio",
+            "education": "williamhe --education",
+            "experience": "williamhe --experience",
+            "skills": "williamhe --skills",
+            "contact": "williamhe --contact"
+          }
+        },
+        "description": {
+          "title": "DESCRIPTION",
+          "content": "William He is a {{age}}-year-old full-stack web developer with a burning passion for web design and development based in Vancouver, BC. He is a graduate of British Columbia Institute of Technology, where he completed his Computer Systems Technology (Web and Mobile Development Option) diploma and is pursuing a Bachelor of Science degree in Applied Computer Science (Wireless and Mobile Applications Option)."
+        }
+      }
+    }
+  }
+}

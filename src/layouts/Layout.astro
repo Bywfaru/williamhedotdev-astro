@@ -1,22 +1,61 @@
+---
+import ubuntuWallpaperImg from '@/assets/images/ubuntu-wallpaper.jpg';
+import { i18next, t } from '@/utils';
+import '@fontsource/ubuntu';
+import '@fontsource/ubuntu-mono';
+import { Image } from 'astro:assets';
+---
+
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
+<html lang={i18next.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{t('site.title')}</title>
+    <meta name="description" content={t('site.description')} />
+  </head>
+  <body>
+    <div
+      class:list={[
+        'flex',
+        'flex-col',
+        'items-center',
+        'py-3',
+        'px-5',
+        'bg-body-bg',
+        'relative',
+        'h-screen',
+        'font-serif',
+      ]}
+    >
+      <Image
+        src={ubuntuWallpaperImg}
+        alt=""
+        class:list={[
+          'absolute',
+          'top-0',
+          'left-0',
+          'size-full',
+          'object-cover',
+          'z-0',
+          'pointer-events-none',
+        ]}
+      />
+
+      <div class:list={['relative']}>
+        <slot />
+      </div>
+    </div>
+  </body>
 </html>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
 </style>

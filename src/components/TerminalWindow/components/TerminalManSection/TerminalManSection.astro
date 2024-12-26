@@ -1,0 +1,24 @@
+---
+export type TerminalManSectionProps = {
+  title: string;
+};
+type Props = TerminalManSectionProps;
+
+const { title } = Astro.props;
+---
+
+<div>
+  <span class:list={['uppercase']}>{title}</span>
+
+  <div
+    class:list={[
+      'pl-[calc(1rem*4)]',
+      'md:pl-[calc(1rem*7)]',
+      'flex',
+      'flex-col',
+      'transition-all',
+    ]}
+  >
+    <slot />
+  </div>
+</div>
