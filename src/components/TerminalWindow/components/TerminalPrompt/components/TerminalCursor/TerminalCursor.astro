@@ -1,0 +1,10 @@
+---
+export type TerminalCursorProps = {
+  idle?: boolean;
+};
+type Props = TerminalCursorProps;
+
+const { idle = true } = Astro.props;
+---
+
+<span class:list={[idle && "animate-blink"]}>█</span>

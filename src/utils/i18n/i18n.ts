@@ -1,8 +1,8 @@
-import i18next from 'i18next';
-import enTranslation from './locales/en/translation.json';
+import i18next from "i18next";
+import enTranslation from "./locales/en/translation.json";
 
 i18next.init({
-  fallbackLng: 'en',
+  fallbackLng: "en",
   resources: {
     en: {
       translation: enTranslation,

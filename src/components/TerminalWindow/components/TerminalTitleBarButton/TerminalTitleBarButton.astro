@@ -1,25 +1,29 @@
 ---
 export type TerminalTitleBarButtonProps = {
-  variant?: 'square' | 'circle';
+  variant?: "square" | "circle";
 };
 type Props = TerminalTitleBarButtonProps;
 
-const { variant = 'square' } = Astro.props;
+const { variant = "square" } = Astro.props;
 ---
 
 <button
   class:list={[
-    'border',
-    'border-terminal-menu-bar-btn-border',
-    'flex',
-    'justify-center',
-    'items-center',
-    'bg-terminal-menu-bar-btn-bg',
-    'hover:bg-terminal-menu-bar-btn-hover-bg',
-    'transition-colors',
-    'select-none',
-    variant === 'square' && ['rounded-[4px]', 'h-9', 'w-10'],
-    variant === 'circle' && ['rounded-full', 'h-7', 'aspect-square'],
+    "flex",
+    "justify-center",
+    "items-center",
+    "bg-terminal-menu-bar-btn-bg",
+    "hover:bg-terminal-menu-bar-btn-hover-bg",
+    "transition-colors",
+    "select-none",
+    variant === "square" && [
+      "rounded-[4px]",
+      "h-9",
+      "w-10",
+      "border",
+      "border-terminal-menu-bar-btn-border",
+    ],
+    variant === "circle" && ["rounded-full", "h-6", "aspect-square"],
   ]}
 >
   <slot />

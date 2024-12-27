@@ -1,0 +1,42 @@
+---
+import { t } from "@/utils";
+import TerminalCursor from "./components/TerminalCursor/TerminalCursor.astro";
+
+export type TerminalPromptProps = {
+  user?: string;
+  domain?: string;
+  path?: string;
+  sudo?: boolean;
+  hasRun?: boolean;
+};
+type Props = TerminalPromptProps;
+
+const {
+  hasRun,
+  sudo,
+  domain = t("terminal.domain"),
+  path = "~",
+  user = t("terminal.user"),
+} = Astro.props;
+---
+
+<span>
+  <span
+    class:list={[
+      "text-terminal-text-2",
+      "font-bold",
+      "selection:bg-terminal-text-2",
+      "selection:text-terminal-bg",
+    ]}>{user}@{domain}</span
+  >:<span
+    class:list={[
+      "text-terminal-text-3",
+      "selection:bg-terminal-text-3",
+      "selection:text-terminal-bg",
+    ]}>{path}</span
+  >{sudo ? "$" : "#"}
+
+  <span>
+    <slot />{!hasRun && <TerminalCursor />}
+  </span>
+</span>

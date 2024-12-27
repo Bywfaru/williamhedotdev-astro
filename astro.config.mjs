@@ -1,10 +1,10 @@
 // @ts-check
-import react from '@astrojs/react';
-import tailwind from '@astrojs/tailwind';
-import { defineConfig } from 'astro/config';
-import { fileURLToPath, URL } from 'url';
+import react from "@astrojs/react";
+import tailwind from "@astrojs/tailwind";
+import { defineConfig } from "astro/config";
+import { fileURLToPath, URL } from "url";
 
-import icon from 'astro-icon';
+import icon from "astro-icon";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,8 +13,8 @@ export default defineConfig({
     resolve: {
       alias: [
         {
-          find: '@',
-          replacement: fileURLToPath(new URL('./src', import.meta.url)),
+          find: "@",
+          replacement: fileURLToPath(new URL("./src", import.meta.url)),
         },
       ],
     },
