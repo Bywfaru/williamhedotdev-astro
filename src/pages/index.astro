@@ -1,117 +1,15 @@
 ---
-import TerminalManSection from "@/components/TerminalWindow/components/TerminalManSection/TerminalManSection.astro";
-import TerminalWindow from "@/components/TerminalWindow/TerminalWindow.astro";
-import { differenceInYears } from "date-fns";
-import { t } from "@/utils";
-import Layout from "../layouts/Layout.astro";
-import { marked } from "marked";
-import TerminalPrompt from "@/components/TerminalWindow/components/TerminalPrompt/TerminalPrompt.astro";
+import { HomeTerminalWindow } from '@/components/pageSpecific/home/HomeTerminalWindow';
+import { differenceInYears } from 'date-fns';
+import Layout from '../layouts/Layout.astro';
 
-const age = differenceInYears(new Date(), new Date("1999-04-17"));
+const age = differenceInYears(new Date(), new Date('1999-04-17'));
 ---
 
 <Layout>
-  <TerminalWindow>
-    <!-- man command -->
-    <TerminalPrompt hasRun>
-      {t("terminal.home.manCommand")}
-    </TerminalPrompt>
-
-    <!-- man command output -->
-    <span
-      class:list={[
-        "pr-4",
-        "[&_a:hover]:bg-terminal-text-1",
-        "[&_a:hover]:text-terminal-bg",
-        "[&_a]:font-bold",
-        "[&_a]:underline",
-      ]}
-    >
-      <!-- Header -->
-      <div class:list={["flex", "justify-between"]}>
-        <span>
-          <span class:list={["underline"]}
-            >{t("terminal.home.manOutput.header.name")}</span
-          ><span>(1)</span>
-        </span>
-        <span>{t("terminal.home.manOutput.header.title")}</span>
-        <span>
-          <span class:list={["underline"]}
-            >{t("terminal.home.manOutput.header.name")}</span
-          ><span>(1)</span>
-        </span>
-      </div>
-
-      <!-- Content -->
-      <div class:list={["flex", "flex-col"]}>
-        <!-- Name -->
-        <TerminalManSection title={t("terminal.home.manOutput.name.title")}>
-          <span>{t("terminal.home.manOutput.name.content")}</span>
-        </TerminalManSection>
-
-        <!-- Synopsis -->
-        <TerminalManSection title={t("terminal.home.manOutput.synopsis.title")}>
-          <a
-            href="/portfolio"
-            class:list={["w-fit", "hover:underline", "font-bold"]}
-            >{t("terminal.home.manOutput.synopsis.content.portfolio")}</a
-          >
-          <a
-            href="/experience"
-            class:list={["w-fit", "hover:underline", "font-bold"]}
-            >{t("terminal.home.manOutput.synopsis.content.experience")}</a
-          >
-          <a
-            href="/skills"
-            class:list={["w-fit", "hover:underline", "font-bold"]}
-            >{t("terminal.home.manOutput.synopsis.content.skills")}</a
-          >
-          <a
-            href="/education"
-            class:list={["w-fit", "hover:underline", "font-bold"]}
-            >{t("terminal.home.manOutput.synopsis.content.education")}</a
-          >
-          <a
-            href="/contact"
-            class:list={["w-fit", "hover:underline", "font-bold"]}
-            >{t("terminal.home.manOutput.synopsis.content.contact")}</a
-          >
-        </TerminalManSection>
-
-        <!-- Description -->
-        <TerminalManSection
-          title={t("terminal.home.manOutput.description.title")}
-        >
-          <span
-            set:html={marked(
-              t("terminal.home.manOutput.description.content.description", {
-                age,
-              })
-            )}
-          />
-
-          <span>
-            <br />
-
-            {t("terminal.home.manOutput.description.content.hint")}
-          </span>
-        </TerminalManSection>
-      </div>
-
-      <br />
-
-      <!-- Footer -->
-      <div class:list={["flex", "justify-between"]}>
-        <span>{process.env.npm_package_version}</span>
-        <span>2024-12-25</span>
-        <span>
-          <span class:list={["underline"]}
-            >{t("terminal.home.manOutput.header.name")}</span
-          ><span>(1)</span>
-        </span>
-      </div>
-    </span>
-
-    <TerminalPrompt />
-  </TerminalWindow>
+  <HomeTerminalWindow
+    client:load
+    age={age}
+    version={process.env.npm_package_version}
+  />
 </Layout>

@@ -8,8 +8,8 @@
     "user": "contact",
     "domain": "williamhedotdev",
     "home": {
-      "manCommand": "man williamhe | cat",
-      "manOutput": {
+      "command": "man williamhe | cat",
+      "output": {
         "header": {
           "name": "WILLIAMHE",
           "title": "User Commands"
@@ -35,6 +35,19 @@
             "hint": "Enter or click on one of the commands under \"SYNOPSIS\" to learn more about William He."
           }
         }
+      }
+    },
+    "portfolio": {
+      "title": "Portfolio",
+      "description": "William He's portfolio showcases his projects and work experience. Click on a project to learn more about it.",
+      "command": "williamhe --portfolio",
+      "output": {
+        "header": {
+          "title": "PORTFOLIO"
+        },
+        "description": "This is a list of all my works, both academic and professional. Click on a project to learn more about it.",
+        "selectAProject": "Select a project",
+        "selectAProjectHint": "Use arrow-keys or click on a list item to view."
       }
     }
   }

@@ -1,0 +1,27 @@
+---
+import type { PortfolioProject } from '@/components/pageSpecific/portfolio/PortfolioTerminalWindow';
+import { PortfolioTerminalWindow } from '@/components/pageSpecific/portfolio/PortfolioTerminalWindow';
+import Layout from '../layouts/Layout.astro';
+
+const projects: PortfolioProject[] = [
+  {
+    title: 'Only The Best Nutrition',
+    description: '',
+    techStack: ['Next.js', 'Material UI', 'TypeScript', 'Netlify CMS'],
+  },
+  {
+    title: 'MealoBox',
+    description: '',
+    techStack: ['React Native', 'TypeScript', 'Expo', 'Firebase'],
+  },
+  {
+    title: 'The Refill Stop',
+    description: '',
+    techStack: ['Astro', 'TypeScript', 'Tailwind CSS', 'Firebase', 'CMS'],
+  },
+];
+---
+
+<Layout>
+  <PortfolioTerminalWindow client:load projects={projects} />
+</Layout>
