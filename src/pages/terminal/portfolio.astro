@@ -1,7 +1,7 @@
 ---
-import type { PortfolioProject } from '@/components/pageSpecific/portfolio/PortfolioTerminalWindow';
-import { PortfolioTerminalWindow } from '@/components/pageSpecific/portfolio/PortfolioTerminalWindow';
-import Layout from '../layouts/Layout.astro';
+import type { PortfolioProject } from '@/components/pageSpecific/terminal/portfolio/PortfolioTerminalWindow';
+import { PortfolioTerminalWindow } from '@/components/pageSpecific/terminal/portfolio/PortfolioTerminalWindow';
+import TerminalLayout from '@/layouts/TerminalLayout.astro';
 
 const projects: PortfolioProject[] = [
   {
@@ -22,6 +22,6 @@ const projects: PortfolioProject[] = [
 ];
 ---
 
-<Layout>
+<TerminalLayout>
   <PortfolioTerminalWindow client:load projects={projects} />
-</Layout>
+</TerminalLayout>

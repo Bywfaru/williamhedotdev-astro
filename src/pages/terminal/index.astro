@@ -1,0 +1,15 @@
+---
+import { HomeTerminalWindow } from '@/components/pageSpecific/terminal/home/HomeTerminalWindow';
+import { differenceInYears } from 'date-fns';
+import TerminalLayout from '@/layouts/TerminalLayout.astro';
+
+const age = differenceInYears(new Date(), new Date('1999-04-17'));
+---
+
+<TerminalLayout>
+  <HomeTerminalWindow
+    client:load
+    age={age}
+    version={process.env.npm_package_version}
+  />
+</TerminalLayout>

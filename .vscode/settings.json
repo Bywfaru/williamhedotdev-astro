@@ -12,5 +12,9 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit",
     "source.organizeImports": "never"
-  }
+  },
+  "i18n-ally.localesPaths": [
+    "src/utils/i18n",
+    "src/utils/i18n/locales"
+  ]
 }
