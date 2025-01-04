@@ -1,0 +1,52 @@
+---
+import dotGridWhite from '@/assets/images/dot-grid-white.png';
+import { i18next, t } from '@/utils';
+import '@fontsource-variable/fira-code';
+import '@fontsource/fira-sans';
+
+import { getImage } from 'astro:assets';
+
+const optimizedBackgroundImage = await getImage({
+  src: dotGridWhite,
+  quality: 70,
+});
+---
+
+<!doctype html>
+<html lang={i18next.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{t('site.title')}</title>
+    <meta name="description" content={t('site.description')} />
+  </head>
+  <body
+    class:list={['bg-body-bg', 'font-sans', 'bg-repeat']}
+    style={`background-image: url('${optimizedBackgroundImage.src}')`}
+  >
+    <div
+      class:list={[
+        'flex',
+        'flex-col',
+        'px-5',
+        'gap-20',
+        'w-full',
+        'max-w-screen-lg',
+        'mx-auto',
+      ]}
+    >
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>
