@@ -17,12 +17,18 @@ export default {
       'terminal-menu-bar-btn-border': '#202020',
       'terminal-cmd-question-mark': '#2B9FB2',
       'terminal-cmd-select-arrow': '#29A2B5',
+      primary: '#071013',
+      secondary: '#B7999C',
+      tertiary: '#AAAAAA',
+      'accent-1': '#DFE0E2',
+      'accent-2': '#EB5160',
     },
     extend: {
       fontFamily: {
-        sans: [...defaultTheme.fontFamily.sans],
-        serif: ['Ubuntu', ...defaultTheme.fontFamily.serif],
-        mono: ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
+        sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
+        mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],
+        'terminal-serif': ['Ubuntu', ...defaultTheme.fontFamily.serif],
+        'terminal-mono': ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
       },
       keyframes: {
         blink: {
