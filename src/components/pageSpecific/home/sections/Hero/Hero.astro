@@ -1,0 +1,96 @@
+---
+import clsx from 'clsx';
+import { Github, Linkedin } from 'lucide-react';
+import { IconButton } from '../../general/IconButton/IconButton';
+import NameLogo from '../../general/NameLogo.astro';
+import { TextButton } from '../../general/TextButton';
+
+const GITHUB_URL = 'https://github.com/bywfaru';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/williamhevancity';
+---
+
+<script>
+  import { gsap } from 'gsap';
+
+  const subheading = document.querySelector('.heroSubheading');
+  const socials = document.querySelector('.heroSocials');
+  const getInTouch = document.querySelector('.heroGetInTouch');
+
+  const timeline = gsap.timeline({
+    delay: 1.5,
+    defaults: {
+      duration: 0.5,
+    },
+  });
+
+  timeline
+    .fromTo(
+      subheading,
+      {
+        opacity: 0,
+        y: '100%',
+      },
+      {
+        opacity: 1,
+        y: 0,
+      }
+    )
+    .fromTo(
+      socials,
+      {
+        opacity: 0,
+        y: '100%',
+      },
+      {
+        opacity: 1,
+        y: 0,
+      }
+    )
+    .fromTo(
+      getInTouch,
+      {
+        opacity: 0,
+        y: '100%',
+      },
+      {
+        opacity: 1,
+        y: 0,
+      }
+    );
+</script>
+
+<section
+  id="hero"
+  class:list={[
+    'w-full',
+    'flex',
+    'flex-col',
+    'gap-10',
+    'justify-center',
+    'h-screen',
+  ]}
+>
+  <div class:list={['flex', 'flex-col', 'gap-5', 'w-full']}>
+    <h1 class:list={['sr-only']}>William He</h1>
+    <NameLogo size={286} />
+
+    <h2
+      class:list={['heroSubheading', 'text-accent-1', 'font-mono', 'text-xl']}
+    >
+      Full-stack<br />software engineer
+    </h2>
+
+    <div class:list={['heroSocials', 'flex', 'gap-5']}>
+      <IconButton type="link" size={48} href={GITHUB_URL}>
+        <Github />
+      </IconButton>
+      <IconButton type="link" size={48} href={LINKEDIN_URL}>
+        <Linkedin />
+      </IconButton>
+    </div>
+  </div>
+
+  <TextButton type="link" href="#contact" className={clsx(['heroGetInTouch'])}
+    >Get in touch</TextButton
+  >
+</section>

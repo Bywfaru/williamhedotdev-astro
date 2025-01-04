@@ -1,15 +1,12 @@
 ---
-import { HomeTerminalWindow } from '@/components/pageSpecific/home/HomeTerminalWindow';
-import { differenceInYears } from 'date-fns';
-import Layout from '../layouts/Layout.astro';
-
-const age = differenceInYears(new Date(), new Date('1999-04-17'));
+import About from '@/components/pageSpecific/home/sections/About/About.astro';
+import Hero from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
+import Skills from '@/components/pageSpecific/home/sections/Skills/Skills.astro';
+import MainLayout from '@/layouts/MainLayout.astro';
 ---
 
-<Layout>
-  <HomeTerminalWindow
-    client:load
-    age={age}
-    version={process.env.npm_package_version}
-  />
-</Layout>
+<MainLayout>
+  <Hero />
+  <About />
+  <Skills />
+</MainLayout>

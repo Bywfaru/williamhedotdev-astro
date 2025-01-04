@@ -1,0 +1,72 @@
+---
+import { differenceInYears } from 'date-fns';
+
+const age = differenceInYears(new Date(), new Date('1999-04-17'));
+---
+
+<script>
+  import { gsap } from 'gsap';
+
+  const timeline = gsap.timeline({
+    delay: 1.5,
+    defaults: {
+      duration: 0.5,
+    },
+  });
+</script>
+
+<section
+  id="about"
+  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+>
+  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+    <h2 class:list={['aboutHeading', 'text-accent-1', 'font-bold', 'text-6xl']}>
+      Hi, I'm<br />William
+    </h2>
+    <h3
+      class:list={['aboutSubheading', 'text-tertiary', 'font-mono', 'text-xl']}
+    >
+      Pleased to meet you
+    </h3>
+  </div>
+
+  <div
+    class:list={[
+      'w-full',
+      'flex',
+      'flex-col',
+      'gap-5',
+      'text-secondary',
+      '[&_strong]:text-accent-2',
+      '[&_a]:text-accent-2',
+      '[&_a]:underline',
+    ]}
+  >
+    <p>
+      I am a {age}-year-old <strong
+        >full-stack software engineer based in Vancouver, BC</strong
+      >, with a strong passion for web design and development.
+    </p>
+
+    <p>
+      I graduated from the <a href="https://www.bcit.ca" target="_blank"
+        >British Columbia Institute of Technology</a
+      > with a diploma in <a
+        href="https://www.bcit.ca/programs/computer-systems-technology-diploma-full-time-5500dipma/"
+        target="_blank"
+        >Computer Systems Technology (Web and Mobile Development option)</a
+      > and am currently pursuing a Bachelor of Science in <a
+        href="https://www.bcit.ca/programs/applied-computer-science-wireless-and-mobile-applications-development-option-bachelor-of-science-part-time-867fbsc/"
+        target="_blank"
+        >Computer Science (Wireless and Mobile Applications option)</a
+      >.
+    </p>
+
+    <p>
+      With the combination of my education and professional experience, I am
+      <strong>confident</strong> in my ability to make a <strong
+        >meaningful contribution</strong
+      > to your team.
+    </p>
+  </div>
+</section>
