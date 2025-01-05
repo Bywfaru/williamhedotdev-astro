@@ -6,8 +6,9 @@ import type {
   PropsWithChildren,
 } from 'react';
 
-export type TextButtonProps = PropsWithChildren<{
+export type ButtonProps = PropsWithChildren<{
   className?: string;
+  variant?: 'primary' | 'secondary';
 }> &
   (
     | {
@@ -24,12 +25,13 @@ export type TextButtonProps = PropsWithChildren<{
       }
   );
 
-export const TextButton = ({
+export const Button = ({
   children,
   className,
+  variant = 'primary',
   ...restProps
-}: TextButtonProps) => {
-  const CLASSNAME = clsx([
+}: ButtonProps) => {
+  let classNameVariant = clsx([
     className,
     'group',
     'bg-accent-2',
@@ -53,9 +55,29 @@ export const TextButton = ({
     '[&_*]:transition',
   ]);
 
+  switch (variant) {
+    case 'secondary': {
+      classNameVariant = clsx([
+        className,
+        'group',
+        'text-accent-2',
+        'font-mono',
+        'text-xl',
+        'w-fit',
+        'h-fit',
+        'hover:text-accent-1',
+        'transition',
+        '[&_*]:transition',
+      ]);
+    }
+    default: {
+      break;
+    }
+  }
+
   if (restProps.type === 'link')
     return (
-      <a href={restProps.href} className={CLASSNAME}>
+      <a href={restProps.href} className={classNameVariant}>
         {children}
       </a>
     );
@@ -64,7 +86,7 @@ export const TextButton = ({
     <button
       type={restProps.buttonType}
       onClick={restProps.onClick}
-      className={CLASSNAME}
+      className={classNameVariant}
     >
       {children}
     </button>

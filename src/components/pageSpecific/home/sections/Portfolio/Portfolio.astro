@@ -1,8 +1,41 @@
 ---
-import { Image } from 'astro:assets';
-import iPhone14ProMaxImage from '@/assets/images/iphone-14-pro-max.png';
 import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
-import { TextButton } from '../../general/TextButton';
+import theRefillStopMobileImage from '@/assets/images/portfolioScreenshots/theRefillStop/mobile.png';
+import { getImage } from 'astro:assets';
+import {
+  PortfolioItems,
+  type PortfolioItem,
+} from './components/PortfolioItems';
+
+const portfolioItems: PortfolioItem[] = await Promise.all([
+  {
+    name: 'Only The Best Nutrition',
+    stack: ['Next.js 13', 'Headless CMS', 'Google Analytics', 'SEO', 'Stripe'],
+    description:
+      'An SEO-optimized Next.js 13 online store that implements Google Analytics and a headless CMS for simple page and product customization.',
+    mobile: await getImage({
+      src: onlyTheBestNutritionMobileImage,
+      quality: 70,
+    }),
+  },
+  {
+    name: 'The Refill Stop',
+    stack: [
+      'Astro',
+      'React',
+      'Headless CMS',
+      'Google Analytics',
+      'SEO',
+      'Stripe',
+    ],
+    description:
+      'An SEO-optimized Astro online store with React components that implements Google Analytics and a headless CMS for simple page and product customization.',
+    mobile: await getImage({
+      src: theRefillStopMobileImage,
+      quality: 70,
+    }),
+  },
+]);
 ---
 
 <script>
@@ -19,6 +52,7 @@ import { TextButton } from '../../general/TextButton';
   );
   const portfolioItemContent = document.querySelector('.portfolioItemContent');
   const portfolioItemButton = document.querySelector('.portfolioItemButton');
+  const portfolioNavButtons = document.querySelector('.portfolioNavButtons');
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -46,7 +80,8 @@ import { TextButton } from '../../general/TextButton';
       { y: 0, opacity: 1 }
     )
     .fromTo(portfolioItemContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioItemButton, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
+    .fromTo(portfolioItemButton, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(portfolioNavButtons, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
 </script>
 
 <section
@@ -95,77 +130,5 @@ import { TextButton } from '../../general/TextButton';
     </p>
   </div>
 
-  <div class:list={['grid', 'grid-cols-3', 'gap-5', 'py-5']}>
-    <div class:list={['col-span-1', 'relative', 'h-[533px]']}>
-      <div
-        class:list={[
-          'portfolioDevice',
-          'min-w-[257px]',
-          'min-h-[533px]',
-          'absolute',
-          'top-0',
-          'right-0',
-          'rounded-[42px]',
-          'overflow-hidden',
-        ]}
-      >
-        <Image
-          src={onlyTheBestNutritionMobileImage}
-          alt="Only The Best Nutrition mobile screenshot"
-          loading="lazy"
-          class:list={['size-full', 'absolute', 'top-0', 'left-0']}
-        />
-        <Image
-          src={iPhone14ProMaxImage}
-          alt="iPhone 14 Pro Max frame"
-          loading="lazy"
-          class:list={[
-            'size-full',
-            'absolute',
-            'top-0',
-            'left-0',
-            'object-contain',
-            'object-center',
-          ]}
-        />
-      </div>
-    </div>
-
-    <div class:list={['col-span-2', 'flex', 'flex-col', 'gap-5', 'py-5']}>
-      <div class:list={['flex', 'flex-col', 'gap-2']}>
-        <h4
-          class:list={[
-            'portfolioItemHeading',
-            'text-accent-1',
-            'font-semibold',
-            'text-3xl',
-          ]}
-        >
-          Only The Best Nutrition
-        </h4>
-
-        <h5
-          class:list={[
-            'portfolioItemSubheading',
-            'text-tertiary',
-            'font-mono',
-            'text-xl',
-          ]}
-        >
-          Next.js 13, Headless CMS, Google Analytics, SEO
-        </h5>
-      </div>
-
-      <p class:list={['portfolioItemContent', 'text-secondary']}>
-        An SEO-optimized Next.js 13 online store that implements Google
-        Analytics and a headless CMS for simple page and product customization.
-      </p>
-
-      <div class:list={['portfolioItemButton']}>
-        <TextButton type="link" href="/portfolio/only-the-best-nutrition"
-          >More details
-        </TextButton>
-      </div>
-    </div>
-  </div>
+  <PortfolioItems client:load items={portfolioItems} />
 </section>
