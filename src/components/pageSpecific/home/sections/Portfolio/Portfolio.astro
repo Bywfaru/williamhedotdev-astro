@@ -1,0 +1,171 @@
+---
+import { Image } from 'astro:assets';
+import iPhone14ProMaxImage from '@/assets/images/iphone-14-pro-max.png';
+import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
+import { TextButton } from '../../general/TextButton';
+---
+
+<script>
+  import { gsap } from '@/utils';
+
+  const portfolioSection = document.querySelector('#portfolio');
+  const portfolioHeading = document.querySelector('.portfolioHeading');
+  const portfolioSubheading = document.querySelector('.portfolioSubheading');
+  const portfolioContent = document.querySelectorAll('.portfolioContent');
+  const portfolioDevice = document.querySelector('.portfolioDevice');
+  const portfolioItemHeading = document.querySelector('.portfolioItemHeading');
+  const portfolioItemSubheading = document.querySelector(
+    '.portfolioItemSubheading'
+  );
+  const portfolioItemContent = document.querySelector('.portfolioItemContent');
+  const portfolioItemButton = document.querySelector('.portfolioItemButton');
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: portfolioSection,
+    },
+    defaults: {
+      duration: 0.25,
+    },
+  });
+
+  timeline
+    .fromTo(portfolioHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(portfolioSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(portfolioContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(portfolioDevice, { x: -50, opacity: 0 }, { x: 0, opacity: 1 })
+    .fromTo(
+      portfolioItemHeading,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1 },
+      '-=0.5'
+    )
+    .fromTo(
+      portfolioItemSubheading,
+      { y: 50, opacity: 0 },
+      { y: 0, opacity: 1 }
+    )
+    .fromTo(portfolioItemContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(portfolioItemButton, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
+</script>
+
+<section
+  id="portfolio"
+  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+>
+  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+    <h2
+      class:list={[
+        'portfolioHeading',
+        'text-accent-1',
+        'font-bold',
+        'text-6xl',
+      ]}
+    >
+      Not just a dog who's all bark, no bite
+    </h2>
+    <h3
+      class:list={[
+        'portfolioSubheading',
+        'text-tertiary',
+        'font-mono',
+        'text-xl',
+      ]}
+    >
+      I won't actually bite you. I promise.
+    </h3>
+  </div>
+
+  <div
+    class:list={[
+      'portfolioContent',
+      'w-full',
+      'flex',
+      'flex-col',
+      'gap-5',
+      'text-secondary',
+      '[&_strong]:text-accent-2',
+      '[&_a]:text-accent-2',
+      '[&_a]:underline',
+    ]}
+  >
+    <p>
+      Here's just a small sample as an appetizer. Add me to your team for the
+      main course. I'll even make dessert!
+    </p>
+  </div>
+
+  <div class:list={['grid', 'grid-cols-3', 'gap-5', 'py-5']}>
+    <div class:list={['col-span-1', 'relative', 'h-[533px]']}>
+      <div
+        class:list={[
+          'portfolioDevice',
+          'min-w-[257px]',
+          'min-h-[533px]',
+          'absolute',
+          'top-0',
+          'right-0',
+          'rounded-[42px]',
+          'overflow-hidden',
+        ]}
+      >
+        <Image
+          src={onlyTheBestNutritionMobileImage}
+          alt="Only The Best Nutrition mobile screenshot"
+          loading="lazy"
+          class:list={['size-full', 'absolute', 'top-0', 'left-0']}
+        />
+        <Image
+          src={iPhone14ProMaxImage}
+          alt="iPhone 14 Pro Max frame"
+          loading="lazy"
+          class:list={[
+            'size-full',
+            'absolute',
+            'top-0',
+            'left-0',
+            'object-contain',
+            'object-center',
+          ]}
+        />
+      </div>
+    </div>
+
+    <div class:list={['col-span-2', 'flex', 'flex-col', 'gap-5', 'py-5']}>
+      <div class:list={['flex', 'flex-col', 'gap-2']}>
+        <h4
+          class:list={[
+            'portfolioItemHeading',
+            'text-accent-1',
+            'font-semibold',
+            'text-3xl',
+          ]}
+        >
+          Only The Best Nutrition
+        </h4>
+
+        <h5
+          class:list={[
+            'portfolioItemSubheading',
+            'text-tertiary',
+            'font-mono',
+            'text-xl',
+          ]}
+        >
+          Next.js 13, Headless CMS, Google Analytics, SEO
+        </h5>
+      </div>
+
+      <p class:list={['portfolioItemContent', 'text-secondary']}>
+        An SEO-optimized Next.js 13 online store that implements Google
+        Analytics and a headless CMS for simple page and product customization.
+      </p>
+
+      <div class:list={['portfolioItemButton']}>
+        <TextButton type="link" href="/portfolio/only-the-best-nutrition"
+          >More details
+        </TextButton>
+      </div>
+    </div>
+  </div>
+</section>

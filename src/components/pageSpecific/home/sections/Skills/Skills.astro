@@ -1,28 +1,38 @@
----
-import { differenceInYears } from 'date-fns';
----
-
 <script>
-  import { gsap } from 'gsap';
+  import { gsap } from '@/utils';
+
+  const skillsSection = document.querySelector('#skills');
+  const skillsHeading = document.querySelector('.skillsHeading');
+  const skillsSubheading = document.querySelector('.skillsSubheading');
+  const skillsContent = document.querySelectorAll('.skillsContent');
 
   const timeline = gsap.timeline({
-    delay: 1.5,
+    scrollTrigger: {
+      trigger: skillsSection,
+    },
     defaults: {
-      duration: 0.5,
+      duration: 0.25,
     },
   });
+
+  timeline
+    .fromTo(skillsHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(skillsSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(skillsContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
 </script>
 
 <section
-  id="about"
+  id="skills"
   class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
 >
   <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
-    <h2 class:list={['aboutHeading', 'text-accent-1', 'font-bold', 'text-6xl']}>
+    <h2
+      class:list={['skillsHeading', 'text-accent-1', 'font-bold', 'text-6xl']}
+    >
       A human Swiss Army Knife
     </h2>
     <h3
-      class:list={['aboutSubheading', 'text-tertiary', 'font-mono', 'text-xl']}
+      class:list={['skillsSubheading', 'text-tertiary', 'font-mono', 'text-xl']}
     >
       I've got just the tool for the job
     </h3>
@@ -30,6 +40,7 @@ import { differenceInYears } from 'date-fns';
 
   <div
     class:list={[
+      'skillsContent',
       'w-full',
       'flex',
       'flex-col',

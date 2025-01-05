@@ -1,5 +1,6 @@
 ---
 import dotGridWhite from '@/assets/images/dot-grid-white.png';
+import Footer from '@/components/pageSpecific/home/sections/Footer/Footer.astro';
 import { i18next, t } from '@/utils';
 import '@fontsource-variable/fira-code';
 import '@fontsource/fira-sans';
@@ -35,10 +36,13 @@ const optimizedBackgroundImage = await getImage({
         'w-full',
         'max-w-screen-lg',
         'mx-auto',
+        'mb-20',
       ]}
     >
       <slot />
     </div>
+
+    <Footer />
   </body>
 </html>
 

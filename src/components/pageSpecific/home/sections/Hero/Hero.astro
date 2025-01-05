@@ -1,6 +1,5 @@
 ---
-import clsx from 'clsx';
-import { Github, Linkedin } from 'lucide-react';
+import { SiGithub, SiLinkedin } from '@icons-pack/react-simple-icons';
 import { IconButton } from '../../general/IconButton/IconButton';
 import NameLogo from '../../general/NameLogo.astro';
 import { TextButton } from '../../general/TextButton';
@@ -10,7 +9,7 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/williamhevancity';
 ---
 
 <script>
-  import { gsap } from 'gsap';
+  import { gsap } from '@/utils';
 
   const subheading = document.querySelector('.heroSubheading');
   const socials = document.querySelector('.heroSocials');
@@ -82,15 +81,15 @@ const LINKEDIN_URL = 'https://www.linkedin.com/in/williamhevancity';
 
     <div class:list={['heroSocials', 'flex', 'gap-5']}>
       <IconButton type="link" size={48} href={GITHUB_URL}>
-        <Github />
+        <SiGithub />
       </IconButton>
       <IconButton type="link" size={48} href={LINKEDIN_URL}>
-        <Linkedin />
+        <SiLinkedin />
       </IconButton>
     </div>
   </div>
 
-  <TextButton type="link" href="#contact" className={clsx(['heroGetInTouch'])}
-    >Get in touch</TextButton
-  >
+  <div class="heroGetInTouch">
+    <TextButton type="link" href="#contact">Get in touch</TextButton>
+  </div>
 </section>

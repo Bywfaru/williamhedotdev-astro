@@ -5,14 +5,29 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
 ---
 
 <script>
-  import { gsap } from 'gsap';
+  import { gsap } from '@/utils';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const aboutSection = document.querySelector('#about');
+  const aboutHeading = document.querySelector('.aboutHeading');
+  const aboutSubheading = document.querySelector('.aboutSubheading');
+  const aboutContent = document.querySelectorAll('.aboutContent');
 
   const timeline = gsap.timeline({
-    delay: 1.5,
+    scrollTrigger: {
+      trigger: aboutSection,
+    },
     defaults: {
-      duration: 0.5,
+      duration: 0.25,
     },
   });
+
+  timeline
+    .fromTo(aboutHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(aboutSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
+    .fromTo(aboutContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
 </script>
 
 <section
@@ -32,6 +47,7 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
 
   <div
     class:list={[
+      'aboutContent',
       'w-full',
       'flex',
       'flex-col',
