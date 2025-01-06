@@ -1,0 +1,177 @@
+---
+import type { GetImageResult } from 'astro';
+import { format } from 'date-fns';
+
+export type EducationItemProps = {
+  school: {
+    name: string;
+    logo: GetImageResult;
+  };
+  from: Date;
+  to: Date | null;
+  degree: string;
+  major: string;
+  option?: string;
+  description?: string;
+  showAboveTimeline?: boolean;
+  showBelowTimeline?: boolean;
+  showMarker?: boolean;
+};
+type Props = EducationItemProps;
+
+const {
+  degree,
+  description,
+  from,
+  major,
+  school,
+  to,
+  option,
+  showAboveTimeline = false,
+  showBelowTimeline = false,
+  showMarker = true,
+} = Astro.props;
+
+const fromDate = format(from, 'MMM yyyy');
+const toDate = to ? format(to, 'MMM yyyy') : 'Present';
+---
+
+<div class:list={['flex', 'gap-4']}>
+  <div class:list={['min-w-[27px]', 'min-h-full', 'relative']}>
+    {
+      showAboveTimeline && (
+        <div
+          class:list={[
+            'educationTimelineAbove',
+            'w-1',
+            'bg-accent-2',
+            'absolute',
+            'top-0',
+            'left-[12px]',
+            'h-0',
+          ]}
+        />
+      )
+    }
+
+    {
+      showMarker && (
+        <div
+          class:list={[
+            'educationTimelineMarker',
+            'w-0',
+            'h-1',
+            'bg-accent-2',
+            'absolute',
+            'top-14',
+            'left-0',
+          ]}
+        />
+      )
+    }
+
+    {
+      showBelowTimeline && (
+        <div
+          class:list={[
+            'educationTimelineBelow',
+            'w-1',
+            'bg-accent-2',
+            'absolute',
+            'top-14',
+            'left-[12px]',
+            'h-0',
+          ]}
+        />
+      )
+    }
+  </div>
+
+  <div class:list={[{ 'pb-10': showBelowTimeline }]}>
+    <div class:list={['flex', 'flex-col', 'gap-3']}>
+      <img
+        src={school.logo.src}
+        alt={school.name}
+        class:list={[
+          'educationSchoolLogo',
+          'h-28',
+          'object-contain',
+          'object-left-top',
+          '-translate-x-50',
+          'opacity-0',
+        ]}
+      />
+
+      <div class:list={['flex', 'flex-col', 'gap-3']}>
+        <div class:list={['flex', 'flex-col', 'gap-2']}>
+          <div class:list={['flex', 'flex-col']}>
+            <span
+              class:list={[
+                'educationDates',
+                '-translate-x-50',
+                'opacity-0',
+                'font-mono',
+                'text-accent-2',
+              ]}
+            >
+              {fromDate} - {toDate}
+            </span>
+
+            <h4
+              class:list={[
+                'educationSchoolName',
+                '-translate-x-50',
+                'opacity-0',
+                'text-accent-1',
+                'text-2xl',
+              ]}
+            >
+              {school.name}
+            </h4>
+          </div>
+
+          <h5
+            class:list={[
+              'educationDegree',
+              '-translate-x-50',
+              'opacity-0',
+              'font-mono',
+              'text-accent-2',
+              'font-medium',
+            ]}
+          >
+            {degree}
+          </h5>
+
+          <h6
+            class:list={[
+              'educationMajorOption',
+              '-translate-x-50',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-sm',
+            ]}
+          >
+            <strong>{major}</strong>
+            {!!option && ` (${option} Option)`}
+          </h6>
+        </div>
+
+        {
+          !!description && (
+            <div
+              class:list={[
+                'educationDescription',
+                '-translate-x-50',
+                'opacity-0',
+                'text-secondary',
+              ]}
+              set:html={description}
+            />
+          )
+        }
+      </div>
+    </div>
+  </div>
+</div>

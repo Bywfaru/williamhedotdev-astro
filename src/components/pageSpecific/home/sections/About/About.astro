@@ -20,14 +20,15 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
       trigger: aboutSection,
     },
     defaults: {
-      duration: 0.25,
+      delay: -0.25,
+      duration: 0.5,
     },
   });
 
   timeline
-    .fromTo(aboutHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(aboutSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(aboutContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
+    .to(aboutHeading, { y: 0, opacity: 1 })
+    .to(aboutSubheading, { y: 0, opacity: 1 })
+    .to(aboutContent, { y: 0, opacity: 1 });
 </script>
 
 <section
@@ -35,11 +36,27 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
   class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
 >
   <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
-    <h2 class:list={['aboutHeading', 'text-accent-1', 'font-bold', 'text-6xl']}>
+    <h2
+      class:list={[
+        'aboutHeading',
+        'translate-y-12',
+        'opacity-0',
+        'text-accent-1',
+        'font-bold',
+        'text-6xl',
+      ]}
+    >
       Hi, I'm<br />William
     </h2>
     <h3
-      class:list={['aboutSubheading', 'text-tertiary', 'font-mono', 'text-xl']}
+      class:list={[
+        'aboutSubheading',
+        'translate-y-12',
+        'opacity-0',
+        'text-tertiary',
+        'font-mono',
+        'text-xl',
+      ]}
     >
       Pleased to meet you
     </h3>
@@ -48,6 +65,8 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
   <div
     class:list={[
       'aboutContent',
+      'translate-y-12',
+      'opacity-0',
       'w-full',
       'flex',
       'flex-col',

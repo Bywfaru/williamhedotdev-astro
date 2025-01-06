@@ -11,14 +11,15 @@
       trigger: skillsSection,
     },
     defaults: {
-      duration: 0.25,
+      delay: -0.25,
+      duration: 0.5,
     },
   });
 
   timeline
-    .fromTo(skillsHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(skillsSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(skillsContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
+    .to(skillsHeading, { y: 0, opacity: 1 })
+    .to(skillsSubheading, { y: 0, opacity: 1 })
+    .to(skillsContent, { y: 0, opacity: 1 });
 </script>
 
 <section
@@ -27,12 +28,26 @@
 >
   <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
     <h2
-      class:list={['skillsHeading', 'text-accent-1', 'font-bold', 'text-6xl']}
+      class:list={[
+        'skillsHeading',
+        'translate-y-12',
+        'opacity-0',
+        'text-accent-1',
+        'font-bold',
+        'text-6xl',
+      ]}
     >
       A human Swiss Army Knife
     </h2>
     <h3
-      class:list={['skillsSubheading', 'text-tertiary', 'font-mono', 'text-xl']}
+      class:list={[
+        'skillsSubheading',
+        'translate-y-12',
+        'opacity-0',
+        'text-tertiary',
+        'font-mono',
+        'text-xl',
+      ]}
     >
       I've got just the tool for the job
     </h3>
@@ -41,6 +56,8 @@
   <div
     class:list={[
       'skillsContent',
+      'translate-y-12',
+      'opacity-0',
       'w-full',
       'flex',
       'flex-col',

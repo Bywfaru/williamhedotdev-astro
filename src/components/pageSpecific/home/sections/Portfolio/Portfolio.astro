@@ -59,29 +59,21 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
       trigger: portfolioSection,
     },
     defaults: {
-      duration: 0.25,
+      delay: -0.25,
+      duration: 0.5,
     },
   });
 
   timeline
-    .fromTo(portfolioHeading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioSubheading, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioDevice, { x: -50, opacity: 0 }, { x: 0, opacity: 1 })
-    .fromTo(
-      portfolioItemHeading,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1 },
-      '-=0.5'
-    )
-    .fromTo(
-      portfolioItemSubheading,
-      { y: 50, opacity: 0 },
-      { y: 0, opacity: 1 }
-    )
-    .fromTo(portfolioItemContent, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioItemButton, { y: 50, opacity: 0 }, { y: 0, opacity: 1 })
-    .fromTo(portfolioNavButtons, { y: 50, opacity: 0 }, { y: 0, opacity: 1 });
+    .to(portfolioHeading, { y: 0, opacity: 1 })
+    .to(portfolioSubheading, { y: 0, opacity: 1 })
+    .to(portfolioContent, { y: 0, opacity: 1 })
+    .to(portfolioDevice, { x: 0, opacity: 1 })
+    .to(portfolioItemHeading, { y: 0, opacity: 1 })
+    .to(portfolioItemSubheading, { y: 0, opacity: 1 })
+    .to(portfolioItemContent, { y: 0, opacity: 1 })
+    .to(portfolioItemButton, { y: 0, opacity: 1 })
+    .to(portfolioNavButtons, { y: 0, opacity: 1 });
 </script>
 
 <section
@@ -92,6 +84,8 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
     <h2
       class:list={[
         'portfolioHeading',
+        'translate-y-12',
+        'opacity-0',
         'text-accent-1',
         'font-bold',
         'text-6xl',
@@ -102,6 +96,8 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
     <h3
       class:list={[
         'portfolioSubheading',
+        'translate-y-12',
+        'opacity-0',
         'text-tertiary',
         'font-mono',
         'text-xl',
@@ -114,6 +110,8 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
   <div
     class:list={[
       'portfolioContent',
+      'translate-y-12',
+      'opacity-0',
       'w-full',
       'flex',
       'flex-col',
