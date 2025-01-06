@@ -25,12 +25,6 @@ export type PortfolioItemsProps = {
 
 export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
   'use memo';
-  const [optimizedIPhone14ProMaxImage, setOptimizedIPhone14ProMaxImage] =
-    useState<GetImageResult | null>(null);
-  const [optimizedIPadProImage, setOptimizedIPadProImage] =
-    useState<GetImageResult | null>(null);
-  const [optimizedMacBookProImage, setOptimizedMacBookProImage] =
-    useState<GetImageResult | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const container = useRef(null);
   const { contextSafe } = useGSAP({ scope: container });
@@ -273,19 +267,6 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
     }, timelineBeforeChange.duration() * 1000);
   });
 
-  // Load optimized images
-  useEffect(() => {
-    getImage({
-      src: iPhone14ProMaxImage,
-    }).then((result) => setOptimizedIPhone14ProMaxImage(result));
-    getImage({
-      src: iPadProImage,
-    }).then((result) => setOptimizedIPadProImage(result));
-    getImage({
-      src: macBookProImage,
-    }).then((result) => setOptimizedMacBookProImage(result));
-  }, []);
-
   return (
     <div
       ref={container}
@@ -357,21 +338,19 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
                 'rounded-[30px]',
               ])}
             />
-            {!!optimizedIPhone14ProMaxImage?.src && (
-              <img
-                src={optimizedIPhone14ProMaxImage.src}
-                alt="iPhone 14 Pro Max frame"
-                loading="lazy"
-                className={clsx([
-                  'size-full',
-                  'absolute',
-                  'top-0',
-                  'left-0',
-                  'object-contain',
-                  'object-center',
-                ])}
-              />
-            )}
+            <img
+              src={iPhone14ProMaxImage.src}
+              alt="iPhone 14 Pro Max frame"
+              loading="lazy"
+              className={clsx([
+                'size-full',
+                'absolute',
+                'top-0',
+                'left-0',
+                'object-contain',
+                'object-center',
+              ])}
+            />
           </div>
 
           {/* Tablet */}
@@ -402,21 +381,19 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
                 'rounded-[10px]',
               ])}
             />
-            {!!optimizedIPadProImage?.src && (
-              <img
-                src={optimizedIPadProImage.src}
-                alt="iPad Pro frame"
-                loading="lazy"
-                className={clsx([
-                  'size-full',
-                  'absolute',
-                  'top-0',
-                  'left-0',
-                  'object-contain',
-                  'object-center',
-                ])}
-              />
-            )}
+            <img
+              src={iPadProImage.src}
+              alt="iPad Pro frame"
+              loading="lazy"
+              className={clsx([
+                'size-full',
+                'absolute',
+                'top-0',
+                'left-0',
+                'object-contain',
+                'object-center',
+              ])}
+            />
           </div>
 
           {/* Desktop */}
@@ -448,21 +425,19 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
                 '-translate-x-1/2',
               ])}
             />
-            {!!optimizedMacBookProImage?.src && (
-              <img
-                src={optimizedMacBookProImage.src}
-                alt="Macbook Pro 15 inch frame"
-                loading="lazy"
-                className={clsx([
-                  'size-full',
-                  'absolute',
-                  'top-0',
-                  'left-0',
-                  'object-contain',
-                  'object-center',
-                ])}
-              />
-            )}
+            <img
+              src={macBookProImage.src}
+              alt="Macbook Pro 15 inch frame"
+              loading="lazy"
+              className={clsx([
+                'size-full',
+                'absolute',
+                'top-0',
+                'left-0',
+                'object-contain',
+                'object-center',
+              ])}
+            />
           </div>
         </div>
       </div>
