@@ -8,9 +8,15 @@ export const ContactForm: FC = () => {
   return (
     <form
       className={clsx(['flex', 'flex-col', 'gap-3', 'w-full', 'items-end'])}
-      data-netlify="true"
-      data-netlify-recaptcha="true"
+      action={'https://api.web3forms.com/submit'}
+      method={'POST'}
     >
+      <input
+        type="hidden"
+        name="access_key"
+        value="6fd50934-e515-479f-a4a6-8e6d02f1523c"
+      />
+
       <Input type="text" name="name" label="Your name" fullWidth required />
       <Input
         type="text"
@@ -33,8 +39,6 @@ export const ContactForm: FC = () => {
         fullWidth
         required
       />
-
-      <div data-netlify-recaptcha="true" />
 
       <Button
         type="button"
