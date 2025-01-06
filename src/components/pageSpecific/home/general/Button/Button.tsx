@@ -45,7 +45,6 @@ export const Button = ({
     'items-center',
     'justify-center',
     'font-mono',
-    'text-xl',
     { 'w-full': fullWidth },
     { 'w-fit': !fullWidth },
     'h-fit',

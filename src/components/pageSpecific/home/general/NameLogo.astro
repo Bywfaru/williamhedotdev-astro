@@ -1,33 +1,29 @@
 ---
 export type NameLogoProps = {
-  size?: number;
+  size?: number | string;
 };
 type Props = NameLogoProps;
 
 const VIEW_BOX_WIDTH = 489;
-const VIEW_BOX_HEIGHT = 213;
-const RATIO = VIEW_BOX_WIDTH / VIEW_BOX_HEIGHT;
 
 const { size = VIEW_BOX_WIDTH } = Astro.props;
-const width = size;
-const height = size / RATIO;
 ---
 
 <script>
   import { gsap } from '@/utils';
 
-  const colon = document.querySelector('.colon');
-  const w = document.querySelector('.w');
-  const i1 = document.querySelector('.i1');
-  const l1 = document.querySelector('.l1');
-  const l2 = document.querySelector('.l2');
-  const i2 = document.querySelector('.i2');
-  const a = document.querySelector('.a');
-  const m = document.querySelector('.m');
-  const h = document.querySelector('.h');
-  const e = document.querySelector('.e');
-  const underscore = document.querySelector('.underscore');
-  const highlight = document.querySelector('.highlight');
+  const colon = document.querySelectorAll('.colon');
+  const w = document.querySelectorAll('.w');
+  const i1 = document.querySelectorAll('.i1');
+  const l1 = document.querySelectorAll('.l1');
+  const l2 = document.querySelectorAll('.l2');
+  const i2 = document.querySelectorAll('.i2');
+  const a = document.querySelectorAll('.a');
+  const m = document.querySelectorAll('.m');
+  const h = document.querySelectorAll('.h');
+  const e = document.querySelectorAll('.e');
+  const underscore = document.querySelectorAll('.underscore');
+  const highlight = document.querySelectorAll('.highlight');
 
   const timeline = gsap.timeline({
     defaults: {
@@ -142,8 +138,7 @@ const height = size / RATIO;
 </script>
 
 <svg
-  width={width}
-  height={height}
+  width={size}
   viewBox="0 0 489 213"
   style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;"
 >

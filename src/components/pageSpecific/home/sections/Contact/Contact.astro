@@ -33,7 +33,15 @@ import { ContactForm } from './components/ContactForm';
 
 <section
   id="contact"
-  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+  class:list={[
+    'w-full',
+    'flex',
+    'flex-col',
+    'gap-5',
+    'justify-center',
+    'md:justify-center',
+    'md:text-center',
+  ]}
 >
   <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
     <h2
@@ -75,12 +83,13 @@ import { ContactForm } from './components/ContactForm';
       '[&_strong]:text-accent-2',
       '[&_a]:text-accent-2',
       '[&_a]:underline',
+      'md:',
     ]}
   >
     <p>
       My slogan is: <strong
         >"Where there's a will, there's a way, and my name is Will."</strong
-      > You've got a problem? I've got the solution
+      ><br />You've got a problem? I've got the solution
     </p>
 
     <p>Let's see how I can help you and your business grow!</p>

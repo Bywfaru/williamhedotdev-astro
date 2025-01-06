@@ -159,9 +159,28 @@ const education: EducationItemProps[] = [
 
 <section
   id="education"
-  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+  class:list={[
+    'w-full',
+    'flex',
+    'flex-col',
+    'gap-5',
+    'justify-center',
+    'md:flex-row-reverse',
+    'md:justify-between',
+    'md:gap-20',
+    '[&>*]:md:flex-1',
+  ]}
 >
-  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+  <div
+    class:list={[
+      'flex',
+      'flex-col',
+      'w-full',
+      'gap-2',
+      'md:items-end',
+      'md:text-right',
+    ]}
+  >
     <h2
       class:list={[
         'educationHeading',

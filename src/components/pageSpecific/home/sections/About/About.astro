@@ -33,7 +33,17 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
 
 <section
   id="about"
-  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+  class:list={[
+    'w-full',
+    'flex',
+    'flex-col',
+    'gap-5',
+    'justify-center',
+    'md:flex-row',
+    'md:justify-between',
+    'md:gap-20',
+    '[&>*]:md:flex-1',
+  ]}
 >
   <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
     <h2

@@ -24,7 +24,14 @@ const optimizedBackgroundImage = await getImage({
     <meta name="description" content={t('site.description')} />
   </head>
   <body
-    class:list={['bg-body-bg', 'font-sans', 'bg-repeat']}
+    class:list={[
+      'bg-body-bg',
+      'font-sans',
+      'bg-repeat',
+      'scroll-smooth',
+      'text-base',
+      'md:text-lg',
+    ]}
     style={`background-image: url('${optimizedBackgroundImage.src}')`}
   >
     <div
@@ -34,7 +41,7 @@ const optimizedBackgroundImage = await getImage({
         'px-5',
         'gap-20',
         'w-full',
-        'max-w-screen-lg',
+        'max-w-screen-xl',
         'mx-auto',
         'mb-20',
       ]}

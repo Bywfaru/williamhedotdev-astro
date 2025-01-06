@@ -1,12 +1,14 @@
+import iPhone14ProMaxImage from '@/assets/images/iphone-14-pro-max.png';
+import iPadProImage from '@/assets/images/ipad-pro.png';
+import macBookProImage from '@/assets/images/macbook-pro-15-inch.png';
 import { Button } from '@/components/pageSpecific/home/general/Button';
+import { gsap } from '@/utils';
+import { useGSAP } from '@gsap/react';
 import type { GetImageResult } from 'astro';
 import { getImage } from 'astro:assets';
 import clsx from 'clsx';
 import { useEffect, useRef, useState, type FC } from 'react';
-import iPhone14ProMaxImage from '@/assets/images/iphone-14-pro-max.png';
-import { MoveLeft, MoveRight } from 'lucide-react';
-import { useGSAP } from '@gsap/react';
-import { gsap } from '@/utils';
+import { PaginationControls } from './components';
 
 export type PortfolioItem = {
   name: string;
@@ -23,18 +25,19 @@ export type PortfolioItemsProps = {
 
 export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
   'use memo';
-  const [optimizedImage, setOptimizedImage] = useState<GetImageResult | null>(
-    null,
-  );
+  const [optimizedIPhone14ProMaxImage, setOptimizedIPhone14ProMaxImage] =
+    useState<GetImageResult | null>(null);
+  const [optimizedIPadProImage, setOptimizedIPadProImage] =
+    useState<GetImageResult | null>(null);
+  const [optimizedMacBookProImage, setOptimizedMacBookProImage] =
+    useState<GetImageResult | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const container = useRef(null);
   const { contextSafe } = useGSAP({ scope: container });
 
   const currentItem = items[currentIndex];
-  const paginationText = `${currentIndex + 1}/${items.length}`;
 
   const handlePrevClick = contextSafe(() => {
-    const portfolioScreenshot = document.querySelector('.portfolioScreenshot');
     const portfolioItemHeading = document.querySelector(
       '.portfolioItemHeading',
     );
@@ -58,7 +61,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: 50,
+          x: 20,
           opacity: 0,
         },
       )
@@ -69,7 +72,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: 50,
+          x: 20,
           opacity: 0,
         },
       )
@@ -80,7 +83,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: 50,
+          x: 20,
           opacity: 0,
         },
       )
@@ -91,23 +94,10 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: 50,
+          x: 20,
           opacity: 0,
         },
       );
-
-    gsap.fromTo(
-      portfolioScreenshot,
-      {
-        x: 0,
-        opacity: 1,
-      },
-      {
-        x: 50,
-        opacity: 0,
-        duration: timelineBeforeChange.duration(),
-      },
-    );
 
     setTimeout(() => {
       setCurrentIndex(
@@ -122,7 +112,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemHeading,
           {
-            x: -50,
+            x: -20,
             opacity: 0,
           },
           {
@@ -133,7 +123,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemSubheading,
           {
-            x: -50,
+            x: -20,
             opacity: 0,
           },
           {
@@ -144,7 +134,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemContent,
           {
-            x: -50,
+            x: -20,
             opacity: 0,
           },
           {
@@ -155,7 +145,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemButton,
           {
-            x: -50,
+            x: -20,
             opacity: 0,
           },
           {
@@ -163,24 +153,10 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
             opacity: 1,
           },
         );
-
-      gsap.fromTo(
-        portfolioScreenshot,
-        {
-          x: -50,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: timelineAfterChange.duration(),
-        },
-      );
     }, timelineBeforeChange.duration() * 1000);
   });
 
   const handleNextClick = contextSafe(() => {
-    const portfolioScreenshot = document.querySelector('.portfolioScreenshot');
     const portfolioItemHeading = document.querySelector(
       '.portfolioItemHeading',
     );
@@ -204,7 +180,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: -50,
+          x: -20,
           opacity: 0,
         },
       )
@@ -215,7 +191,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: -50,
+          x: -20,
           opacity: 0,
         },
       )
@@ -226,7 +202,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: -50,
+          x: -20,
           opacity: 0,
         },
       )
@@ -237,22 +213,10 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
           opacity: 1,
         },
         {
-          x: -50,
+          x: -20,
           opacity: 0,
         },
       );
-    gsap.fromTo(
-      portfolioScreenshot,
-      {
-        x: 0,
-        opacity: 1,
-      },
-      {
-        x: -50,
-        opacity: 0,
-        duration: timelineBeforeChange.duration(),
-      },
-    );
 
     setTimeout(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % items.length);
@@ -265,7 +229,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemHeading,
           {
-            x: 50,
+            x: 20,
             opacity: 0,
           },
           {
@@ -276,7 +240,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemSubheading,
           {
-            x: 50,
+            x: 20,
             opacity: 0,
           },
           {
@@ -287,7 +251,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemContent,
           {
-            x: 50,
+            x: 20,
             opacity: 0,
           },
           {
@@ -298,7 +262,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
         .fromTo(
           portfolioItemButton,
           {
-            x: 50,
+            x: 20,
             opacity: 0,
           },
           {
@@ -306,33 +270,47 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
             opacity: 1,
           },
         );
-      gsap.fromTo(
-        portfolioScreenshot,
-        {
-          x: 50,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: timelineAfterChange.duration(),
-        },
-      );
     }, timelineBeforeChange.duration() * 1000);
   });
 
+  // Load optimized images
   useEffect(() => {
     getImage({
       src: iPhone14ProMaxImage,
-    }).then((result) => setOptimizedImage(result));
+    }).then((result) => setOptimizedIPhone14ProMaxImage(result));
+    getImage({
+      src: iPadProImage,
+    }).then((result) => setOptimizedIPadProImage(result));
+    getImage({
+      src: macBookProImage,
+    }).then((result) => setOptimizedMacBookProImage(result));
   }, []);
 
   return (
     <div
       ref={container}
-      className={clsx(['grid', 'grid-cols-3', 'gap-5', 'py-5', 'w-full'])}
+      className={clsx([
+        'grid',
+        'grid-cols-3',
+        'gap-5',
+        'py-5',
+        'w-full',
+        'md:gap-20',
+        'md:grid-cols-5',
+        'lg:grid-cols-2',
+      ])}
     >
-      <div className={clsx(['col-span-1', 'relative', 'h-[533px]'])}>
+      <div
+        className={clsx([
+          'col-span-1',
+          'relative',
+          'min-h-[533px]',
+          'md:col-span-2',
+          'md:min-h-[782px]',
+          'lg:col-span-1',
+          'lg:min-h-[734px]',
+        ])}
+      >
         <div
           className={clsx([
             'portfolioDevice',
@@ -340,46 +318,165 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
             'opacity-0',
             'min-w-[257px]',
             'min-h-[533px]',
+            'max-h-[533px]',
+            'md:min-w-[600px]',
+            'md:min-h-[782px]',
+            'md:max-h-[782px]',
+            'lg:min-w-[1216px]',
+            'lg:min-h-[734px]',
+            'lg:max-h-[734px]',
             'absolute',
             'top-0',
             'right-0',
-            'bg-[black]',
-            'rounded-[42px]',
             'overflow-hidden',
           ])}
         >
-          <img
-            src={currentItem.mobile.src}
-            alt={`${currentItem.name} mobile screenshot`}
-            loading="lazy"
+          {/* Mobile */}
+          <div
             className={clsx([
-              'portfolioScreenshot',
               'size-full',
               'absolute',
               'top-0',
               'left-0',
+              'md:hidden',
             ])}
-          />
-          {!!optimizedImage?.src && (
+          >
             <img
-              src={optimizedImage.src}
-              alt="iPhone 14 Pro Max frame"
+              src={currentItem.mobile.src}
+              alt={`${currentItem.name} mobile screenshot`}
               loading="lazy"
               className={clsx([
-                'size-full',
+                'portfolioScreenshot',
+                'w-[92%]',
+                'h-[96%]',
                 'absolute',
-                'top-0',
-                'left-0',
-                'object-contain',
-                'object-center',
+                'top-1/2',
+                'left-1/2',
+                '-translate-x-1/2',
+                '-translate-y-1/2',
+                'rounded-[30px]',
               ])}
             />
-          )}
+            {!!optimizedIPhone14ProMaxImage?.src && (
+              <img
+                src={optimizedIPhone14ProMaxImage.src}
+                alt="iPhone 14 Pro Max frame"
+                loading="lazy"
+                className={clsx([
+                  'size-full',
+                  'absolute',
+                  'top-0',
+                  'left-0',
+                  'object-contain',
+                  'object-center',
+                ])}
+              />
+            )}
+          </div>
+
+          {/* Tablet */}
+          <div
+            className={clsx([
+              'size-full',
+              'absolute',
+              'top-0',
+              'left-0',
+              'hidden',
+              'md:block',
+              'lg:hidden',
+            ])}
+          >
+            <img
+              src={currentItem.tablet?.src || currentItem.mobile.src}
+              alt={`${currentItem.name} tablet screenshot`}
+              loading="lazy"
+              className={clsx([
+                'portfolioScreenshot',
+                'w-[91%]',
+                'h-[94%]',
+                'absolute',
+                'top-1/2',
+                'left-1/2',
+                '-translate-x-1/2',
+                '-translate-y-1/2',
+                'rounded-[10px]',
+              ])}
+            />
+            {!!optimizedIPadProImage?.src && (
+              <img
+                src={optimizedIPadProImage.src}
+                alt="iPad Pro frame"
+                loading="lazy"
+                className={clsx([
+                  'size-full',
+                  'absolute',
+                  'top-0',
+                  'left-0',
+                  'object-contain',
+                  'object-center',
+                ])}
+              />
+            )}
+          </div>
+
+          {/* Desktop */}
+          <div
+            className={clsx([
+              'size-full',
+              'absolute',
+              'top-0',
+              'left-0',
+              'hidden',
+              'lg:block',
+            ])}
+          >
+            <img
+              src={
+                currentItem.desktop?.src ||
+                currentItem.tablet?.src ||
+                currentItem.mobile.src
+              }
+              alt={`${currentItem.name} desktop screenshot`}
+              loading="lazy"
+              className={clsx([
+                'portfolioScreenshot',
+                'h-[86%]',
+                'w-[82%]',
+                'absolute',
+                'top-[5%]',
+                'left-1/2',
+                '-translate-x-1/2',
+              ])}
+            />
+            {!!optimizedMacBookProImage?.src && (
+              <img
+                src={optimizedMacBookProImage.src}
+                alt="Macbook Pro 15 inch frame"
+                loading="lazy"
+                className={clsx([
+                  'size-full',
+                  'absolute',
+                  'top-0',
+                  'left-0',
+                  'object-contain',
+                  'object-center',
+                ])}
+              />
+            )}
+          </div>
         </div>
       </div>
 
       <div
-        className={clsx(['col-span-2', 'flex', 'flex-col', 'gap-5', 'py-5'])}
+        className={clsx([
+          'col-span-2',
+          'flex',
+          'flex-col',
+          'gap-5',
+          'py-5',
+          'md:col-span-3',
+          'lg:col-span-1',
+        ])}
       >
         <div className={clsx(['flex', 'flex-col', 'gap-2'])}>
           <h4
@@ -431,47 +528,42 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({ items }) => {
             More details
           </Button>
         </div>
+
+        <div
+          className={clsx([
+            'portfolioNavButtons',
+            'translate-y-12',
+            'opacity-0',
+            'hidden',
+            'md:flex',
+            'items-end',
+            'h-full',
+          ])}
+        >
+          <PaginationControls
+            onPrevClick={handlePrevClick}
+            onNextClick={handleNextClick}
+            currentPage={currentIndex + 1}
+            totalPages={items.length}
+          />
+        </div>
       </div>
 
       <div
         className={clsx([
           'portfolioNavButtons',
+          'translate-y-12',
+          'opacity-0',
           'col-span-3',
-          'flex',
-          'justify-between',
-          'items-center',
-          'gap-5',
-          'font-mono',
+          'md:hidden',
         ])}
       >
-        <Button
-          type="button"
-          variant="secondary"
-          className={clsx(['flex', 'gap-2', 'items-center'])}
-          onClick={handlePrevClick}
-        >
-          <>
-            {' '}
-            <MoveLeft size={16} />{' '}
-            <span className={clsx(['underline'])}>Prev</span>
-          </>
-        </Button>
-
-        <span className={clsx(['text-accent-1', 'text-xl'])}>
-          {paginationText}
-        </span>
-
-        <Button
-          type="button"
-          variant="secondary"
-          className={clsx(['flex', 'gap-2', 'items-center'])}
-          onClick={handleNextClick}
-        >
-          <>
-            <span className={clsx(['underline'])}>Next</span>
-            <MoveRight size={12} />
-          </>
-        </Button>
+        <PaginationControls
+          onPrevClick={handlePrevClick}
+          onNextClick={handleNextClick}
+          currentPage={currentIndex + 1}
+          totalPages={items.length}
+        />
       </div>
     </div>
   );

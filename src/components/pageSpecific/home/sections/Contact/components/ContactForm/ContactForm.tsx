@@ -7,7 +7,7 @@ import type { FC } from 'react';
 export const ContactForm: FC = () => {
   return (
     <form
-      className={clsx(['flex', 'flex-col', 'gap-3', 'w-full'])}
+      className={clsx(['flex', 'flex-col', 'gap-3', 'w-full', 'items-end'])}
       data-netlify="true"
       data-netlify-recaptcha="true"
     >
@@ -36,7 +36,19 @@ export const ContactForm: FC = () => {
 
       <div data-netlify-recaptcha="true" />
 
-      <Button type="button" buttonType="submit" fullWidth>
+      <Button
+        type="button"
+        buttonType="submit"
+        fullWidth
+        className={clsx(['md:hidden'])}
+      >
+        Send
+      </Button>
+      <Button
+        type="button"
+        buttonType="submit"
+        className={clsx(['hidden', 'md:block'])}
+      >
         Send
       </Button>
     </form>

@@ -1,6 +1,10 @@
 ---
 import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
+import onlyTheBestNutritionTabletImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/tablet.png';
+import onlyTheBestNutritionDesktopImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/desktop.png';
 import theRefillStopMobileImage from '@/assets/images/portfolioScreenshots/theRefillStop/mobile.png';
+import theRefillStopTabletImage from '@/assets/images/portfolioScreenshots/theRefillStop/tablet.png';
+import theRefillStopDesktopImage from '@/assets/images/portfolioScreenshots/theRefillStop/desktop.png';
 import { getImage } from 'astro:assets';
 import {
   PortfolioItems,
@@ -15,6 +19,14 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
       'An SEO-optimized Next.js 13 online store that implements Google Analytics and a headless CMS for simple page and product customization.',
     mobile: await getImage({
       src: onlyTheBestNutritionMobileImage,
+      quality: 70,
+    }),
+    tablet: await getImage({
+      src: onlyTheBestNutritionTabletImage,
+      quality: 70,
+    }),
+    desktop: await getImage({
+      src: onlyTheBestNutritionDesktopImage,
       quality: 70,
     }),
   },
@@ -32,6 +44,14 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
       'An SEO-optimized Astro online store with React components that implements Google Analytics and a headless CMS for simple page and product customization.',
     mobile: await getImage({
       src: theRefillStopMobileImage,
+      quality: 70,
+    }),
+    tablet: await getImage({
+      src: theRefillStopTabletImage,
+      quality: 70,
+    }),
+    desktop: await getImage({
+      src: theRefillStopDesktopImage,
       quality: 70,
     }),
   },
@@ -52,7 +72,7 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
   );
   const portfolioItemContent = document.querySelector('.portfolioItemContent');
   const portfolioItemButton = document.querySelector('.portfolioItemButton');
-  const portfolioNavButtons = document.querySelector('.portfolioNavButtons');
+  const portfolioNavButtons = document.querySelectorAll('.portfolioNavButtons');
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -89,6 +109,7 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
         'text-accent-1',
         'font-bold',
         'text-6xl',
+        'md:text-center',
       ]}
     >
       Not just a dog who's all bark, no bite
@@ -101,6 +122,7 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
         'text-tertiary',
         'font-mono',
         'text-xl',
+        'md:text-center',
       ]}
     >
       I won't actually bite you. I promise.
@@ -120,6 +142,7 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
       '[&_strong]:text-accent-2',
       '[&_a]:text-accent-2',
       '[&_a]:underline',
+      'md:text-center',
     ]}
   >
     <p>
