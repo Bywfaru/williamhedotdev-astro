@@ -1,6 +1,6 @@
 import { Button } from '@/components/pageSpecific/home/general/Button';
 import { Input } from '@/components/pageSpecific/home/general/Input';
-import { TextArea } from '@/components/pageSpecific/home/general/Textarea';
+import { TextArea } from '@/components/pageSpecific/home/general/TextArea';
 import clsx from 'clsx';
 import type { FC } from 'react';
 
