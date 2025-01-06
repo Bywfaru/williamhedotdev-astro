@@ -9,6 +9,7 @@ import type {
 export type ButtonProps = PropsWithChildren<{
   className?: string;
   variant?: 'primary' | 'secondary';
+  fullWidth?: boolean;
 }> &
   (
     | {
@@ -28,6 +29,7 @@ export type ButtonProps = PropsWithChildren<{
 export const Button = ({
   children,
   className,
+  fullWidth,
   variant = 'primary',
   ...restProps
 }: ButtonProps) => {
@@ -44,7 +46,8 @@ export const Button = ({
     'justify-center',
     'font-mono',
     'text-xl',
-    'w-fit',
+    { 'w-full': fullWidth },
+    { 'w-fit': !fullWidth },
     'h-fit',
     'px-10',
     'py-2',
@@ -63,7 +66,8 @@ export const Button = ({
         'text-accent-2',
         'font-mono',
         'text-xl',
-        'w-fit',
+        { 'w-full': fullWidth },
+        { 'w-fit': !fullWidth },
         'h-fit',
         'hover:text-accent-1',
         'transition',

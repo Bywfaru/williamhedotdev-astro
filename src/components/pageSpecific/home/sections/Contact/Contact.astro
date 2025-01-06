@@ -1,0 +1,90 @@
+---
+import { Input } from '../../general/Input';
+import { TextArea } from '../../general/Textarea';
+import { ContactForm } from './components/ContactForm';
+---
+
+<script>
+  import { gsap } from '@/utils';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const contactSection = document.querySelector('#contact');
+  const contactHeading = document.querySelector('.contactHeading');
+  const contactSubheading = document.querySelector('.contactSubheading');
+  const contactContent = document.querySelectorAll('.contactContent');
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: contactSection,
+    },
+    defaults: {
+      delay: -0.25,
+      duration: 0.5,
+    },
+  });
+
+  timeline
+    .to(contactHeading, { y: 0, opacity: 1 })
+    .to(contactSubheading, { y: 0, opacity: 1 })
+    .to(contactContent, { y: 0, opacity: 1 });
+</script>
+
+<section
+  id="contact"
+  class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
+>
+  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+    <h2
+      class:list={[
+        'contactHeading',
+        'translate-y-12',
+        'opacity-0',
+        'text-accent-1',
+        'font-bold',
+        'text-6xl',
+      ]}
+    >
+      Let's get in touch :)
+    </h2>
+    <h3
+      class:list={[
+        'contactSubheading',
+        'translate-y-12',
+        'opacity-0',
+        'text-tertiary',
+        'font-mono',
+        'text-xl',
+      ]}
+    >
+      But please don't touch me
+    </h3>
+  </div>
+
+  <div
+    class:list={[
+      'contactContent',
+      'translate-y-12',
+      'opacity-0',
+      'w-full',
+      'flex',
+      'flex-col',
+      'gap-5',
+      'text-secondary',
+      '[&_strong]:text-accent-2',
+      '[&_a]:text-accent-2',
+      '[&_a]:underline',
+    ]}
+  >
+    <p>
+      My slogan is: <strong
+        >"Where there's a will, there's a way, and my name is Will."</strong
+      > You've got a problem? I've got the solution
+    </p>
+
+    <p>Let's see how I can help you and your business grow!</p>
+
+    <ContactForm client:load />
+  </div>
+</section>
