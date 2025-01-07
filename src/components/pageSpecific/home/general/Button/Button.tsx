@@ -36,6 +36,7 @@ export const Button = ({
   let classNameVariant = clsx([
     className,
     'group',
+    'button',
     'bg-accent-2',
     'border-[3px]',
     'border-accent-1',
@@ -68,7 +69,8 @@ export const Button = ({
         { 'w-full': fullWidth },
         { 'w-fit': !fullWidth },
         'h-fit',
-        'hover:text-accent-1',
+        'hover:text-primary',
+        'hover:bg-accent-2',
         'transition',
         '[&_*]:transition',
       ]);
