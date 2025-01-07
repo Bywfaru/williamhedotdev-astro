@@ -1,61 +1,13 @@
 ---
-import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
-import onlyTheBestNutritionTabletImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/tablet.png';
-import onlyTheBestNutritionDesktopImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/desktop.png';
-import theRefillStopMobileImage from '@/assets/images/portfolioScreenshots/theRefillStop/mobile.png';
-import theRefillStopTabletImage from '@/assets/images/portfolioScreenshots/theRefillStop/tablet.png';
-import theRefillStopDesktopImage from '@/assets/images/portfolioScreenshots/theRefillStop/desktop.png';
-import { getImage } from 'astro:assets';
-import {
-  PortfolioItems,
-  type PortfolioItem,
-} from './components/PortfolioItems';
+import type { PortfolioItem } from './components/PortfolioItems';
+import { PortfolioItems } from './components/PortfolioItems';
 
-const portfolioItems: PortfolioItem[] = await Promise.all([
-  {
-    name: 'Only The Best Nutrition',
-    stack: ['Next.js 13', 'Headless CMS', 'Google Analytics', 'SEO', 'Stripe'],
-    description:
-      'An SEO-optimized Next.js 13 online store that implements Google Analytics and a headless CMS for simple page and product customization.',
-    mobile: await getImage({
-      src: onlyTheBestNutritionMobileImage,
-      quality: 70,
-    }),
-    tablet: await getImage({
-      src: onlyTheBestNutritionTabletImage,
-      quality: 70,
-    }),
-    desktop: await getImage({
-      src: onlyTheBestNutritionDesktopImage,
-      quality: 70,
-    }),
-  },
-  {
-    name: 'The Refill Stop',
-    stack: [
-      'Astro',
-      'React',
-      'Headless CMS',
-      'Google Analytics',
-      'SEO',
-      'Stripe',
-    ],
-    description:
-      'An SEO-optimized Astro online store with React components that implements Google Analytics and a headless CMS for simple page and product customization.',
-    mobile: await getImage({
-      src: theRefillStopMobileImage,
-      quality: 70,
-    }),
-    tablet: await getImage({
-      src: theRefillStopTabletImage,
-      quality: 70,
-    }),
-    desktop: await getImage({
-      src: theRefillStopDesktopImage,
-      quality: 70,
-    }),
-  },
-]);
+export type PortfolioProps = {
+  items: PortfolioItem[];
+};
+type Props = PortfolioProps;
+
+const { items } = Astro.props;
 ---
 
 <script>
@@ -71,8 +23,12 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
     '.portfolioItemSubheading'
   );
   const portfolioItemContent = document.querySelector('.portfolioItemContent');
-  const portfolioItemButton = document.querySelector('.portfolioItemButton');
+  const portfolioVisitLink = document.querySelector('.portfolioVisitLink');
+  const portfolioMoreDetailsButton = document.querySelector(
+    '.portfolioMoreDetailsButton'
+  );
   const portfolioNavButtons = document.querySelectorAll('.portfolioNavButtons');
+  const portfolioScreenshot = document.querySelectorAll('.portfolioScreenshot');
 
   const timeline = gsap.timeline({
     scrollTrigger: {
@@ -89,10 +45,12 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
     .to(portfolioSubheading, { y: 0, opacity: 1 })
     .to(portfolioContent, { y: 0, opacity: 1 })
     .to(portfolioDevice, { x: 0, opacity: 1 })
+    .to(portfolioScreenshot, { opacity: 1 })
     .to(portfolioItemHeading, { y: 0, opacity: 1 })
     .to(portfolioItemSubheading, { y: 0, opacity: 1 })
     .to(portfolioItemContent, { y: 0, opacity: 1 })
-    .to(portfolioItemButton, { y: 0, opacity: 1 })
+    .to(portfolioVisitLink, { y: 0, opacity: 1 })
+    .to(portfolioMoreDetailsButton, { y: 0, opacity: 1 })
     .to(portfolioNavButtons, { y: 0, opacity: 1 });
 </script>
 
@@ -100,56 +58,64 @@ const portfolioItems: PortfolioItem[] = await Promise.all([
   id="portfolio"
   class:list={['w-full', 'flex', 'flex-col', 'gap-5', 'justify-center']}
 >
-  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
-    <h2
-      class:list={[
-        'portfolioHeading',
-        'translate-y-12',
-        'opacity-0',
-        'text-accent-1',
-        'font-bold',
-        'text-6xl',
-        'md:text-center',
-      ]}
-    >
-      Not just a dog who's all bark, no bite
-    </h2>
-    <h3
-      class:list={[
-        'portfolioSubheading',
-        'translate-y-12',
-        'opacity-0',
-        'text-tertiary',
-        'font-mono',
-        'text-xl',
-        'md:text-center',
-      ]}
-    >
-      I won't actually bite you. I promise.
-    </h3>
-  </div>
+  {
+    (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
+      <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+        {Astro.slots.has('heading') && (
+          <h2
+            class:list={[
+              'portfolioHeading',
+              'translate-y-12',
+              'opacity-0',
+              'text-accent-1',
+              'font-bold',
+              'text-6xl',
+              'md:text-center',
+            ]}
+          >
+            <slot name="heading" />
+          </h2>
+        )}
 
-  <div
-    class:list={[
-      'portfolioContent',
-      'translate-y-12',
-      'opacity-0',
-      'w-full',
-      'flex',
-      'flex-col',
-      'gap-5',
-      'text-secondary',
-      '[&_strong]:text-accent-2',
-      '[&_a]:text-accent-2',
-      '[&_a]:underline',
-      'md:text-center',
-    ]}
-  >
-    <p>
-      Here's just a small sample as an appetizer. Add me to your team for the
-      main course. I'll even make dessert!
-    </p>
-  </div>
+        {Astro.slots.has('subheading') && (
+          <h3
+            class:list={[
+              'portfolioSubheading',
+              'translate-y-12',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-xl',
+              'md:text-center',
+            ]}
+          >
+            <slot name="subheading" />
+          </h3>
+        )}
+      </div>
+    )
+  }
 
-  <PortfolioItems client:load items={portfolioItems} />
+  {
+    Astro.slots.has('content') && (
+      <div
+        class:list={[
+          'portfolioContent',
+          'translate-y-12',
+          'opacity-0',
+          'w-full',
+          'flex',
+          'flex-col',
+          'gap-5',
+          'md:text-center',
+        ]}
+      >
+        <p>
+          <slot name="content" />
+        </p>
+      </div>
+    )
+  }
+
+  <PortfolioItems client:load items={items} />
 </section>
