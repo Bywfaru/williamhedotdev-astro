@@ -10,6 +10,7 @@ export type ButtonProps = PropsWithChildren<{
   className?: string;
   variant?: 'primary' | 'secondary';
   fullWidth?: boolean;
+  disabled?: boolean;
 }> &
   (
     | {
@@ -29,6 +30,7 @@ export type ButtonProps = PropsWithChildren<{
 export const Button = ({
   children,
   className,
+  disabled,
   fullWidth,
   variant = 'primary',
   ...restProps
@@ -51,11 +53,13 @@ export const Button = ({
     'h-fit',
     'px-10',
     'py-2',
-    'hover:bg-accent-1',
-    'hover:border-accent-2',
-    'hover:text-accent-2',
+    'enabled:hover:bg-accent-1',
+    'enabled:hover:border-accent-2',
+    'enabled:hover:text-accent-2',
     'transition',
     '[&_*]:transition',
+    'disabled:opacity-50',
+    'disabled:cursor-not-allowed',
   ]);
 
   switch (variant) {
@@ -69,8 +73,8 @@ export const Button = ({
         { 'w-full': fullWidth },
         { 'w-fit': !fullWidth },
         'h-fit',
-        'hover:text-primary',
-        'hover:bg-accent-2',
+        'enabled:hover:text-primary',
+        'enabled:hover:bg-accent-2',
         'transition',
         '[&_*]:transition',
       ]);
@@ -92,6 +96,7 @@ export const Button = ({
       type={restProps.buttonType}
       onClick={restProps.onClick}
       className={classNameVariant}
+      disabled={disabled}
     >
       {children}
     </button>
