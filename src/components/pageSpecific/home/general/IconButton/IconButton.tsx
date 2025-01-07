@@ -34,6 +34,7 @@ export const IconButton = ({
   const CLASSNAME = clsx([
     className,
     'group',
+    'button',
     'bg-accent-2',
     'border-[3px]',
     'border-accent-1',
@@ -47,6 +48,8 @@ export const IconButton = ({
     'hover:text-accent-2',
     'transition',
     '[&_*]:transition',
+    'disabled:opacity-50',
+    'disabled:cursor-not-allowed',
   ]);
 
   if (restProps.type === 'link')
