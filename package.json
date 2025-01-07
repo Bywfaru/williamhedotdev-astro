@@ -17,7 +17,9 @@
     "@fontsource/ubuntu": "^5.1.0",
     "@fontsource/ubuntu-mono": "^5.1.0",
     "@gsap/react": "^2.1.1",
+    "@hookform/resolvers": "^3.10.0",
     "@icons-pack/react-simple-icons": "^10.2.0",
+    "@types/react-google-recaptcha": "^2.1.9",
     "astro": "^5.1.1",
     "astro-icon": "^1.1.4",
     "clsx": "^2.1.1",
@@ -28,7 +30,10 @@
     "marked": "^15.0.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "usehooks-ts": "^3.1.0"
+    "react-google-recaptcha": "^3.1.0",
+    "react-hook-form": "^7.54.2",
+    "usehooks-ts": "^3.1.0",
+    "zod": "^3.24.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
