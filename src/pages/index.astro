@@ -1,18 +1,227 @@
 ---
+import onlyTheBestNutritionDesktopImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/desktop.png';
+import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
+import onlyTheBestNutritionTabletImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/tablet.png';
+import theRefillStopDesktopImage from '@/assets/images/portfolioScreenshots/theRefillStop/desktop.png';
+import theRefillStopMobileImage from '@/assets/images/portfolioScreenshots/theRefillStop/mobile.png';
+import theRefillStopTabletImage from '@/assets/images/portfolioScreenshots/theRefillStop/tablet.png';
+import bcitLogo from '@/assets/images/schools/bcit-logo.webp';
+import douglasLogo from '@/assets/images/schools/douglas-logo.png';
 import About from '@/components/pageSpecific/home/sections/About/About.astro';
 import Contact from '@/components/pageSpecific/home/sections/Contact/Contact.astro';
+import type { EducationItemProps } from '@/components/pageSpecific/home/sections/Education/components/EducationItem/EducationItem.astro';
 import Education from '@/components/pageSpecific/home/sections/Education/Education.astro';
 import Hero from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
+import type { PortfolioItem } from '@/components/pageSpecific/home/sections/Portfolio/components/PortfolioItems';
 import Portfolio from '@/components/pageSpecific/home/sections/Portfolio/Portfolio.astro';
 import Skills from '@/components/pageSpecific/home/sections/Skills/Skills.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
+import {
+  SiGithub,
+  SiInstagram,
+  SiLinkedin,
+} from '@icons-pack/react-simple-icons';
+import { getImage } from 'astro:assets';
+import { differenceInYears } from 'date-fns';
+import { marked } from 'marked';
+
+const DOUGLAS_COLLEGE_COMPLETED_COURSES = [
+  'C++ Programming',
+  'Introduction to Programming',
+  'Calculus',
+  'Introduction to Programming II',
+  'Data Structures & Algorithms',
+  'Calculus II',
+  'Business Statistics',
+  'Linear Algebra',
+  'Academic Writing',
+  'Discrete Mathematics I',
+  'Introduction to Programming II',
+];
+
+const age = differenceInYears(new Date(), new Date('1999-04-17'));
+const portfolioItems: PortfolioItem[] = [
+  {
+    name: 'Only The Best Nutrition',
+    stack: ['Next.js 13', 'Headless CMS', 'Google Analytics', 'SEO', 'Stripe'],
+    description:
+      'An SEO-optimized Next.js 13 online store that implements Google Analytics and a headless CMS for simple page and product customization.',
+    mobile: await getImage({
+      src: onlyTheBestNutritionMobileImage,
+      quality: 70,
+    }),
+    tablet: await getImage({
+      src: onlyTheBestNutritionTabletImage,
+      quality: 70,
+    }),
+    desktop: await getImage({
+      src: onlyTheBestNutritionDesktopImage,
+      quality: 70,
+    }),
+    visitUrl: 'https://onlythebestnutrition.com',
+    moreDetailsUrl: '/portfolio/only-the-best-nutrition',
+  },
+  {
+    name: 'The Refill Stop',
+    stack: [
+      'Astro',
+      'React',
+      'Headless CMS',
+      'Google Analytics',
+      'SEO',
+      'Stripe',
+    ],
+    description:
+      'An SEO-optimized Astro online store with React components that implements Google Analytics and a headless CMS for simple page and product customization.',
+    mobile: await getImage({
+      src: theRefillStopMobileImage,
+      quality: 70,
+    }),
+    tablet: await getImage({
+      src: theRefillStopTabletImage,
+      quality: 70,
+    }),
+    desktop: await getImage({
+      src: theRefillStopDesktopImage,
+      quality: 70,
+    }),
+    visitUrl: 'https://therefillstop.com',
+    moreDetailsUrl: '/portfolio/the-refill-stop',
+  },
+];
+const education: EducationItemProps[] = [
+  {
+    school: {
+      name: 'British Columbia Institute of Technology',
+      logo: await getImage({
+        src: bcitLogo,
+        quality: 70,
+      }),
+    },
+    degree: 'Bachelor of Science',
+    major: 'Applied Computer Science',
+    option: 'Wireless and Mobile Applications Development',
+    from: new Date('2023-04-01'),
+    to: null,
+    description: 'Expected to graduate 2026',
+  },
+  {
+    school: {
+      name: 'British Columbia Institute of Technology',
+      logo: await getImage({
+        src: bcitLogo,
+        quality: 70,
+      }),
+    },
+    degree: 'Diploma',
+    major: 'Computer Systems Technology',
+    option: 'Web and Mobile Development',
+    from: new Date('2023-04-01'),
+    to: null,
+    description: 'Graduated Dec 2021',
+  },
+  {
+    school: {
+      name: 'Douglas College',
+      logo: await getImage({
+        src: douglasLogo,
+        quality: 70,
+      }),
+    },
+    degree: 'Partially completed',
+    major: 'Computer Studies and Information Systems',
+    from: new Date('2023-04-01'),
+    to: null,
+    description: await marked(
+      `Completed courses:
+
+*${DOUGLAS_COLLEGE_COMPLETED_COURSES.join(', ')}*`
+    ),
+  },
+];
 ---
 
 <MainLayout>
-  <Hero />
-  <About />
-  <Skills />
-  <Portfolio />
-  <Education />
-  <Contact />
+  <Hero
+    socials={[
+      {
+        Icon: SiGithub,
+        href: 'https://github.com/bywfaru',
+      },
+      {
+        Icon: SiLinkedin,
+        href: 'https://www.linkedin.com/in/williamhevancity',
+      },
+      {
+        Icon: SiInstagram,
+        href: 'https://www.instagram.com/bywfaru',
+      },
+    ]}
+  >
+    <Fragment slot="subheading">Full-stack<br />software engineer</Fragment>
+  </Hero>
+
+  <About>
+    <Fragment slot="heading">Hi, I'm<br />William</Fragment>
+    <Fragment slot="subheading">Pleased to meet you</Fragment>
+    <Fragment
+      slot="content"
+      set:html={marked(
+        `I am a ${age}-year-old **full-stack software engineer based in Vancouver, BC**, with a strong passion for web design and development.
+
+I graduated from the [British Columbia Institute of Technology](https://www.bcit.ca) with a diploma in [Computer Systems Technology (Web and Mobile Development option)](https://www.bcit.ca/programs/computer-systems-technology-diploma-full-time-5500dipma/) and am currently pursuing a Bachelor of Science in [Computer Science (Wireless and Mobile Applications option)](https://www.bcit.ca/programs/applied-computer-science-wireless-and-mobile-applications-development-option-bachelor-of-science-part-time-867fbsc/).
+
+Since graduating, I have worked at [WaveBI](https://wavebi.com) for almost **three years** where I started as a **junior front-end web developer** and quickly stepped into a **lead front-end web developer** role.
+
+With the combination of my education and professional experience, I am **confident** in my ability to make a **meaningful contribution** to your team.`,
+        {}
+      )}
+    />
+  </About>
+
+  <Skills>
+    <Fragment slot="heading">My Skills</Fragment>
+    <Fragment slot="subheading">A jack of all trades</Fragment>
+    <Fragment
+      slot="content"
+      set:html={marked(
+        `I have almost **three years** of professional experience in web development, working with a variety of technologies. I have experience building **performant**, **responsive**, and **SEO-optimized** e-commerce sites using **[Next.js](https://nextjs.org/)** and **[Astro](https://astro.build/)**. These sites leveraged **static generation**, **server-side rendering**, and **incremental static regeneration** to provide the best user experience possible. Additionally, custom **middleware** functions were created to handle **multivariate testing**.
+        
+My experience with front-end development also includes **payment processing** (using **[Stripe](https://stripe.com)**, **[PayPal](https://www.paypal.com)**, and **[Authorize.Net](https://authorize.net)**) and **SEO-optimization** (by **dynamically-generating** **structured data in JSON-LD format** and **Open Graph metadata**).
+
+
+
+While I have a strong foundation in **front-end development**, my experience extends to **back-end development** as well. I have written **RESTful APIs** using **[Express.js](https://expressjs.com)** for production applications and have experience with both **SQL** and **NoSQL** database technologies, such as **[PostgreSQL](https://www.postgresql.org/)** and **[Firestore](https://firebase.google.com/docs/firestore)**.
+
+`
+      )}
+    />
+  </Skills>
+
+  <Portfolio items={portfolioItems}>
+    <Fragment slot="heading">Not just a dog who's all bark, no bite</Fragment>
+    <Fragment slot="subheading">I've got the skills to back it up</Fragment>
+    <Fragment slot="content">
+      Here's just a small sample as an appetizer. Add me to your team for the
+      main course. I'll even make dessert!
+    </Fragment>
+  </Portfolio>
+
+  <Education items={education}>
+    <Fragment slot="heading">I went to school for this!</Fragment>
+    <Fragment slot="subheading">I'm a studious fellow</Fragment>
+  </Education>
+
+  <Contact>
+    <Fragment slot="heading">Let's get in touch :)</Fragment>
+    <Fragment slot="subheading">But please don't touch me</Fragment>
+    <Fragment
+      slot="content"
+      set:html={marked(
+        `My slogan is: **"Where there's a will, there's a way, and my name is Will."**<br>You've got a problem? I've got the solution.
+
+Let's see how I can help you and your business grow!`
+      )}
+    />
+  </Contact>
 </MainLayout>

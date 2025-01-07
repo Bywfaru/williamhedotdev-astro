@@ -36,60 +36,59 @@
     '[&>*]:md:flex-1',
   ]}
 >
-  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2', 'md:text-right']}>
-    <h2
-      class:list={[
-        'skillsHeading',
-        'translate-y-12',
-        'opacity-0',
-        'text-accent-1',
-        'font-bold',
-        'text-6xl',
-      ]}
-    >
-      A human Swiss Army Knife
-    </h2>
-    <h3
-      class:list={[
-        'skillsSubheading',
-        'translate-y-12',
-        'opacity-0',
-        'text-tertiary',
-        'font-mono',
-        'text-xl',
-      ]}
-    >
-      I've got just the tool for the job
-    </h3>
-  </div>
+  {
+    (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
+      <div
+        class:list={['flex', 'flex-col', 'w-full', 'gap-2', 'md:text-right']}
+      >
+        {Astro.slots.has('heading') && (
+          <h2
+            class:list={[
+              'skillsHeading',
+              'translate-y-12',
+              'opacity-0',
+              'text-accent-1',
+              'font-bold',
+              'text-6xl',
+            ]}
+          >
+            <slot name="heading" />
+          </h2>
+        )}
 
-  <div
-    class:list={[
-      'skillsContent',
-      'translate-y-12',
-      'opacity-0',
-      'w-full',
-      'flex',
-      'flex-col',
-      'gap-5',
-      'text-secondary',
-      '[&_strong]:text-accent-2',
-      '[&_a]:text-accent-2',
-      '[&_a]:underline',
-    ]}
-  >
-    <p>
-      I'm a bit of a jack of all trades, always ready to expand my deck of
-      skills. Need a sharp eye for <strong>UI/UX design</strong> to craft user experiences
-      that delight? Or perhaps some rock-solid <strong>web development</strong> to
-      bring those designs to life? Maybe it's time to dive into <strong
-        >mobile app development</strong
-      > for those on-the-go users, or build out some seamless <strong
-        >back-end</strong
-      > to power it all. Have an English essay that needs a second pair of eyes?
-      I've got something for that too. While I may not have mastered every skill
-      just yet, I'm always up for a challenge and eager to learn something new along
-      the way.
-    </p>
-  </div>
+        {Astro.slots.has('subheading') && (
+          <h3
+            class:list={[
+              'skillsSubheading',
+              'translate-y-12',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-xl',
+            ]}
+          >
+            <slot name="subheading" />
+          </h3>
+        )}
+      </div>
+    )
+  }
+
+  {
+    Astro.slots.has('content') && (
+      <div
+        class:list={[
+          'skillsContent',
+          'translate-y-12',
+          'opacity-0',
+          'w-full',
+          'flex',
+          'flex-col',
+          'gap-5',
+        ]}
+      >
+        <slot name="content" />
+      </div>
+    )
+  }
 </section>

@@ -1,74 +1,13 @@
 ---
-import bcitLogo from '@/assets/images/schools/bcit-logo.webp';
-import douglasLogo from '@/assets/images/schools/douglas-logo.png';
-import { getImage } from 'astro:assets';
-import { marked } from 'marked';
-import EducationItem from './components/EducationItem/EducationItem.astro';
 import type { EducationItemProps } from './components/EducationItem/EducationItem.astro';
+import EducationItem from './components/EducationItem/EducationItem.astro';
 
-const DOUGLAS_COLLEGE_COMPLETED_COURSES = [
-  'C++ Programming',
-  'Introduction to Programming',
-  'Calculus',
-  'Introduction to Programming II',
-  'Data Structures & Algorithms',
-  'Calculus II',
-  'Business Statistics',
-  'Linear Algebra',
-  'Academic Writing',
-  'Discrete Mathematics I',
-  'Introduction to Programming II',
-];
-const education: EducationItemProps[] = [
-  {
-    school: {
-      name: 'British Columbia Institute of Technology',
-      logo: await getImage({
-        src: bcitLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Bachelor of Science',
-    major: 'Applied Computer Science',
-    option: 'Wireless and Mobile Applications Development',
-    from: new Date('2023-04-01'),
-    to: null,
-    description: 'Expected to graduate 2026',
-  },
-  {
-    school: {
-      name: 'British Columbia Institute of Technology',
-      logo: await getImage({
-        src: bcitLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Diploma',
-    major: 'Computer Systems Technology',
-    option: 'Web and Mobile Development',
-    from: new Date('2023-04-01'),
-    to: null,
-    description: 'Graduated Dec 2021',
-  },
-  {
-    school: {
-      name: 'Douglas College',
-      logo: await getImage({
-        src: douglasLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Partially completed',
-    major: 'Computer Studies and Information Systems',
-    from: new Date('2023-04-01'),
-    to: null,
-    description: await marked(
-      `Completed courses:
+export type EducationProps = {
+  items: EducationItemProps[];
+};
+type Props = EducationProps;
 
-*${DOUGLAS_COLLEGE_COMPLETED_COURSES.join(', ')}*`
-    ),
-  },
-];
+const { items } = Astro.props;
 ---
 
 <script>
@@ -114,46 +53,44 @@ const education: EducationItemProps[] = [
   const educationItems = document.querySelectorAll('.educationItem');
 
   educationItems.forEach((educationItem) => {
-    try {
-      const educationTimelineAbove = educationItem.querySelector(
-        '.educationTimelineAbove'
-      );
-      const educationTimelineMarker = educationItem.querySelector(
-        '.educationTimelineMarker'
-      );
-      const educationTimelineBelow = educationItem.querySelector(
-        '.educationTimelineBelow'
-      );
-      const educationSchoolLogo = educationItem.querySelector(
-        '.educationSchoolLogo'
-      );
-      const educationDates = educationItem.querySelector('.educationDates');
-      const educationSchoolName = educationItem.querySelector(
-        '.educationSchoolName'
-      );
-      const educationDegree = educationItem.querySelector('.educationDegree');
-      const educationMajorOption = educationItem.querySelector(
-        '.educationMajorOption'
-      );
-      const educationDescription = educationItem.querySelector(
-        '.educationDescription'
-      );
+    const educationTimelineAbove = educationItem.querySelector(
+      '.educationTimelineAbove'
+    );
+    const educationTimelineMarker = educationItem.querySelector(
+      '.educationTimelineMarker'
+    );
+    const educationTimelineBelow = educationItem.querySelector(
+      '.educationTimelineBelow'
+    );
+    const educationSchoolLogo = educationItem.querySelector(
+      '.educationSchoolLogo'
+    );
+    const educationDates = educationItem.querySelector('.educationDates');
+    const educationSchoolName = educationItem.querySelector(
+      '.educationSchoolName'
+    );
+    const educationDegree = educationItem.querySelector('.educationDegree');
+    const educationMajorOption = educationItem.querySelector(
+      '.educationMajorOption'
+    );
+    const educationDescription = educationItem.querySelector(
+      '.educationDescription'
+    );
 
-      if (educationTimelineAbove)
-        educationItemsTimeline.to(educationTimelineAbove, { height: 14 });
-      if (educationTimelineMarker)
-        educationItemsTimeline.to(educationTimelineMarker, { width: '100%' });
+    if (educationTimelineAbove)
+      educationItemsTimeline.to(educationTimelineAbove, { height: 14 });
+    if (educationTimelineMarker)
+      educationItemsTimeline.to(educationTimelineMarker, { width: '100%' });
 
-      educationItemsTimeline.to(educationSchoolLogo, { x: 0, opacity: 1 });
-      educationItemsTimeline.to(educationDates, { x: 0, opacity: 1 });
-      educationItemsTimeline.to(educationSchoolName, { x: 0, opacity: 1 });
-      educationItemsTimeline.to(educationDegree, { x: 0, opacity: 1 });
-      educationItemsTimeline.to(educationMajorOption, { x: 0, opacity: 1 });
-      educationItemsTimeline.to(educationDescription, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationSchoolLogo, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationDates, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationSchoolName, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationDegree, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationMajorOption, { x: 0, opacity: 1 });
+    educationItemsTimeline.to(educationDescription, { x: 0, opacity: 1 });
 
-      if (educationTimelineBelow)
-        educationItemsTimeline.to(educationTimelineBelow, { height: '100%' });
-    } catch (error) {}
+    if (educationTimelineBelow)
+      educationItemsTimeline.to(educationTimelineBelow, { height: '100%' });
   });
 </script>
 
@@ -171,45 +108,54 @@ const education: EducationItemProps[] = [
     '[&>*]:md:flex-1',
   ]}
 >
-  <div
-    class:list={[
-      'flex',
-      'flex-col',
-      'w-full',
-      'gap-2',
-      'md:items-end',
-      'md:text-right',
-    ]}
-  >
-    <h2
-      class:list={[
-        'educationHeading',
-        'translate-y-12',
-        'opacity-0',
-        'text-accent-1',
-        'font-bold',
-        'text-6xl',
-      ]}
-    >
-      I went to school for this!
-    </h2>
-    <h3
-      class:list={[
-        'educationSubheading',
-        'translate-y-12',
-        'opacity-0',
-        'text-tertiary',
-        'font-mono',
-        'text-xl',
-      ]}
-    >
-      I'm a studious fellow
-    </h3>
-  </div>
+  {
+    (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
+      <div
+        class:list={[
+          'flex',
+          'flex-col',
+          'w-full',
+          'gap-2',
+          'md:items-end',
+          'md:text-right',
+        ]}
+      >
+        {Astro.slots.has('heading') && (
+          <h2
+            class:list={[
+              'educationHeading',
+              'translate-y-12',
+              'opacity-0',
+              'text-accent-1',
+              'font-bold',
+              'text-6xl',
+            ]}
+          >
+            <slot name="heading" />
+          </h2>
+        )}
+
+        {Astro.slots.has('subheading') && (
+          <h3
+            class:list={[
+              'educationSubheading',
+              'translate-y-12',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-xl',
+            ]}
+          >
+            <slot name="subheading" />
+          </h3>
+        )}
+      </div>
+    )
+  }
 
   <div class:list={['educationContent', 'flex', 'flex-col']}>
     {
-      education.map((item, index) => {
+      items.map((item, index) => {
         const key = Math.random().toString(36).substring(2, 9);
 
         return (
@@ -217,7 +163,7 @@ const education: EducationItemProps[] = [
             <EducationItem
               {...item}
               showAboveTimeline={index !== 0}
-              showBelowTimeline={index !== education.length - 1}
+              showBelowTimeline={index !== items.length - 1}
               showMarker
             />
           </div>

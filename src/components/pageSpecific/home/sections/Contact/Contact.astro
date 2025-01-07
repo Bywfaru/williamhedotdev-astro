@@ -41,32 +41,41 @@ import { ContactForm } from './components/ContactForm';
     'md:text-center',
   ]}
 >
-  <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
-    <h2
-      class:list={[
-        'contactHeading',
-        'translate-y-12',
-        'opacity-0',
-        'text-accent-1',
-        'font-bold',
-        'text-6xl',
-      ]}
-    >
-      Let's get in touch :)
-    </h2>
-    <h3
-      class:list={[
-        'contactSubheading',
-        'translate-y-12',
-        'opacity-0',
-        'text-tertiary',
-        'font-mono',
-        'text-xl',
-      ]}
-    >
-      But please don't touch me
-    </h3>
-  </div>
+  {
+    (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
+      <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+        {Astro.slots.has('heading') && (
+          <h2
+            class:list={[
+              'contactHeading',
+              'translate-y-12',
+              'opacity-0',
+              'text-accent-1',
+              'font-bold',
+              'text-6xl',
+            ]}
+          >
+            <slot name="heading" />
+          </h2>
+        )}
+
+        {Astro.slots.has('subheading') && (
+          <h3
+            class:list={[
+              'contactSubheading',
+              'translate-y-12',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-xl',
+            ]}
+          >
+            <slot name="subheading" />
+          </h3>
+        )}
+      </div>
+    )
+  }
 
   <div
     class:list={[
@@ -77,20 +86,9 @@ import { ContactForm } from './components/ContactForm';
       'flex',
       'flex-col',
       'gap-5',
-      'text-secondary',
-      '[&_strong]:text-accent-2',
-      '[&_a]:text-accent-2',
-      '[&_a]:underline',
-      'md:',
     ]}
   >
-    <p>
-      My slogan is: <strong
-        >"Where there's a will, there's a way, and my name is Will."</strong
-      ><br />You've got a problem? I've got the solution
-    </p>
-
-    <p>Let's see how I can help you and your business grow!</p>
+    <slot name="content" />
 
     <ContactForm client:load />
   </div>
