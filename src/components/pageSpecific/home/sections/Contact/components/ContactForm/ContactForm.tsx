@@ -30,22 +30,24 @@ type FormSchema = z.infer<typeof FORM_SCHEMA>;
 type Web3FormsResponse = z.infer<typeof WEB_3_FORMS_RESPONSE_SCHEMA>;
 
 export const ContactForm: FC = () => {
-  const { handleSubmit, register, setValue, watch, resetField } =
-    useForm<FormSchema>({
-      resolver: zodResolver(FORM_SCHEMA),
-    });
+  const { handleSubmit, register } = useForm<FormSchema>({
+    resolver: zodResolver(FORM_SCHEMA),
+  });
   const isClient = useIsClient();
   const [message, setMessage] = useState<string | null>(null);
   const [reCaptchaToken, setReCaptchaToken] = useState<string | null>(null);
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
 
   const handleFormSubmit: SubmitHandler<FormSchema> = async (fieldValues) => {
-    setMessage(null);
-
+    if (isSubmitting) return;
     if (!reCaptchaToken) {
       setMessage('Please complete the reCAPTCHA challenge.');
 
       return;
     }
+
+    setIsSubmitting(true);
+    setMessage(null);
 
     const res = await fetch(FORM_API_URL, {
       method: 'POST',
@@ -90,6 +92,7 @@ export const ContactForm: FC = () => {
         } satisfies Web3FormsResponse;
       });
 
+    setIsSubmitting(false);
     setMessage(res.message);
   };
 
@@ -141,6 +144,7 @@ export const ContactForm: FC = () => {
         type="button"
         buttonType="submit"
         className={clsx(['md:hidden'])}
+        disabled={isSubmitting}
         fullWidth
       >
         Send
@@ -149,6 +153,7 @@ export const ContactForm: FC = () => {
         type="button"
         buttonType="submit"
         className={clsx(['hidden', 'md:block'])}
+        disabled={isSubmitting}
       >
         Send
       </Button>
