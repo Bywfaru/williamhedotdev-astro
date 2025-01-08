@@ -7,6 +7,17 @@ import '@fontsource/fira-sans';
 
 import { getImage } from 'astro:assets';
 
+export type MainLayoutProps = {
+  title?: string;
+  description?: string;
+};
+type Props = MainLayoutProps;
+
+const { description = t('site.description'), ...restProps } = Astro.props;
+
+const title = restProps.title
+  ? `${restProps.title} | William He`
+  : t('site.title');
 const optimizedBackgroundImage = await getImage({
   src: dotGridWhite,
   quality: 70,
@@ -20,8 +31,8 @@ const optimizedBackgroundImage = await getImage({
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{t('site.title')}</title>
-    <meta name="description" content={t('site.description')} />
+    <title>{title}</title>
+    <meta name="description" content={description} />
   </head>
   <body
     class:list={[
@@ -41,6 +52,8 @@ const optimizedBackgroundImage = await getImage({
     ]}
     style={`background-image: url('${optimizedBackgroundImage.src}')`}
   >
+    <slot name="outer" />
+
     <div
       class:list={[
         'flex',
@@ -51,6 +64,7 @@ const optimizedBackgroundImage = await getImage({
         'max-w-screen-xl',
         'mx-auto',
         'mb-20',
+        'min-h-screen',
       ]}
     >
       <slot />

@@ -8,20 +8,10 @@ import type { GetImageResult } from 'astro';
 import clsx from 'clsx';
 import { useEffect, useRef, useState, type FC } from 'react';
 import { PaginationControls } from './components';
-
-export type PortfolioItem = {
-  name: string;
-  stack: string[];
-  description: string;
-  mobile: GetImageResult;
-  tablet?: GetImageResult;
-  desktop?: GetImageResult;
-  visitUrl?: string;
-  moreDetailsUrl?: string;
-};
+import type { CollectionEntry } from 'astro:content';
 
 export type PortfolioItemsProps = {
-  items: PortfolioItem[];
+  items: CollectionEntry<'portfolio'>[];
   autoRotate?: boolean;
   autoRotateInterval?: number;
 };
@@ -449,8 +439,8 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
             ])}
           >
             <img
-              src={currentItem.mobile.src}
-              alt={`${currentItem.name} mobile screenshot`}
+              src={currentItem.data.mobile.src}
+              alt={`${currentItem.data.name} mobile screenshot`}
               loading="lazy"
               className={clsx([
                 'portfolioScreenshot',
@@ -493,8 +483,8 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
             ])}
           >
             <img
-              src={currentItem.tablet?.src || currentItem.mobile.src}
-              alt={`${currentItem.name} tablet screenshot`}
+              src={currentItem.data.tablet?.src || currentItem.data.mobile.src}
+              alt={`${currentItem.data.name} tablet screenshot`}
               loading="lazy"
               className={clsx([
                 'portfolioScreenshot',
@@ -537,11 +527,11 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           >
             <img
               src={
-                currentItem.desktop?.src ||
-                currentItem.tablet?.src ||
-                currentItem.mobile.src
+                currentItem.data.desktop?.src ||
+                currentItem.data.tablet?.src ||
+                currentItem.data.mobile.src
               }
-              alt={`${currentItem.name} desktop screenshot`}
+              alt={`${currentItem.data.name} desktop screenshot`}
               loading="lazy"
               className={clsx([
                 'portfolioScreenshot',
@@ -595,7 +585,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
                 'text-3xl',
               ])}
             >
-              {currentItem.name}
+              {currentItem.data.name}
             </h4>
 
             <h5
@@ -608,7 +598,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
                 'text-xl',
               ])}
             >
-              {currentItem.stack.join(', ')}
+              {currentItem.data.stack.join(', ')}
             </h5>
           </div>
 
@@ -619,12 +609,12 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
               'opacity-0',
             ])}
           >
-            {currentItem.description}
+            {currentItem.data.description}
           </p>
         </div>
 
         <div className={clsx(['flex', 'flex-col', 'gap-5', ''])}>
-          {!!currentItem.visitUrl && (
+          {!!currentItem.data.visitUrl && (
             <div
               className={clsx([
                 'portfolioVisitLink',
@@ -632,23 +622,23 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
                 'opacity-0',
               ])}
             >
-              <a href={currentItem.visitUrl}>Visit {currentItem.name}</a>
+              <a href={currentItem.data.visitUrl}>
+                Visit {currentItem.data.name}
+              </a>
             </div>
           )}
 
-          {!!currentItem.moreDetailsUrl && (
-            <div
-              className={clsx([
-                'portfolioMoreDetailsButton',
-                'translate-y-12',
-                'opacity-0',
-              ])}
-            >
-              <Button type="link" href={currentItem.moreDetailsUrl}>
-                More details
-              </Button>
-            </div>
-          )}
+          <div
+            className={clsx([
+              'portfolioMoreDetailsButton',
+              'translate-y-12',
+              'opacity-0',
+            ])}
+          >
+            <Button type="link" href={`/portfolio/${currentItem.id}`}>
+              More details
+            </Button>
+          </div>
 
           <div
             className={clsx([

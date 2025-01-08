@@ -1,10 +1,4 @@
 ---
-import onlyTheBestNutritionDesktopImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/desktop.png';
-import onlyTheBestNutritionMobileImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/mobile.png';
-import onlyTheBestNutritionTabletImage from '@/assets/images/portfolioScreenshots/onlyTheBestNutrition/tablet.png';
-import theRefillStopDesktopImage from '@/assets/images/portfolioScreenshots/theRefillStop/desktop.png';
-import theRefillStopMobileImage from '@/assets/images/portfolioScreenshots/theRefillStop/mobile.png';
-import theRefillStopTabletImage from '@/assets/images/portfolioScreenshots/theRefillStop/tablet.png';
 import bcitLogo from '@/assets/images/schools/bcit-logo.webp';
 import douglasLogo from '@/assets/images/schools/douglas-logo.png';
 import About from '@/components/pageSpecific/home/sections/About/About.astro';
@@ -12,7 +6,6 @@ import Contact from '@/components/pageSpecific/home/sections/Contact/Contact.ast
 import type { EducationItemProps } from '@/components/pageSpecific/home/sections/Education/components/EducationItem/EducationItem.astro';
 import Education from '@/components/pageSpecific/home/sections/Education/Education.astro';
 import Hero from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
-import type { PortfolioItem } from '@/components/pageSpecific/home/sections/Portfolio/components/PortfolioItems';
 import Portfolio from '@/components/pageSpecific/home/sections/Portfolio/Portfolio.astro';
 import Skills from '@/components/pageSpecific/home/sections/Skills/Skills.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -22,6 +15,8 @@ import {
   SiLinkedin,
 } from '@icons-pack/react-simple-icons';
 import { getImage } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { differenceInYears } from 'date-fns';
 import { marked } from 'marked';
 
@@ -40,55 +35,7 @@ const DOUGLAS_COLLEGE_COMPLETED_COURSES = [
 ];
 
 const age = differenceInYears(new Date(), new Date('1999-04-17'));
-const portfolioItems: PortfolioItem[] = [
-  {
-    name: 'Only The Best Nutrition',
-    stack: ['Next.js 13', 'Headless CMS', 'Google Analytics', 'SEO', 'Stripe'],
-    description:
-      'An SEO-optimized Next.js 13 online store that implements Google Analytics and a headless CMS for simple page and product customization.',
-    mobile: await getImage({
-      src: onlyTheBestNutritionMobileImage,
-      quality: 70,
-    }),
-    tablet: await getImage({
-      src: onlyTheBestNutritionTabletImage,
-      quality: 70,
-    }),
-    desktop: await getImage({
-      src: onlyTheBestNutritionDesktopImage,
-      quality: 70,
-    }),
-    visitUrl: 'https://onlythebestnutrition.com',
-    // moreDetailsUrl: '/portfolio/only-the-best-nutrition',
-  },
-  {
-    name: 'The Refill Stop',
-    stack: [
-      'Astro',
-      'React',
-      'Headless CMS',
-      'Google Analytics',
-      'SEO',
-      'Stripe',
-    ],
-    description:
-      'An SEO-optimized Astro online store with React components that implements Google Analytics and a headless CMS for simple page and product customization.',
-    mobile: await getImage({
-      src: theRefillStopMobileImage,
-      quality: 70,
-    }),
-    tablet: await getImage({
-      src: theRefillStopTabletImage,
-      quality: 70,
-    }),
-    desktop: await getImage({
-      src: theRefillStopDesktopImage,
-      quality: 70,
-    }),
-    visitUrl: 'https://therefillstop.com',
-    // moreDetailsUrl: '/portfolio/the-refill-stop',
-  },
-];
+const portfolioEntries = await getCollection('portfolio');
 const education: EducationItemProps[] = [
   {
     school: {
@@ -200,7 +147,7 @@ While I have a strong foundation in **front-end development**, my experience ext
     />
   </Skills>
 
-  <Portfolio items={portfolioItems}>
+  <Portfolio items={portfolioEntries}>
     <Fragment slot="heading">Projects</Fragment>
     <Fragment slot="subheading"
       >A glimpse of my professional and personal works</Fragment

@@ -1,9 +1,9 @@
 ---
-import type { PortfolioItem } from './components/PortfolioItems';
+import type { CollectionEntry } from 'astro:content';
 import { PortfolioItems } from './components/PortfolioItems';
 
 export type PortfolioProps = {
-  items: PortfolioItem[];
+  items: CollectionEntry<'portfolio'>[];
 };
 type Props = PortfolioProps;
 
