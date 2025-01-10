@@ -1,6 +1,6 @@
 ---
 name: Only The Best Nutrition
-stack: 
+stack:
   - Next.js 13
   - Headless CMS
   - Google Analytics
@@ -21,4 +21,4 @@ Mauris vitae leo tempor, luctus erat vitae, vestibulum metus. Vestibulum ante ip
 
 Ut eu dictum urna. Duis vitae orci ipsum. Nulla finibus, nulla at suscipit fringilla, enim dolor tincidunt ante, at posuere dolor sapien a ligula. Nullam turpis nulla, scelerisque id finibus a, bibendum vitae mauris. Nulla et faucibus ante. Fusce auctor neque sit amet dui pellentesque, eu placerat sapien tincidunt. Nulla ac libero quis diam bibendum efficitur. Quisque fringilla sapien eu massa ultrices cursus. Morbi aliquam vel nibh ut malesuada.
 
-In id sodales felis, sed fermentum nisl. Nulla ac urna mattis, faucibus ipsum in, dictum diam. Fusce eu diam placerat, placerat dui non, consectetur enim. Integer tempor lectus egestas ipsum accumsan, vitae volutpat tortor lacinia. Nunc et metus et diam semper dictum. Ut et lobortis nulla. Sed tincidunt libero sed metus faucibus, nec elementum lorem commodo. Sed pretium dolor justo, at accumsan dolor elementum quis. Donec in nibh a massa finibus tincidunt sed at nunc. 
+In id sodales felis, sed fermentum nisl. Nulla ac urna mattis, faucibus ipsum in, dictum diam. Fusce eu diam placerat, placerat dui non, consectetur enim. Integer tempor lectus egestas ipsum accumsan, vitae volutpat tortor lacinia. Nunc et metus et diam semper dictum. Ut et lobortis nulla. Sed tincidunt libero sed metus faucibus, nec elementum lorem commodo. Sed pretium dolor justo, at accumsan dolor elementum quis. Donec in nibh a massa finibus tincidunt sed at nunc.
