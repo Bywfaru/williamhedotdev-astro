@@ -34,7 +34,7 @@ export const NavMenu: FC<NavMenuProps> = ({
         'flex',
         'flex-col',
         'items-end',
-        'w-full',
+        'w-screen',
         'gap-10',
         'md:max-w-lg',
         'h-screen',
