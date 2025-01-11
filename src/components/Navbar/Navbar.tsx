@@ -19,7 +19,7 @@ export const Navbar: FC<NavbarProps> = ({ links }) => {
   return (
     <nav
       className={clsx([
-        'w-full',
+        'w-screen',
         'md:w-auto',
         'md:h-full',
         'py-2',
