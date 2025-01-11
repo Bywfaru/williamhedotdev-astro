@@ -50,7 +50,7 @@ export const NavMenu: FC<NavMenuProps> = ({
         'md:px-5',
         'md:py-4',
         open && ['top-0', 'left-0', 'md:left-0', 'md:top-0'],
-        !open && ['-top-full', 'left-0', 'md:-left-full', 'md:top-0'],
+        !open && ['-top-[100vh]', 'left-0', 'md:-left-full', 'md:top-0'],
       ])}
     >
       <button
