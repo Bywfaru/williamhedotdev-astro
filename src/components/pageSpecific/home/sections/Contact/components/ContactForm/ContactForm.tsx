@@ -98,7 +98,14 @@ export const ContactForm: FC = () => {
 
   return (
     <form
-      className={clsx(['flex', 'flex-col', 'gap-3', 'w-full', 'items-end'])}
+      className={clsx([
+        'flex',
+        'flex-col',
+        'gap-3',
+        'w-full',
+        'items-center',
+        'md:items-end',
+      ])}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Input

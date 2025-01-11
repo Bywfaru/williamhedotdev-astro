@@ -1,0 +1,36 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry, InferEntrySchema } from 'astro:content';
+import { Button } from '../../home/general/Button';
+
+export type CatalogCardProps = {
+  entry: CollectionEntry<'projects'>;
+};
+type Props = CatalogCardProps;
+
+const { entry } = Astro.props;
+const { data, id } = entry;
+---
+
+<a class:list={['flex', 'flex-col', 'gap-5']}>
+  <div class:list={['w-full', 'aspect-square']}>
+    <img
+      src={data.headerImage?.src}
+      alt={`Header image for ${data.name}`}
+      class:list={['size-full', 'object-cover', 'object-center']}
+    />
+  </div>
+
+  <div class:list={['flex', 'flex-col']}>
+    <h1 class:list={['text-2xl', 'text-accent-1']}>{data.name}</h1>
+    <h2 class:list={['text-lg', 'font-mono', 'text-tertiary']}>
+      {data.stack.join(', ')}
+    </h2>
+  </div>
+
+  <p>
+    {data.description}
+  </p>
+
+  <Button type="link" href={`/projects/${id}`}> Read more </Button>
+</a>

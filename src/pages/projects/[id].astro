@@ -1,0 +1,96 @@
+---
+import MainLayout from '@/layouts/MainLayout.astro';
+import type { GetStaticPaths } from 'astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+import tailwindConfig from '../../../tailwind.config.mjs';
+import { Button } from '@/components/pageSpecific/home/general/Button';
+import { ChevronLeft } from 'lucide-react';
+import clsx from 'clsx';
+
+type Props = CollectionEntry<'projects'>;
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const portfolioEntries = await getCollection('projects');
+
+  return portfolioEntries.map((entry) => ({
+    params: { id: entry.id },
+    props: entry,
+  }));
+};
+
+const { data, id } = Astro.props;
+const {
+  description,
+  headerImage,
+  name,
+  stack,
+  visitUrl,
+  headerBackgroundColor = (
+    tailwindConfig.theme?.colors as Record<string, string> | undefined
+  )?.tertiary,
+} = data;
+const { Content } = await render(Astro.props);
+---
+
+<MainLayout title={name} description={description}>
+  <div
+    slot="outer"
+    class:list={['w-full', 'h-60', 'p-10', 'lg:h-80']}
+    style={`background-color: ${headerBackgroundColor}`}
+  >
+    {
+      !!headerImage && (
+        <img
+          class:list={['w-full', 'h-full', 'object-contain', 'object-center']}
+          src={headerImage.src}
+          alt={`Header image for ${name}`}
+        />
+      )
+    }
+  </div>
+
+  <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
+    <div
+      class:list={['flex', 'gap-2', 'items-center', 'text-accent-2', 'text-xl']}
+    >
+      <Button type="link" variant="secondary" href="/"> Home </Button>
+
+      <ChevronLeft />
+
+      <Button type="link" variant="secondary" href="/projects">
+        Portfolio
+      </Button>
+
+      <ChevronLeft />
+
+      <Button
+        type="link"
+        variant="secondary"
+        href={`/projects/${id}`}
+        className={clsx(['text-ellipsis', 'line-clamp-1'])}
+      >
+        {name}
+      </Button>
+    </div>
+
+    <div class:list={['flex', 'flex-col']}>
+      <h1 class:list={['text-6xl', 'text-accent-1']}>{name}</h1>
+      <h2 class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
+        {stack.join(', ')}
+      </h2>
+    </div>
+
+    <div class:list={['flex', 'flex-col', 'gap-5']}>
+      {
+        !!visitUrl && (
+          <Button type="link" variant="secondary" href={visitUrl}>
+            Visit {name}
+          </Button>
+        )
+      }
+
+      <Content />
+    </div>
+  </div>
+</MainLayout>

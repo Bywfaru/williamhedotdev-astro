@@ -10,15 +10,15 @@ import { useEffect, useRef, useState, type FC } from 'react';
 import { PaginationControls } from './components';
 import type { CollectionEntry } from 'astro:content';
 
-export type PortfolioItemsProps = {
-  items: CollectionEntry<'portfolio'>[];
+export type ProjectItemsProps = {
+  items: CollectionEntry<'projects'>[];
   autoRotate?: boolean;
   autoRotateInterval?: number;
 };
 
 const DEFAULT_AUTO_ROTATION_INTERVAL = 10 * 1000;
 
-export const PortfolioItems: FC<PortfolioItemsProps> = ({
+export const ProjectItems: FC<ProjectItemsProps> = ({
   items,
   autoRotate = true,
   autoRotateInterval = DEFAULT_AUTO_ROTATION_INTERVAL,
@@ -44,22 +44,16 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
     setIsTransitioning(true);
 
-    const portfolioItemHeading = document.querySelector(
-      '.portfolioItemHeading',
+    const projectItemHeading = document.querySelector('.projectItemHeading');
+    const projectItemSubheading = document.querySelector(
+      '.projectItemSubheading',
     );
-    const portfolioItemSubheading = document.querySelector(
-      '.portfolioItemSubheading',
+    const projectItemContent = document.querySelector('.projectItemContent');
+    const projectVisitLink = document.querySelector('.projectVisitLink');
+    const projectMoreDetailsButton = document.querySelector(
+      '.projectMoreDetailsButton',
     );
-    const portfolioItemContent = document.querySelector(
-      '.portfolioItemContent',
-    );
-    const portfolioVisitLink = document.querySelector('.portfolioVisitLink');
-    const portfolioMoreDetailsButton = document.querySelector(
-      '.portfolioMoreDetailsButton',
-    );
-    const portfolioScreenshot = document.querySelectorAll(
-      '.portfolioScreenshot',
-    );
+    const projectScreenshot = document.querySelectorAll('.projectScreenshot');
 
     const timelineBeforeChange = gsap.timeline({
       defaults: { delay: -0.2, duration: 0.3 },
@@ -67,7 +61,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
     timelineBeforeChange
       .fromTo(
-        portfolioItemHeading,
+        projectItemHeading,
         {
           x: 0,
           opacity: 1,
@@ -78,7 +72,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioItemSubheading,
+        projectItemSubheading,
         {
           x: 0,
           opacity: 1,
@@ -89,7 +83,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioItemContent,
+        projectItemContent,
         {
           x: 0,
           opacity: 1,
@@ -100,7 +94,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioVisitLink,
+        projectVisitLink,
         {
           x: 0,
           opacity: 1,
@@ -111,7 +105,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioMoreDetailsButton,
+        projectMoreDetailsButton,
         {
           x: 0,
           opacity: 1,
@@ -121,7 +115,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           opacity: 0,
         },
       );
-    gsap.to(portfolioScreenshot, {
+    gsap.to(projectScreenshot, {
       opacity: 0,
       duration: timelineBeforeChange.duration(),
     });
@@ -135,7 +129,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
       timelineAfterChange
         .fromTo(
-          portfolioItemHeading,
+          projectItemHeading,
           {
             x: 20,
             opacity: 0,
@@ -146,7 +140,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioItemSubheading,
+          projectItemSubheading,
           {
             x: 20,
             opacity: 0,
@@ -157,7 +151,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioItemContent,
+          projectItemContent,
           {
             x: 20,
             opacity: 0,
@@ -168,7 +162,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioVisitLink,
+          projectVisitLink,
           {
             x: 20,
             opacity: 0,
@@ -179,7 +173,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioMoreDetailsButton,
+          projectMoreDetailsButton,
           {
             x: 20,
             opacity: 0,
@@ -189,7 +183,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
             opacity: 1,
           },
         );
-      gsap.to(portfolioScreenshot, {
+      gsap.to(projectScreenshot, {
         opacity: 1,
         duration: timelineAfterChange.duration(),
       });
@@ -213,22 +207,16 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
     setIsTransitioning(true);
 
-    const portfolioItemHeading = document.querySelector(
-      '.portfolioItemHeading',
+    const projectItemHeading = document.querySelector('.projectItemHeading');
+    const projectItemSubheading = document.querySelector(
+      '.projectItemSubheading',
     );
-    const portfolioItemSubheading = document.querySelector(
-      '.portfolioItemSubheading',
+    const projectItemContent = document.querySelector('.projectItemContent');
+    const projectVisitLink = document.querySelector('.projectVisitLink');
+    const projectMoreDetailsButton = document.querySelector(
+      '.projectMoreDetailsButton',
     );
-    const portfolioItemContent = document.querySelector(
-      '.portfolioItemContent',
-    );
-    const portfolioVisitLink = document.querySelector('.portfolioVisitLink');
-    const portfolioMoreDetailsButton = document.querySelector(
-      '.portfolioMoreDetailsButton',
-    );
-    const portfolioScreenshot = document.querySelectorAll(
-      '.portfolioScreenshot',
-    );
+    const projectScreenshot = document.querySelectorAll('.projectScreenshot');
 
     const timelineBeforeChange = gsap.timeline({
       defaults: { delay: -0.2, duration: 0.3 },
@@ -236,7 +224,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
     timelineBeforeChange
       .fromTo(
-        portfolioItemHeading,
+        projectItemHeading,
         {
           x: 0,
           opacity: 1,
@@ -247,7 +235,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioItemSubheading,
+        projectItemSubheading,
         {
           x: 0,
           opacity: 1,
@@ -258,7 +246,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioItemContent,
+        projectItemContent,
         {
           x: 0,
           opacity: 1,
@@ -269,7 +257,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioVisitLink,
+        projectVisitLink,
         {
           x: 0,
           opacity: 1,
@@ -280,7 +268,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       )
       .fromTo(
-        portfolioMoreDetailsButton,
+        projectMoreDetailsButton,
         {
           x: 0,
           opacity: 1,
@@ -291,7 +279,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
         },
       );
 
-    gsap.to(portfolioScreenshot, {
+    gsap.to(projectScreenshot, {
       opacity: 0,
       duration: timelineBeforeChange.duration(),
     });
@@ -307,7 +295,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
       timelineAfterChange
         .fromTo(
-          portfolioItemHeading,
+          projectItemHeading,
           {
             x: -20,
             opacity: 0,
@@ -318,7 +306,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioItemSubheading,
+          projectItemSubheading,
           {
             x: -20,
             opacity: 0,
@@ -329,7 +317,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioItemContent,
+          projectItemContent,
           {
             x: -20,
             opacity: 0,
@@ -340,7 +328,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioVisitLink,
+          projectVisitLink,
           {
             x: -20,
             opacity: 0,
@@ -351,7 +339,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           },
         )
         .fromTo(
-          portfolioMoreDetailsButton,
+          projectMoreDetailsButton,
           {
             x: -20,
             opacity: 0,
@@ -361,7 +349,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
             opacity: 1,
           },
         );
-      gsap.to(portfolioScreenshot, {
+      gsap.to(projectScreenshot, {
         opacity: 1,
         duration: timelineAfterChange.duration(),
       });
@@ -410,7 +398,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
       >
         <div
           className={clsx([
-            'portfolioDevice',
+            'projectDevice',
             '-translate-x-12',
             'opacity-0',
             'min-w-[257px]',
@@ -443,7 +431,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
               alt={`${currentItem.data.name} mobile screenshot`}
               loading="lazy"
               className={clsx([
-                'portfolioScreenshot',
+                'projectScreenshot',
                 'opacity-0',
                 'w-[92%]',
                 'h-[96%]',
@@ -487,7 +475,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
               alt={`${currentItem.data.name} tablet screenshot`}
               loading="lazy"
               className={clsx([
-                'portfolioScreenshot',
+                'projectScreenshot',
                 'opacity-0',
                 'w-[91%]',
                 'h-[94%]',
@@ -534,7 +522,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
               alt={`${currentItem.data.name} desktop screenshot`}
               loading="lazy"
               className={clsx([
-                'portfolioScreenshot',
+                'projectScreenshot',
                 'opacity-0',
                 'h-[86%]',
                 'w-[82%]',
@@ -577,7 +565,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           <div className={clsx(['flex', 'flex-col', 'gap-2'])}>
             <h4
               className={clsx([
-                'portfolioItemHeading',
+                'projectItemHeading',
                 'translate-y-12',
                 'opacity-0',
                 'text-accent-1',
@@ -590,7 +578,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
             <h5
               className={clsx([
-                'portfolioItemSubheading',
+                'projectItemSubheading',
                 'translate-y-12',
                 'opacity-0',
                 'text-tertiary',
@@ -604,7 +592,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
           <p
             className={clsx([
-              'portfolioItemContent',
+              'projectItemContent',
               'translate-y-12',
               'opacity-0',
             ])}
@@ -617,7 +605,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
           {!!currentItem.data.visitUrl && (
             <div
               className={clsx([
-                'portfolioVisitLink',
+                'projectVisitLink',
                 'translate-y-12',
                 'opacity-0',
               ])}
@@ -630,19 +618,19 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
           <div
             className={clsx([
-              'portfolioMoreDetailsButton',
+              'projectMoreDetailsButton',
               'translate-y-12',
               'opacity-0',
             ])}
           >
-            <Button type="link" href={`/portfolio/${currentItem.id}`}>
+            <Button type="link" href={`/projects/${currentItem.id}`}>
               More details
             </Button>
           </div>
 
           <div
             className={clsx([
-              'portfolioNavButtons',
+              'projectNavButtons',
               'translate-y-12',
               'opacity-0',
               'hidden',
@@ -663,7 +651,7 @@ export const PortfolioItems: FC<PortfolioItemsProps> = ({
 
       <div
         className={clsx([
-          'portfolioNavButtons',
+          'projectNavButtons',
           'translate-y-12',
           'opacity-0',
           'col-span-3',

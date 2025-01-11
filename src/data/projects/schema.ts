@@ -78,4 +78,7 @@ export const buildPortfolioSchema = ({ image }: SchemaContext) =>
     desktop: image().nullable(),
     visitUrl: z.string().nullable(),
     moreDetailsUrl: z.string().nullable(),
+    headerImage: image().optional(),
+    headerBackgroundColor: z.string().optional(),
+    thumbnail: image().optional(),
   });

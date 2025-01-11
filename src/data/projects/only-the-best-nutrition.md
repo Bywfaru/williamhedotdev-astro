@@ -12,6 +12,8 @@ tablet: ./assets/onlyTheBestNutrition/tablet.png
 desktop: ./assets/onlyTheBestNutrition/desktop.png
 visitUrl: https://onlythebestnutrition.com
 moreDetailsUrl: null
+headerImage: ./assets/onlyTheBestNutrition/banner.png
+headerBackgroundColor: "#004a48"
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas semper porttitor est, ut bibendum massa placerat sollicitudin. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla facilisi. Sed cursus leo lacus. Ut accumsan viverra imperdiet. Sed aliquet ornare neque, sit amet tincidunt mauris efficitur ac. Suspendisse tincidunt in metus sit amet rhoncus. Nulla viverra urna et aliquet venenatis. Nunc eget neque velit. Proin sit amet elit justo. Sed interdum nulla nisi, nec luctus velit aliquet auctor. Mauris sapien magna, commodo at nulla ac, porta imperdiet lacus. Cras vitae scelerisque tortor.

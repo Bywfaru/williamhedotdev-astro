@@ -1,0 +1,132 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { ProjectItems } from './components/ProjectItems';
+
+export type ProjectProps = {
+  items: CollectionEntry<'projects'>[];
+};
+type Props = ProjectProps;
+
+const { items } = Astro.props;
+---
+
+<script>
+  import { gsap } from '@/utils';
+
+  const projectSection = document.querySelector('#project');
+  const projectHeading = document.querySelector('.projectHeading');
+  const projectSubheading = document.querySelector('.projectSubheading');
+  const projectContent = document.querySelectorAll('.projectContent');
+  const projectDevice = document.querySelector('.projectDevice');
+  const projectItemHeading = document.querySelector('.projectItemHeading');
+  const projectItemSubheading = document.querySelector(
+    '.projectItemSubheading'
+  );
+  const projectItemContent = document.querySelector('.projectItemContent');
+  const projectVisitLink = document.querySelector('.projectVisitLink');
+  const projectMoreDetailsButton = document.querySelector(
+    '.projectMoreDetailsButton'
+  );
+  const projectNavButtons = document.querySelectorAll('.projectNavButtons');
+  const projectScreenshot = document.querySelectorAll('.projectScreenshot');
+
+  const timeline = gsap.timeline({
+    scrollTrigger: {
+      trigger: projectSection,
+    },
+    defaults: {
+      delay: -0.25,
+      duration: 0.5,
+    },
+  });
+
+  timeline
+    .to(projectHeading, { y: 0, opacity: 1 })
+    .to(projectSubheading, { y: 0, opacity: 1 })
+    .to(projectContent, { y: 0, opacity: 1 })
+    .to(projectDevice, { x: 0, opacity: 1 })
+    .to(projectScreenshot, { opacity: 1 })
+    .to(projectItemHeading, { y: 0, opacity: 1 })
+    .to(projectItemSubheading, { y: 0, opacity: 1 })
+    .to(projectItemContent, { y: 0, opacity: 1 })
+    .to(projectVisitLink, { y: 0, opacity: 1 })
+    .to(projectMoreDetailsButton, { y: 0, opacity: 1 })
+    .to(projectNavButtons, { y: 0, opacity: 1 });
+</script>
+
+<section
+  id="project"
+  class:list={[
+    'w-full',
+    'flex',
+    'flex-col',
+    'gap-5',
+    'justify-center',
+    '[&_a:not(.button)]:text-accent-2',
+    '[&_a:not(.button)]:underline',
+    '[&_a:not(.button)]:transition',
+    '[&_a:not(.button):hover]:bg-accent-2',
+    '[&_a:not(.button):hover]:text-primary',
+  ]}
+>
+  {
+    (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
+      <div class:list={['flex', 'flex-col', 'w-full', 'gap-2']}>
+        {Astro.slots.has('heading') && (
+          <h2
+            class:list={[
+              'projectHeading',
+              'translate-y-12',
+              'opacity-0',
+              'text-accent-1',
+              'font-bold',
+              'text-6xl',
+              'md:text-center',
+            ]}
+          >
+            <slot name="heading" />
+          </h2>
+        )}
+
+        {Astro.slots.has('subheading') && (
+          <h3
+            class:list={[
+              'projectSubheading',
+              'translate-y-12',
+              'opacity-0',
+              'text-tertiary',
+              'font-mono',
+              'text-xl',
+              'md:text-center',
+            ]}
+          >
+            <slot name="subheading" />
+          </h3>
+        )}
+      </div>
+    )
+  }
+
+  {
+    Astro.slots.has('content') && (
+      <div
+        class:list={[
+          'projectContent',
+          'translate-y-12',
+          'opacity-0',
+          'w-full',
+          'flex',
+          'flex-col',
+          'gap-5',
+          'md:text-center',
+        ]}
+      >
+        <p>
+          <slot name="content" />
+        </p>
+      </div>
+    )
+  }
+
+  <ProjectItems client:load items={items} />
+</section>

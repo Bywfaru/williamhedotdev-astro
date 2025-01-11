@@ -6,7 +6,7 @@ import Contact from '@/components/pageSpecific/home/sections/Contact/Contact.ast
 import type { EducationItemProps } from '@/components/pageSpecific/home/sections/Education/components/EducationItem/EducationItem.astro';
 import Education from '@/components/pageSpecific/home/sections/Education/Education.astro';
 import Hero from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
-import Portfolio from '@/components/pageSpecific/home/sections/Portfolio/Portfolio.astro';
+import Projects from '@/components/pageSpecific/home/sections/Projects/Projects.astro';
 import Skills from '@/components/pageSpecific/home/sections/Skills/Skills.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import {
@@ -34,7 +34,7 @@ const DOUGLAS_COLLEGE_COMPLETED_COURSES = [
 ];
 
 const age = differenceInYears(new Date(), new Date('1999-04-17'));
-const portfolioEntries = await getCollection('portfolio');
+const projectEntries = await getCollection('projects');
 const education: EducationItemProps[] = [
   {
     school: {
@@ -146,7 +146,7 @@ While I have a strong foundation in **front-end development**, my experience ext
     />
   </Skills>
 
-  <Portfolio items={portfolioEntries}>
+  <Projects items={projectEntries}>
     <Fragment slot="heading">Projects</Fragment>
     <Fragment slot="subheading"
       >A glimpse of my professional and personal works</Fragment
@@ -156,7 +156,7 @@ While I have a strong foundation in **front-end development**, my experience ext
       that showcase my skills in design, front-end development, back-end
       development, and SEO. Please take a look!
     </Fragment>
-  </Portfolio>
+  </Projects>
 
   <Education items={education}>
     <Fragment slot="heading">I went to school for this!</Fragment>

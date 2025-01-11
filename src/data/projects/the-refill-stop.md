@@ -13,4 +13,6 @@ tablet: ./assets/theRefillStop/tablet.png
 desktop: ./assets/theRefillStop/desktop.png
 visitUrl: https://therefillstop.com
 moreDetailsUrl: null
+headerImage: ./assets/theRefillStop/banner.png
+headerBackgroundColor: "#5e3653"
 ---
