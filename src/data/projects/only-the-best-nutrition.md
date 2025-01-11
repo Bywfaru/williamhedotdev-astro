@@ -14,6 +14,7 @@ visitUrl: https://onlythebestnutrition.com
 moreDetailsUrl: null
 headerImage: ./assets/onlyTheBestNutrition/banner.png
 headerBackgroundColor: "#004a48"
+thumbnail: null
 ---
 
 ![Screenshot of the desktop site of Only The Best Nutrition](./assets/onlyTheBestNutrition/desktop.png "Only The Best Nutrition homepage")
