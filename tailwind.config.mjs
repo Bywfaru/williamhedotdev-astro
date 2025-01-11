@@ -24,6 +24,7 @@ export default {
       'accent-2': '#EB5160',
     },
     extend: {
+      ...defaultTheme,
       fontFamily: {
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
         mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],
