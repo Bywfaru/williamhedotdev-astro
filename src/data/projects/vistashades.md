@@ -13,7 +13,8 @@ desktop: ./assets/vistaShades/desktop.png
 visitUrl: https://vistashades.com/
 moreDetailsUrl: null
 headerImage: ./assets/vistaShades/banner.png
-headerBackgroundColor: "#5e3653"
+headerBackgroundColor: "#015ce1"
+thumbnail: null
 ---
 
 ![Screenshot of the desktop site of VistaShades](./assets/vistaShades/desktop.png "VistaShades homepage")

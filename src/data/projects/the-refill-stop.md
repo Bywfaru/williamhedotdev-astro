@@ -15,6 +15,7 @@ visitUrl: https://therefillstop.com
 moreDetailsUrl: null
 headerImage: ./assets/theRefillStop/banner.png
 headerBackgroundColor: "#5e3653"
+thumbnail: null
 ---
 
 ![Screenshot of the desktop site of The Refill Stop](./assets/theRefillStop/desktop.png "The Refill Stop homepage")
