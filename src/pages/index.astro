@@ -15,76 +15,39 @@ import {
   SiLinkedin,
 } from '@icons-pack/react-simple-icons';
 import { getImage } from 'astro:assets';
+import { getEntry } from 'astro:content';
 import { getCollection } from 'astro:content';
 import { differenceInYears } from 'date-fns';
 import { marked } from 'marked';
 
-const DOUGLAS_COLLEGE_COMPLETED_COURSES = [
-  'C++ Programming',
-  'Introduction to Programming',
-  'Calculus',
-  'Introduction to Programming II',
-  'Data Structures & Algorithms',
-  'Calculus II',
-  'Business Statistics',
-  'Linear Algebra',
-  'Academic Writing',
-  'Discrete Mathematics I',
-  'Introduction to Programming II',
-];
-
-const age = differenceInYears(new Date(), new Date('1999-04-17'));
 const projectEntries = await getCollection('projects');
-const education: EducationItemProps[] = [
-  {
-    school: {
-      name: 'British Columbia Institute of Technology',
-      logo: await getImage({
-        src: bcitLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Bachelor of Science',
-    major: 'Applied Computer Science',
-    option: 'Wireless and Mobile Applications Development',
-    from: new Date('2023-04-01'),
-    to: null,
-    description: 'Expected to graduate 2026',
-  },
-  {
-    school: {
-      name: 'British Columbia Institute of Technology',
-      logo: await getImage({
-        src: bcitLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Diploma',
-    major: 'Computer Systems Technology',
-    option: 'Web and Mobile Development',
-    from: new Date('2020-01-01'),
-    to: new Date('2021-12-01'),
-    description: 'Graduated Dec 2021',
-  },
-  {
-    school: {
-      name: 'Douglas College',
-      logo: await getImage({
-        src: douglasLogo,
-        quality: 70,
-      }),
-    },
-    degree: 'Partially completed',
-    major: 'Computer Studies and Information Systems',
-    from: new Date('2017-09-01'),
-    to: new Date('2019-05-01'),
-    description: await marked(
-      `Completed courses:
+const educationEntries = await getCollection('education');
 
-*${DOUGLAS_COLLEGE_COMPLETED_COURSES.join(', ')}*`
-    ),
-  },
-];
+const education = (
+  await Promise.all(
+    educationEntries
+      .sort((a, b) => a.data.from.valueOf() - b.data.from.valueOf())
+      .map(async (entry): Promise<EducationItemProps | null> => {
+        const school = await getEntry('schools', entry.data.school);
+
+        if (!school) return null;
+
+        return {
+          school: {
+            name: school.data.name,
+            logo: await getImage({ src: school.data.logo }),
+          },
+          degree: entry.data.degree,
+          major: entry.data.major,
+          option: entry.data.option ?? undefined,
+          from: entry.data.from,
+          to: entry.data.to,
+          description: entry.body ? await marked(entry.body) : undefined,
+        };
+      })
+  )
+).filter(Boolean) as EducationItemProps[];
+const age = differenceInYears(new Date(), new Date('1999-04-17'));
 ---
 
 <MainLayout>
