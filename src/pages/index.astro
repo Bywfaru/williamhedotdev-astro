@@ -1,11 +1,11 @@
 ---
-import bcitLogo from '@/assets/images/schools/bcit-logo.webp';
-import douglasLogo from '@/assets/images/schools/douglas-logo.png';
 import About from '@/components/pageSpecific/home/sections/About/About.astro';
 import Contact from '@/components/pageSpecific/home/sections/Contact/Contact.astro';
 import type { EducationItemProps } from '@/components/pageSpecific/home/sections/Education/components/EducationItem/EducationItem.astro';
 import Education from '@/components/pageSpecific/home/sections/Education/Education.astro';
-import Hero from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
+import Hero, {
+  type HeroProps,
+} from '@/components/pageSpecific/home/sections/Hero/Hero.astro';
 import Projects from '@/components/pageSpecific/home/sections/Projects/Projects.astro';
 import Skills from '@/components/pageSpecific/home/sections/Skills/Skills.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
@@ -15,10 +15,24 @@ import {
   SiLinkedin,
 } from '@icons-pack/react-simple-icons';
 import { getImage } from 'astro:assets';
-import { getEntry } from 'astro:content';
-import { getCollection } from 'astro:content';
+import { getCollection, getEntry } from 'astro:content';
 import { differenceInYears } from 'date-fns';
 import { marked } from 'marked';
+
+const SOCIALS: HeroProps['socials'] = [
+  {
+    Icon: SiGithub,
+    href: 'https://github.com/bywfaru',
+  },
+  {
+    Icon: SiLinkedin,
+    href: 'https://www.linkedin.com/in/williamhevancity',
+  },
+  {
+    Icon: SiInstagram,
+    href: 'https://www.instagram.com/bywfaru',
+  },
+];
 
 const projectEntries = await getCollection('projects');
 const educationEntries = await getCollection('education');
@@ -51,22 +65,7 @@ const age = differenceInYears(new Date(), new Date('1999-04-17'));
 ---
 
 <MainLayout>
-  <Hero
-    socials={[
-      {
-        Icon: SiGithub,
-        href: 'https://github.com/bywfaru',
-      },
-      {
-        Icon: SiLinkedin,
-        href: 'https://www.linkedin.com/in/williamhevancity',
-      },
-      {
-        Icon: SiInstagram,
-        href: 'https://www.instagram.com/bywfaru',
-      },
-    ]}
-  >
+  <Hero socials={SOCIALS}>
     <Fragment slot="subheading">Full-stack<br />software engineer</Fragment>
   </Hero>
 

@@ -1,1 +1,46 @@
-<footer class:list={['w-full', 'bg-accent-2', 'h-64']}></footer>
+---
+import type { NavbarLink } from '@/components/Navbar';
+import { Button } from '../../general/Button';
+
+export type FooterProps = {
+  links: NavbarLink[];
+};
+type Props = FooterProps;
+
+const { links } = Astro.props;
+---
+
+<footer class:list={['w-full', 'bg-accent-2', 'min-h-64']}>
+  <ul
+    class:list={[
+      'flex',
+      'flex-col',
+      'gap-5',
+      'max-w-screen-xl',
+      'mx-auto',
+      'py-10',
+      'px-5',
+      'w-full',
+    ]}
+  >
+    {
+      links.map(({ label, href }) => (
+        <li class:list={['w-fit']}>
+          <a
+            href={href}
+            class:list={[
+              'text-accent-1',
+              'font-mono',
+              'w-fit',
+              'hover:text-accent-2',
+              'hover:bg-accent-1',
+              'transition',
+            ]}
+          >
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</footer>

@@ -30,10 +30,10 @@
     'flex-col',
     'gap-5',
     'justify-center',
-    'md:flex-row-reverse',
-    'md:justify-between',
-    'md:gap-20',
-    '[&>*]:md:flex-1',
+    'lg:flex-row-reverse',
+    'lg:justify-between',
+    'lg:gap-20',
+    '[&>*]:lg:flex-1',
     '[&_strong]:text-accent-2',
     '[&_a:not(.button)]:text-accent-2',
     '[&_a:not(.button)]:underline',
@@ -45,7 +45,7 @@
   {
     (Astro.slots.has('heading') || Astro.slots.has('subheading')) && (
       <div
-        class:list={['flex', 'flex-col', 'w-full', 'gap-2', 'md:text-right']}
+        class:list={['flex', 'flex-col', 'w-full', 'gap-2', 'lg:text-right']}
       >
         {Astro.slots.has('heading') && (
           <h2
