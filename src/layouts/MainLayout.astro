@@ -1,6 +1,8 @@
 ---
 import dotGridWhite from '@/assets/images/dot-grid-white.png';
+import type { NavbarLink } from '@/components/Navbar';
 import { Navbar } from '@/components/Navbar';
+import type { NavMenuProps } from '@/components/Navbar/components';
 import Footer from '@/components/pageSpecific/home/sections/Footer/Footer.astro';
 import { i18next, t } from '@/utils';
 import '@fontsource-variable/fira-code';
@@ -14,15 +16,28 @@ export type MainLayoutProps = {
 };
 type Props = MainLayoutProps;
 
-const { description = t('site.description'), ...restProps } = Astro.props;
+const LINKS: NavbarLink[] = [
+  {
+    label: 'Home',
+    href: '/',
+  },
+  {
+    label: 'Projects',
+    href: '/projects',
+  },
+];
 
-const title = restProps.title
-  ? `${restProps.title} | William He`
-  : t('site.title');
+const { title, description = t('site.description') } = Astro.props;
+
+const pageTitle = title ? `${title} | William He` : t('site.title');
 const optimizedBackgroundImage = await getImage({
   src: dotGridWhite,
   quality: 70,
 });
+const links: NavbarLink[] = LINKS.map((link) => ({
+  ...link,
+  isCurrentPage: Astro.url.pathname === link.href,
+}));
 ---
 
 <!doctype html>
@@ -32,9 +47,10 @@ const optimizedBackgroundImage = await getImage({
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <title>{pageTitle}</title>
     <meta name="description" content={description} />
   </head>
+
   <body
     class:list={[
       'bg-body-bg',
@@ -59,7 +75,7 @@ const optimizedBackgroundImage = await getImage({
           'left-0',
         ]}
       >
-        <Navbar client:load />
+        <Navbar client:load links={links} />
       </div>
 
       <div
@@ -88,7 +104,7 @@ const optimizedBackgroundImage = await getImage({
           <slot />
         </div>
 
-        <Footer />
+        <Footer links={LINKS} />
       </div>
     </div>
   </body>
