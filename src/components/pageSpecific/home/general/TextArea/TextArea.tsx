@@ -41,6 +41,7 @@ export const TextArea: FC<TextareaProps> = ({
             'px-1',
             'left-[10px]',
             'transition-all',
+            'pointer-events-none',
             !isFocusedOrHasValue && ['top-[14px]'],
             isFocusedOrHasValue && ['bg-body-bg', '-top-2', 'text-xs'],
           ])}

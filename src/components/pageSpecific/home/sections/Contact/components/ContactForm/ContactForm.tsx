@@ -104,7 +104,7 @@ export const ContactForm: FC = () => {
         'gap-3',
         'w-full',
         'items-center',
-        'md:items-end',
+        'lg:items-end',
       ])}
       onSubmit={handleSubmit(handleFormSubmit)}
     >
@@ -150,7 +150,7 @@ export const ContactForm: FC = () => {
       <Button
         type="button"
         buttonType="submit"
-        className={clsx(['md:hidden'])}
+        className={clsx(['lg:hidden'])}
         disabled={isSubmitting}
         fullWidth
       >
@@ -159,7 +159,7 @@ export const ContactForm: FC = () => {
       <Button
         type="button"
         buttonType="submit"
-        className={clsx(['hidden', 'md:block'])}
+        className={clsx(['hidden', 'lg:block'])}
         disabled={isSubmitting}
       >
         Send
