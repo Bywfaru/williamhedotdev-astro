@@ -12,16 +12,6 @@ const projectEntries = await getCollection('projects');
   title="Projects"
   description="A collection of projects I've worked on"
 >
-  <div
-    slot="outer"
-    class:list={['w-full', 'h-60', 'p-10', 'lg:h-80']}
-    style={`background-color: ${
-      (tailwindConfig.theme?.colors as Record<string, string> | undefined)
-        ?.tertiary
-    }`}
-  >
-  </div>
-
   <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
     <Breadcrumb
       links={[

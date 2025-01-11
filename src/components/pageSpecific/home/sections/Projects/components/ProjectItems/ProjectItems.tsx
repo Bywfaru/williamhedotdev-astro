@@ -380,8 +380,7 @@ export const ProjectItems: FC<ProjectItemsProps> = ({
         'gap-5',
         'py-5',
         'w-full',
-        'md:gap-20',
-        'md:grid-cols-5',
+        'lg:gap-20',
         'lg:grid-cols-2',
       ])}
     >
@@ -390,7 +389,6 @@ export const ProjectItems: FC<ProjectItemsProps> = ({
           'col-span-1',
           'relative',
           'min-h-[533px]',
-          'md:col-span-2',
           'md:min-h-[782px]',
           'lg:col-span-1',
           'lg:min-h-[734px]',
@@ -557,7 +555,6 @@ export const ProjectItems: FC<ProjectItemsProps> = ({
           'gap-5',
           'justify-between',
           'py-5',
-          'md:col-span-3',
           'lg:col-span-1',
         ])}
       >
@@ -634,7 +631,7 @@ export const ProjectItems: FC<ProjectItemsProps> = ({
               'translate-y-12',
               'opacity-0',
               'hidden',
-              'md:flex',
+              'lg:flex',
               'items-end',
               'h-full',
             ])}
@@ -655,7 +652,7 @@ export const ProjectItems: FC<ProjectItemsProps> = ({
           'translate-y-12',
           'opacity-0',
           'col-span-3',
-          'md:hidden',
+          'lg:hidden',
         ])}
       >
         <PaginationControls

@@ -53,7 +53,8 @@ const { socials } = Astro.props;
     'flex-col',
     'gap-10',
     'justify-center',
-    'h-screen',
+    'h-[calc(100vh-1rem-36px)]',
+    'lg:h-screen',
     '[&_strong]:text-accent-2',
     '[&_a:not(.button)]:text-accent-2',
     '[&_a:not(.button)]:underline',
@@ -68,27 +69,27 @@ const { socials } = Astro.props;
       'flex-col',
       'gap-5',
       'w-full',
-      'md:flex-row',
-      'md:justify-between',
-      'md:gap-20',
-      '[&>*]:md:flex-1',
+      'lg:flex-row',
+      'lg:justify-between',
+      'lg:gap-20',
+      '[&>*]:lg:flex-1',
     ]}
   >
     <div>
       <h1 class:list={['sr-only']}>William He</h1>
-      <div class:list={['w-full', 'md:hidden']}>
+      <div class:list={['w-full', 'lg:hidden']}>
         <NameLogo size={286} />
       </div>
 
-      <div class:list={['w-full', 'hidden', 'md:block']}>
+      <div class:list={['w-full', 'hidden', 'lg:block']}>
         <NameLogo size="100%" />
       </div>
     </div>
 
-    <div class:list={['flex', 'flex-col', 'gap-10', 'md:items-end']}>
+    <div class:list={['flex', 'flex-col', 'gap-10', 'lg:items-end']}>
       {
         !!(Astro.slots.has('subheading') || socials?.length) && (
-          <div class:list={['flex', 'flex-col', 'gap-5', 'md:items-end']}>
+          <div class:list={['flex', 'flex-col', 'gap-5', 'lg:items-end']}>
             {Astro.slots.has('subheading') && (
               <h2
                 class:list={[
@@ -98,8 +99,8 @@ const { socials } = Astro.props;
                   'text-accent-1',
                   'font-mono',
                   'text-xl',
-                  'md:text-3xl',
-                  'md:text-right',
+                  'lg:text-3xl',
+                  'lg:text-right',
                 ]}
               >
                 <slot name="subheading" />
