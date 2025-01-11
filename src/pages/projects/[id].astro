@@ -1,12 +1,12 @@
 ---
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.astro';
+import { Button } from '@/components/pageSpecific/home/general/Button';
 import MainLayout from '@/layouts/MainLayout.astro';
 import type { GetStaticPaths } from 'astro';
+import { getImage } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
 import { getCollection, render } from 'astro:content';
 import tailwindConfig from '../../../tailwind.config.mjs';
-import { Button } from '@/components/pageSpecific/home/general/Button';
-import { ChevronLeft } from 'lucide-react';
-import clsx from 'clsx';
 
 type Props = CollectionEntry<'projects'>;
 
@@ -31,6 +31,9 @@ const {
   )?.tertiary,
 } = data;
 const { Content } = await render(Astro.props);
+const optimizedHeaderImage = headerImage
+  ? await getImage({ src: headerImage })
+  : null;
 ---
 
 <MainLayout title={name} description={description}>
@@ -40,10 +43,10 @@ const { Content } = await render(Astro.props);
     style={`background-color: ${headerBackgroundColor}`}
   >
     {
-      !!headerImage && (
+      !!optimizedHeaderImage && (
         <img
           class:list={['w-full', 'h-full', 'object-contain', 'object-center']}
-          src={headerImage.src}
+          src={optimizedHeaderImage.src}
           alt={`Header image for ${name}`}
         />
       )
@@ -51,37 +54,48 @@ const { Content } = await render(Astro.props);
   </div>
 
   <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
-    <div
-      class:list={['flex', 'gap-2', 'items-center', 'text-accent-2', 'text-xl']}
-    >
-      <Button type="link" variant="secondary" href="/"> Home </Button>
+    <Breadcrumb
+      links={[
+        {
+          label: 'Home',
+          href: '/',
+        },
+        {
+          label: 'Projects',
+          href: '/projects',
+        },
+        {
+          label: name,
+          href: `/projects/${id}`,
+        },
+      ]}
+    />
 
-      <ChevronLeft />
-
-      <Button type="link" variant="secondary" href="/projects">
-        Portfolio
-      </Button>
-
-      <ChevronLeft />
-
-      <Button
-        type="link"
-        variant="secondary"
-        href={`/projects/${id}`}
-        className={clsx(['text-ellipsis', 'line-clamp-1'])}
-      >
-        {name}
-      </Button>
-    </div>
-
-    <div class:list={['flex', 'flex-col']}>
+    <div class:list={['flex', 'flex-col', 'gap-2']}>
       <h1 class:list={['text-6xl', 'text-accent-1']}>{name}</h1>
       <h2 class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
         {stack.join(', ')}
       </h2>
     </div>
 
-    <div class:list={['flex', 'flex-col', 'gap-5']}>
+    <article
+      class:list={[
+        'flex',
+        'flex-col',
+        'gap-5',
+        '[&_h2]:text-4xl',
+        '[&_h2]:text-accent-1',
+        '[&_strong]:text-accent-2',
+        '[&_a:not(.button)]:text-accent-2',
+        '[&_a:not(.button)]:underline',
+        '[&_a:not(.button)]:transition',
+        '[&_a:not(.button):hover]:bg-accent-2',
+        '[&_a:not(.button):hover]:text-primary',
+        '[&_ul]:list-disc',
+        '[&_ul]:list-inside',
+        '[&_ul]:ml-4',
+      ]}
+    >
       {
         !!visitUrl && (
           <Button type="link" variant="secondary" href={visitUrl}>
@@ -91,6 +105,6 @@ const { Content } = await render(Astro.props);
       }
 
       <Content />
-    </div>
+    </article>
   </div>
 </MainLayout>

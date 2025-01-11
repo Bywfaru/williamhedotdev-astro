@@ -1,16 +1,15 @@
 ---
+import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.astro';
+import CatalogCard from '@/components/pageSpecific/projectsCatalog/CatalogCard/CatalogCard.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
 import tailwindConfig from '../../../tailwind.config.mjs';
-import { Button } from '@/components/pageSpecific/home/general/Button';
-import { ChevronLeft } from 'lucide-react';
-import CatalogCard from '@/components/pageSpecific/projectsCatalog/CatalogCard/CatalogCard.astro';
 
 const projectEntries = await getCollection('projects');
 ---
 
 <MainLayout
-  title="Portfolio"
+  title="Projects"
   description="A collection of projects I've worked on"
 >
   <div
@@ -24,26 +23,35 @@ const projectEntries = await getCollection('projects');
   </div>
 
   <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
-    <div
-      class:list={['flex', 'gap-2', 'items-center', 'text-accent-2', 'text-xl']}
-    >
-      <Button type="link" variant="secondary" href="/"> Home </Button>
+    <Breadcrumb
+      links={[
+        {
+          label: 'Home',
+          href: '/',
+        },
+        {
+          label: 'Projects',
+          href: '/projects',
+        },
+      ]}
+    />
 
-      <ChevronLeft />
-
-      <Button type="link" variant="secondary" href="/projects">
-        Portfolio
-      </Button>
-    </div>
-
-    <div class:list={['flex', 'flex-col']}>
-      <h1 class:list={['text-6xl', 'text-accent-1']}>Portfolio</h1>
-      <h2 class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
+    <div class:list={['flex', 'flex-col', 'gap-2']}>
+      <h1 class:list={['text-6xl', 'text-accent-1']}>Projects</h1>
+      <p class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
         A collection of projects I've worked on
-      </h2>
+      </p>
     </div>
 
-    <div class:list={['grid', 'grid-cols-1', 'gap-5']}>
+    <div
+      class:list={[
+        'grid',
+        'grid-cols-1',
+        'gap-5',
+        'md:grid-cols-2',
+        'lg:grid-cols-3',
+      ]}
+    >
       {projectEntries.map((entry) => <CatalogCard entry={entry} />)}
     </div>
   </div>

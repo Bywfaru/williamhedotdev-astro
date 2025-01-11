@@ -1,7 +1,8 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry, InferEntrySchema } from 'astro:content';
 import { Button } from '../../home/general/Button';
+import tailwindConfig from '../../../../../tailwind.config.mjs';
+import { getImage } from 'astro:assets';
 
 export type CatalogCardProps = {
   entry: CollectionEntry<'projects'>;
@@ -10,15 +11,62 @@ type Props = CatalogCardProps;
 
 const { entry } = Astro.props;
 const { data, id } = entry;
+const optimizedHeaderImage = data.headerImage
+  ? await getImage({ src: data.headerImage })
+  : null;
+const headerBackgroundColor =
+  data.headerBackgroundColor ||
+  (tailwindConfig.theme?.colors as Record<string, string> | undefined)
+    ?.tertiary;
 ---
 
-<a class:list={['flex', 'flex-col', 'gap-5']}>
-  <div class:list={['w-full', 'aspect-square']}>
-    <img
-      src={data.headerImage?.src}
-      alt={`Header image for ${data.name}`}
-      class:list={['size-full', 'object-cover', 'object-center']}
-    />
+<a
+  href={`/projects/${id}`}
+  class:list={[
+    'group',
+    'flex',
+    'flex-col',
+    'bg-primary',
+    'rounded-3xl',
+    'overflow-hidden',
+    'shadow-2xl',
+    'px-4',
+    'py-5',
+    'gap-5',
+    'transition',
+  ]}
+>
+  <div
+    class:list={[
+      'w-full',
+      'aspect-video',
+      'text-accent-2',
+      'flex',
+      'items-center',
+      'justify-center',
+      'overflow-hidden',
+      'rounded-t-xl',
+    ]}
+    style={`background-color: ${headerBackgroundColor}`}
+  >
+    {
+      optimizedHeaderImage && (
+        <img
+          src={optimizedHeaderImage.src}
+          alt={`Header image for ${data.name}`}
+          loading="lazy"
+          class:list={[
+            'size-full',
+            'object-cover',
+            'object-center',
+            'group-hover:scale-105',
+            'transition',
+          ]}
+        />
+      )
+    }
+
+    {!data.headerImage && <span>Image coming soon...</span>}
   </div>
 
   <div class:list={['flex', 'flex-col']}>
@@ -28,9 +76,9 @@ const { data, id } = entry;
     </h2>
   </div>
 
-  <p>
+  <p class:list={['text-ellipsis', 'line-clamp-4']}>
     {data.description}
   </p>
 
-  <Button type="link" href={`/projects/${id}`}> Read more </Button>
+  <Button type="button">Read more</Button>
 </a>
