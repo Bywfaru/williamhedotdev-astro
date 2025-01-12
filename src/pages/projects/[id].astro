@@ -36,6 +36,28 @@ const optimizedHeaderImage = headerImage
   : null;
 ---
 
+<script>
+  import { gsap } from '@/utils';
+
+  const breadcrumb = document.querySelector('.breadcrumb');
+  const heading = document.querySelector('.heading');
+  const subheading = document.querySelector('.subheading');
+  const content = document.querySelector('.content');
+
+  const timeline = gsap.timeline({
+    defaults: {
+      delay: -0.25,
+      duration: 0.5,
+    },
+  });
+
+  timeline
+    .to(breadcrumb, { y: 0, opacity: 1 })
+    .to(heading, { y: 0, opacity: 1 })
+    .to(subheading, { y: 0, opacity: 1 })
+    .to(content, { y: 0, opacity: 1 });
+</script>
+
 <MainLayout title={name} description={description}>
   <div
     slot="outer"
@@ -54,32 +76,56 @@ const optimizedHeaderImage = headerImage
   </div>
 
   <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
-    <Breadcrumb
-      links={[
-        {
-          label: 'Home',
-          href: '/',
-        },
-        {
-          label: 'Projects',
-          href: '/projects',
-        },
-        {
-          label: name,
-          href: `/projects/${id}`,
-        },
-      ]}
-    />
+    <div class:list={['breadcrumb', 'translate-y-12', 'opacity-0']}>
+      <Breadcrumb
+        links={[
+          {
+            label: 'Home',
+            href: '/',
+          },
+          {
+            label: 'Projects',
+            href: '/projects',
+          },
+          {
+            label: name,
+            href: `/projects/${id}`,
+          },
+        ]}
+      />
+    </div>
 
     <div class:list={['flex', 'flex-col', 'gap-2']}>
-      <h1 class:list={['text-6xl', 'text-accent-1']}>{name}</h1>
-      <h2 class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
+      <h1
+        class:list={[
+          'heading',
+          'translate-y-12',
+          'opacity-0',
+          'text-6xl',
+          'text-accent-1',
+        ]}
+      >
+        {name}
+      </h1>
+      <h2
+        class:list={[
+          'subheading',
+          'translate-y-12',
+          'opacity-0',
+          'text-2xl',
+          'font-mono',
+          'text-tertiary',
+        ]}
+      >
         {stack.join(', ')}
       </h2>
     </div>
 
     <article
       class:list={[
+        'content',
+        'translate-y-12',
+        'opacity-0',
         'flex',
         'flex-col',
         'gap-5',
