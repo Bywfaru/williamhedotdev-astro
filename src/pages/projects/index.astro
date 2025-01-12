@@ -3,38 +3,83 @@ import Breadcrumb from '@/components/Breadcrumb/Breadcrumb.astro';
 import CatalogCard from '@/components/pageSpecific/projectsCatalog/CatalogCard/CatalogCard.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { getCollection } from 'astro:content';
-import tailwindConfig from '../../../tailwind.config.mjs';
 
 const projectEntries = await getCollection('projects');
 ---
+
+<script>
+  import { gsap } from '@/utils';
+
+  const breadcrumb = document.querySelector('.breadcrumb');
+  const heading = document.querySelector('.heading');
+  const subheading = document.querySelector('.subheading');
+  const content = document.querySelector('.content');
+
+  const timeline = gsap.timeline({
+    defaults: {
+      delay: -0.25,
+      duration: 0.5,
+    },
+  });
+
+  timeline
+    .to(breadcrumb, { y: 0, opacity: 1 })
+    .to(heading, { y: 0, opacity: 1 })
+    .to(subheading, { y: 0, opacity: 1 })
+    .to(content, { y: 0, opacity: 1 });
+</script>
 
 <MainLayout
   title="Projects"
   description="A collection of projects I've worked on"
 >
   <div class:list={['flex', 'flex-col', 'gap-8', 'pt-10']}>
-    <Breadcrumb
-      links={[
-        {
-          label: 'Home',
-          href: '/',
-        },
-        {
-          label: 'Projects',
-          href: '/projects',
-        },
-      ]}
-    />
+    <div class:list={['breadcrumb', 'translate-y-12', 'opacity-0']}>
+      <Breadcrumb
+        links={[
+          {
+            label: 'Home',
+            href: '/',
+          },
+          {
+            label: 'Projects',
+            href: '/projects',
+          },
+        ]}
+      />
+    </div>
 
     <div class:list={['flex', 'flex-col', 'gap-2']}>
-      <h1 class:list={['text-6xl', 'text-accent-1']}>Projects</h1>
-      <p class:list={['text-2xl', 'font-mono', 'text-tertiary']}>
+      <h1
+        class:list={[
+          'heading',
+          'translate-y-12',
+          'opacity-0',
+          'text-6xl',
+          'text-accent-1',
+        ]}
+      >
+        Projects
+      </h1>
+      <p
+        class:list={[
+          'subheading',
+          'translate-y-12',
+          'opacity-0',
+          'text-2xl',
+          'font-mono',
+          'text-tertiary',
+        ]}
+      >
         A collection of projects I've worked on
       </p>
     </div>
 
     <div
       class:list={[
+        'content',
+        'translate-y-12',
+        'opacity-0',
         'grid',
         'grid-cols-1',
         'gap-5',
