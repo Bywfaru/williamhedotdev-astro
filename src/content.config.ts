@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { buildProjectSchema } from './data/projects/schema';
 import { buildSchoolSchema } from './data/schools/schema';
 import { buildEducationSchema } from './data/education/schema';
+import { buildResumeSchema } from './data/resume/schema';
 
 const CONTENT_BASE_PATH = './src/data';
 const DEFAULT_MARKDOWN_FILE_PATH_PATTERN = '**/*.md';
@@ -23,6 +24,13 @@ const projects = defineCollection({
   }),
   schema: (context) => buildProjectSchema(context),
 });
+const resume = defineCollection({
+  loader: glob({
+    pattern: DEFAULT_MARKDOWN_FILE_PATH_PATTERN,
+    base: buildContentBasePath('resume'),
+  }),
+  schema: (context) => buildResumeSchema(context),
+});
 const schools = defineCollection({
   loader: glob({
     pattern: DEFAULT_MARKDOWN_FILE_PATH_PATTERN,
@@ -31,4 +39,4 @@ const schools = defineCollection({
   schema: (context) => buildSchoolSchema(context),
 });
 
-export const collections = { education, projects, schools };
+export const collections = { education, projects, resume, schools };

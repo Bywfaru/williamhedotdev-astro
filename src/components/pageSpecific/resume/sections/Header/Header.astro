@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { AtSign, Link2, Phone } from 'lucide-react';
+
+export type HeaderProps = CollectionEntry<'resume'>['data']['basics'];
+type Props = HeaderProps;
+
+const { email, label, name, phone, url } = Astro.props;
+---
+
+<header id="basics" class:list={['w-full', 'flex', 'justify-between']}>
+  <div>
+    <h1 class:list={['text-[30pt]', 'font-bold']}>{name}</h1>
+    <p class:list={['text-[14pt]', 'italic', 'text-resume-accent']}>
+      {label}
+    </p>
+  </div>
+
+  <ul
+    class:list={[
+      'flex',
+      'flex-col',
+      'gap-2',
+      '[&_li]:flex',
+      '[&_li]:gap-2',
+      '[&_li]:items-center',
+    ]}
+  >
+    <li>
+      <Phone size="19" fill="black" />
+      <a href={`tel:${phone}`}>{phone}</a>
+    </li>
+    <li>
+      <AtSign size="19" />
+      <a href={`mailto:${email}`}>{email}</a>
+    </li>
+
+    {
+      !!url && (
+        <li>
+          <Link2 size="19" />
+          <a href={url}>{url}</a>
+        </li>
+      )
+    }
+  </ul>
+</header>
