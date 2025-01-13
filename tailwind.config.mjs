@@ -5,6 +5,7 @@ export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     colors: {
+      ...defaultTheme.colors,
       'body-bg': '#1E1E1E',
       'terminal-text-1': '#FFFFFF',
       'terminal-text-2': '#2EA16D',
@@ -22,22 +23,27 @@ export default {
       tertiary: '#AAAAAA',
       'accent-1': '#DFE0E2',
       'accent-2': '#EB5160',
+      'resume-accent': '#7471a3',
     },
     extend: {
       ...defaultTheme,
       fontFamily: {
+        ...defaultTheme.fontFamily,
         sans: ['Fira Sans', ...defaultTheme.fontFamily.sans],
         mono: ['Fira Code Variable', ...defaultTheme.fontFamily.mono],
         'terminal-serif': ['Ubuntu', ...defaultTheme.fontFamily.serif],
         'terminal-mono': ['Ubuntu Mono', ...defaultTheme.fontFamily.mono],
+        'resume-sans': ['Montserrat Variable', ...defaultTheme.fontFamily.sans],
       },
       keyframes: {
+        ...defaultTheme.keyframes,
         blink: {
           '0%, 100%': { opacity: 1 },
           '50%': { opacity: 0 },
         },
       },
       animation: {
+        ...defaultTheme.animation,
         blink: 'blink 2s step-end infinite',
       },
     },
