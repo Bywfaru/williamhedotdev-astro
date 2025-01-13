@@ -886,6 +886,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource-variable/fira-code/-/fira-code-5.1.1.tgz#57a4f5f1b4f34f2714f4894e5027b629ed186b4c"
   integrity sha512-+X0eaJHfG/igcrVS2jvYCymFUFtcChUpk3obRXLt8ZPYIE+sfZqhtidCEaCgkCQxR6zJbYmvMd6M+rjrya6KyQ==
 
+"@fontsource-variable/montserrat@^5.1.1":
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/@fontsource-variable/montserrat/-/montserrat-5.1.1.tgz#908185f4b17afeec8532301ed0991989dd341506"
+  integrity sha512-eHmSruS3B+4wVaHk6ShNUJj1MbWEohOuriwN/oYR2VY8jRS83a5SKQeG1wu4Eku3v3f5cXTIbfd1tHeQ7GXkiA==
+
 "@fontsource/fira-sans@^5.1.1":
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/@fontsource/fira-sans/-/fira-sans-5.1.1.tgz#cde0f3b38536d27c57fdc7d9784fca23946eda94"
