@@ -54,8 +54,9 @@ export const buildResumeSchema = ({ image }: SchemaContext) =>
       z.object({
         institution: z.string(),
         url: z.string().nullable(),
-        area: z.string(),
-        studyType: z.string().nullable(),
+        area: z.string().nullable(),
+        studyType: z.string(),
+        partiallyCompleted: z.boolean(),
         startDate: z.coerce.date(),
         endDate: z.coerce.date().nullable(),
         score: z.string().nullable(),
