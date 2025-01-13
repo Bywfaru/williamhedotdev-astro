@@ -1,0 +1,40 @@
+---
+import Education from '@/components/pageSpecific/resume/sections/Education/Education.astro';
+import Header from '@/components/pageSpecific/resume/sections/Header/Header.astro';
+import Interests from '@/components/pageSpecific/resume/sections/Interests/Interests.astro';
+import Skills from '@/components/pageSpecific/resume/sections/Skills/Skills.astro';
+import Work from '@/components/pageSpecific/resume/sections/Work/Work.astro';
+import ResumeLayout from '@/layouts/ResumeLayout.astro';
+import { getEntry } from 'astro:content';
+
+if (import.meta.env.PROD) return Astro.rewrite('/404');
+
+const resume = await getEntry('resume', '1');
+
+if (!resume) return Astro.rewrite('/404');
+
+const { data } = resume;
+const { basics, education, interests, skills, work } = data;
+---
+
+<ResumeLayout>
+  <div
+    class:list={[
+      'my-[1in]',
+      'mx-[1in]',
+      'print:m-0',
+      'flex',
+      'flex-col',
+      'gap-4',
+    ]}
+  >
+    <Header {...basics} />
+
+    <main class:list={['w-full', 'flex', 'flex-col', 'gap-4']}>
+      <Skills skills={skills} />
+      <Work jobs={work} />
+      <Education schools={education} />
+      <Interests interests={interests} />
+    </main>
+  </div>
+</ResumeLayout>

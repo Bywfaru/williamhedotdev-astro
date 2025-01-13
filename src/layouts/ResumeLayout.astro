@@ -1,0 +1,50 @@
+---
+import { i18next } from '@/utils';
+import '@fontsource-variable/montserrat';
+---
+
+<!doctype html>
+<html lang={i18next.language}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="generator" content={Astro.generator} />
+    <title>Resume | William He</title>
+    <meta name="description" content="The resume of William He" />
+  </head>
+
+  <body class:list={['font-resume-sans', 'text-[14pt]']}>
+    <div
+      class:list={[
+        'w-[8.5in]',
+        'min-h-[11in]',
+        'mx-auto',
+        'border',
+        'print:border-0',
+        '[&_main_a]:text-blue-600',
+        '[&_main_a]:underline',
+      ]}
+    >
+      <slot />
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    print-color-adjust: exact;
+  }
+
+  @media print {
+    @page {
+      margin: 0.5in 1.25in;
+      background-color: white;
+      size: 8.5in 11in;
+    }
+  }
+</style>

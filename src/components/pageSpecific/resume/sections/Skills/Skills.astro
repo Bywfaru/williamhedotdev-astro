@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export type SkillsProps = {
+  title?: string;
+  skills: CollectionEntry<'resume'>['data']['skills'];
+};
+type Props = SkillsProps;
+
+const { skills, title = 'Technical Skills' } = Astro.props;
+---
+
+{
+  !!skills.length && (
+    <section id="skills">
+      <h2
+        class:list={[
+          'py-1',
+          'font-bold',
+          'w-full',
+          'text-center',
+          'bg-black',
+          'text-white',
+        ]}
+      >
+        {title}
+      </h2>
+
+      <ul
+        class:list={[
+          'grid',
+          'grid-cols-2',
+          'gap-x-2',
+          'w-full',
+          'list-outside',
+          'list-disc',
+          '[&_li]:ml-4',
+        ]}
+      >
+        {skills.map((skill) => (
+          <li>
+            {skill.name}
+            {!!skill.keywords.length && (
+              <>
+                {' '}
+                <span class:list={['text-resume-accent', 'italic']}>
+                  ({skill.keywords.join(', ')})
+                </span>
+              </>
+            )}
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
