@@ -1,0 +1,71 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export type EducationProps = {
+  title?: string;
+  schools: CollectionEntry<'resume'>['data']['education'];
+};
+type Props = EducationProps;
+
+const { schools, title = 'Education' } = Astro.props;
+---
+
+{
+  !!schools.length && (
+    <section id="education">
+      <h2
+        class:list={[
+          'py-1',
+          'font-bold',
+          'w-full',
+          'text-center',
+          'bg-black',
+          'text-white',
+        ]}
+      >
+        {title}
+      </h2>
+
+      <ul class:list={['w-full', 'flex', 'flex-col', 'gap-4']}>
+        {schools.map((school) => {
+          const startDate = school.startDate
+            ? new Date(school.startDate)
+            : null;
+          const endDate = school.endDate ? new Date(school.endDate) : null;
+
+          return (
+            <li class:list={['flex', 'flex-col', 'w-full']}>
+              <div class:list={['flex', 'justify-between']}>
+                <h3 class:list={['font-bold']}>{school.institution}</h3>
+                <p class:list={['text-resume-accent', 'italic']}>
+                  {startDate ? startDate.getFullYear() : ''} -{' '}
+                  {endDate ? endDate.getFullYear() : 'Present'}
+                </p>
+              </div>
+
+              <p class:list={['text-resume-accent', 'italic', 'font-bold']}>
+                {school.studyType}
+                {school.partiallyCompleted && (
+                  <span class:list={['font-normal']}>
+                    {' '}
+                    (Partially completed)
+                  </span>
+                )}
+              </p>
+
+              <p class:list={['text-resume-accent', 'italic']}>{school.area}</p>
+
+              {!!school.highlights.length && (
+                <ul class:list={['list-disc', 'pl-10']}>
+                  {school.highlights.map((highlight) => (
+                    <li>{highlight}</li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )
+}

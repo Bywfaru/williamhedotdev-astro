@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { format } from 'date-fns';
+import { marked } from 'marked';
+
+export type WorkProps = {
+  title?: string;
+  jobs: CollectionEntry<'resume'>['data']['work'];
+};
+type Props = WorkProps;
+
+const { jobs, title = 'Professional Experience' } = Astro.props;
+---
+
+{
+  !!jobs.length && (
+    <section id="work">
+      <h2
+        class:list={[
+          'py-1',
+          'font-bold',
+          'w-full',
+          'text-center',
+          'bg-black',
+          'text-white',
+        ]}
+      >
+        {title}
+      </h2>
+
+      <ul class:list={['w-full', 'flex', 'flex-col', 'gap-4']}>
+        {jobs.map((job) => {
+          const startDate = format(job.startDate, 'yyyy');
+          const endDate = job.endDate ? format(job.endDate, 'yyyy') : 'Present';
+
+          return (
+            <li class:list={['flex', 'flex-col', 'w-full']}>
+              <div class:list={['flex', 'justify-between']}>
+                <h3 class:list={['font-bold']}>{job.name}</h3>
+                <p class:list={['text-resume-accent', 'italic']}>
+                  {startDate} - {endDate}
+                </p>
+              </div>
+
+              <p class:list={['text-resume-accent', 'italic', 'font-bold']}>
+                {job.position}
+              </p>
+
+              <p class:list={['text-resume-accent', 'italic']}>{job.summary}</p>
+
+              {!!job.highlights.length && (
+                <ul class:list={['list-disc', 'pl-10']}>
+                  {job.highlights.map((highlight) => (
+                    <li set:html={marked.parseInline(highlight)} />
+                  ))}
+                </ul>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+    </section>
+  )
+}

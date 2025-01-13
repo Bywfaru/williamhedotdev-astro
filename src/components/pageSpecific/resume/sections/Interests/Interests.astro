@@ -1,0 +1,46 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+export type InterestsProps = {
+  title?: string;
+  interests: CollectionEntry<'resume'>['data']['interests'];
+};
+type Props = InterestsProps;
+
+const { interests, title = 'Interests & Hobbies' } = Astro.props;
+---
+
+{
+  !!interests.length && (
+    <section id="interests">
+      <h2
+        class:list={[
+          'py-1',
+          'font-bold',
+          'w-full',
+          'text-center',
+          'bg-black',
+          'text-white',
+        ]}
+      >
+        {title}
+      </h2>
+
+      <ul class:list={['w-full', 'list-outside', 'list-disc', '[&_li]:ml-4']}>
+        {interests.map((interest) => (
+          <li>
+            <p class:list={['font-bold']}>
+              {interest.name}
+              {!!interest.description && (
+                <span class:list={['font-normal']}>
+                  {' '}
+                  - {interest.description}
+                </span>
+              )}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </section>
+  )
+}
