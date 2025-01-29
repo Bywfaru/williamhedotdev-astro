@@ -23,6 +23,7 @@
     "@types/react-google-recaptcha": "^2.1.9",
     "astro": "^5.1.1",
     "astro-icon": "^1.1.4",
+    "astro-seo": "^0.8.4",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
     "gsap": "^3.12.5",
