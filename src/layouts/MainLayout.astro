@@ -44,6 +44,7 @@ const links: NavbarLink[] = LINKS.map((link) => ({
   ...link,
   isCurrentPage: Astro.url.pathname === link.href,
 }));
+const url = `https://williamhe.dev${Astro.url.pathname}`;
 ---
 
 <!doctype html>
@@ -57,12 +58,13 @@ const links: NavbarLink[] = LINKS.map((link) => ({
     <SEO
       title={pageTitle}
       description={description}
+      canonical={url}
       openGraph={{
         basic: {
+          url,
           title: pageTitle,
           type: 'website',
           image: image || `https://williamhe.dev${optimizedLogo.src}`,
-          url: `https://williamhe.dev${Astro.url.pathname}`,
         },
       }}
     />
