@@ -1,11 +1,13 @@
 ---
 import dotGridWhite from '@/assets/images/dot-grid-white.png';
+import logo from '@/assets/images/logo.jpg';
 import type { NavbarLink } from '@/components/Navbar';
 import { Navbar } from '@/components/Navbar';
 import Footer from '@/components/pageSpecific/home/sections/Footer/Footer.astro';
 import { i18next, t } from '@/utils';
 import '@fontsource-variable/fira-code';
 import '@fontsource/fira-sans';
+import { SEO } from 'astro-seo';
 
 import { getImage } from 'astro:assets';
 
@@ -33,6 +35,10 @@ const optimizedBackgroundImage = await getImage({
   src: dotGridWhite,
   quality: 70,
 });
+const optimizedLogo = await getImage({
+  src: logo,
+  quality: 70,
+});
 const links: NavbarLink[] = LINKS.map((link) => ({
   ...link,
   isCurrentPage: Astro.url.pathname === link.href,
@@ -46,8 +52,18 @@ const links: NavbarLink[] = LINKS.map((link) => ({
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/x-icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
-    <title>{pageTitle}</title>
-    <meta name="description" content={description} />
+
+    <SEO
+      title={pageTitle}
+      description={description}
+      openGraph={{
+        basic: {
+          title: pageTitle,
+          type: 'website',
+          image: `${Astro.url.origin}${optimizedLogo.src}`,
+        },
+      }}
+    />
   </head>
 
   <body
