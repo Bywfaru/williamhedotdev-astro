@@ -14,6 +14,7 @@ import { getImage } from 'astro:assets';
 export type MainLayoutProps = {
   title?: string;
   description?: string;
+  image?: string;
 };
 type Props = MainLayoutProps;
 
@@ -28,7 +29,7 @@ const LINKS: NavbarLink[] = [
   },
 ];
 
-const { title, description = t('site.description') } = Astro.props;
+const { title, description = t('site.description'), image } = Astro.props;
 
 const pageTitle = title ? `${title} | William He` : t('site.title');
 const optimizedBackgroundImage = await getImage({
@@ -60,7 +61,8 @@ const links: NavbarLink[] = LINKS.map((link) => ({
         basic: {
           title: pageTitle,
           type: 'website',
-          image: `https://williamhe.dev${optimizedLogo.src}`,
+          image: image || `https://williamhe.dev${optimizedLogo.src}`,
+          url: `https://williamhe.dev${Astro.url.pathname}`,
         },
       }}
     />

@@ -58,7 +58,11 @@ const optimizedHeaderImage = headerImage
     .to(content, { y: 0, opacity: 1 });
 </script>
 
-<MainLayout title={name} description={description}>
+<MainLayout
+  title={name}
+  description={description}
+  image={`https://williamhe.dev${optimizedHeaderImage?.src}`}
+>
   <div
     slot="outer"
     class:list={['w-full', 'h-60', 'p-10', 'lg:h-80']}
