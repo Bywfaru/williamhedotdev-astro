@@ -6,6 +6,8 @@ import icon from 'astro-icon';
 import { defineConfig, envField } from 'astro/config';
 import { fileURLToPath, URL } from 'url';
 
+import vercel from '@astrojs/vercel';
+
 // https://astro.build/config
 export default defineConfig({
   integrations: [react(), tailwind(), icon()],
@@ -32,4 +34,6 @@ export default defineConfig({
     },
     validateSecrets: true,
   },
+
+  adapter: vercel(),
 });
