@@ -1,10 +1,10 @@
 // @ts-check
 import react from '@astrojs/react';
 import tailwind from '@astrojs/tailwind';
-import { defineConfig } from 'astro/config';
-import { fileURLToPath, URL } from 'url';
 
 import icon from 'astro-icon';
+import { defineConfig, envField } from 'astro/config';
+import { fileURLToPath, URL } from 'url';
 
 // https://astro.build/config
 export default defineConfig({
@@ -24,5 +24,12 @@ export default defineConfig({
   prefetch: {
     prefetchAll: true,
     defaultStrategy: 'hover',
+  },
+
+  env: {
+    schema: {
+      SECRET_KEY: envField.string({ context: 'server', access: 'secret' }),
+    },
+    validateSecrets: true,
   },
 });

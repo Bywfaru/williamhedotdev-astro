@@ -1,0 +1,555 @@
+---
+export const prerender = false;
+
+import { SECRET_KEY } from 'astro:env/server';
+
+const secret = Astro.url.searchParams.get('secret');
+
+if (secret !== SECRET_KEY) return new Response(null, { status: 404 });
+
+const today = new Date().toLocaleDateString('en-CA', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+
+const refNumber = 'DCR-2026-0438';
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document Review Request — Acme Inc</title>
+    <style>
+      *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+        font-size: 14px;
+        color: #1a1a1a;
+        background: #f4f5f7;
+        min-height: 100vh;
+      }
+
+      /* Top banner */
+      .top-bar {
+        background: #0052cc;
+        height: 4px;
+      }
+
+      /* Header */
+      header {
+        background: #fff;
+        border-bottom: 1px solid #dfe1e6;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 56px;
+      }
+
+      .logo-group {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-icon {
+        width: 28px;
+        height: 28px;
+        background: #0052cc;
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .logo-icon svg {
+        fill: #fff;
+      }
+
+      .logo-text {
+        font-size: 15px;
+        font-weight: 600;
+        color: #172b4d;
+        letter-spacing: -0.01em;
+      }
+
+      .logo-divider {
+        width: 1px;
+        height: 18px;
+        background: #dfe1e6;
+        margin: 0 10px;
+      }
+
+      .logo-product {
+        font-size: 13px;
+        color: #5e6c84;
+      }
+
+      .header-user {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        color: #5e6c84;
+      }
+
+      .avatar {
+        width: 28px;
+        height: 28px;
+        background: #deebff;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 11px;
+        font-weight: 600;
+        color: #0052cc;
+      }
+
+      /* Sub-nav */
+      .subnav {
+        background: #fff;
+        border-bottom: 1px solid #dfe1e6;
+        padding: 0 32px;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        height: 40px;
+      }
+
+      .subnav a {
+        font-size: 13px;
+        color: #5e6c84;
+        text-decoration: none;
+        padding: 0 2px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        border-bottom: 2px solid transparent;
+      }
+
+      .subnav a.active {
+        color: #0052cc;
+        border-bottom-color: #0052cc;
+        font-weight: 500;
+      }
+
+      /* Main */
+      main {
+        max-width: 860px;
+        margin: 32px auto;
+        padding: 0 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+
+      /* Breadcrumb */
+      .breadcrumb {
+        font-size: 12px;
+        color: #5e6c84;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .breadcrumb span { color: #97a0af; }
+
+      /* Card */
+      .card {
+        background: #fff;
+        border: 1px solid #dfe1e6;
+        border-radius: 4px;
+        overflow: hidden;
+      }
+
+      .card-header {
+        padding: 20px 24px 16px;
+        border-bottom: 1px solid #f4f5f7;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+      }
+
+      .card-header-left h1 {
+        font-size: 20px;
+        font-weight: 600;
+        color: #172b4d;
+        margin-bottom: 4px;
+      }
+
+      .card-header-left .ref {
+        font-size: 12px;
+        color: #5e6c84;
+      }
+
+      .status-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        padding: 4px 10px;
+        border-radius: 3px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+        background: #e3fcef;
+        color: #006644;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: #36b37e;
+      }
+
+      .card-body {
+        padding: 24px;
+      }
+
+      /* Meta grid */
+      .meta-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 0;
+        border: 1px solid #dfe1e6;
+        border-radius: 3px;
+        margin-bottom: 24px;
+        overflow: hidden;
+      }
+
+      .meta-cell {
+        padding: 12px 16px;
+        border-right: 1px solid #dfe1e6;
+        border-bottom: 1px solid #dfe1e6;
+      }
+
+      .meta-cell:nth-child(3n) { border-right: none; }
+      .meta-cell:nth-child(n+4) { border-bottom: none; }
+
+      .meta-label {
+        font-size: 11px;
+        font-weight: 600;
+        color: #5e6c84;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        margin-bottom: 4px;
+      }
+
+      .meta-value {
+        font-size: 13px;
+        color: #172b4d;
+        font-weight: 500;
+      }
+
+      /* Section */
+      .section-title {
+        font-size: 12px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #5e6c84;
+        margin-bottom: 10px;
+      }
+
+      /* Description box */
+      .description-box {
+        background: #f4f5f7;
+        border: 1px solid #dfe1e6;
+        border-radius: 3px;
+        padding: 14px 16px;
+        font-size: 13px;
+        line-height: 1.7;
+        color: #172b4d;
+        margin-bottom: 24px;
+      }
+
+      /* Document table */
+      .doc-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13px;
+        margin-bottom: 24px;
+      }
+
+      .doc-table thead tr {
+        background: #f4f5f7;
+        border-top: 1px solid #dfe1e6;
+        border-bottom: 1px solid #dfe1e6;
+      }
+
+      .doc-table th {
+        padding: 8px 12px;
+        text-align: left;
+        font-size: 11px;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: #5e6c84;
+      }
+
+      .doc-table td {
+        padding: 10px 12px;
+        border-bottom: 1px solid #f4f5f7;
+        color: #172b4d;
+        vertical-align: middle;
+      }
+
+      .doc-table tbody tr:last-child td { border-bottom: none; }
+
+      .doc-icon {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+      }
+
+      .doc-icon-badge {
+        width: 22px;
+        height: 22px;
+        border-radius: 3px;
+        background: #deebff;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 8px;
+        font-weight: 700;
+        color: #0052cc;
+        letter-spacing: 0;
+      }
+
+      .pill {
+        display: inline-block;
+        padding: 2px 8px;
+        border-radius: 2px;
+        font-size: 11px;
+        font-weight: 500;
+      }
+
+      .pill-yellow { background: #fffae6; color: #974f0c; }
+      .pill-blue   { background: #deebff; color: #0052cc; }
+      .pill-green  { background: #e3fcef; color: #006644; }
+
+      /* Action row */
+      .action-row {
+        display: flex;
+        gap: 10px;
+        padding-top: 4px;
+      }
+
+      .btn {
+        padding: 7px 16px;
+        border-radius: 3px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: not-allowed;
+        border: none;
+        opacity: 0.55;
+      }
+
+      .btn-primary { background: #0052cc; color: #fff; }
+      .btn-secondary { background: #f4f5f7; color: #172b4d; border: 1px solid #dfe1e6; }
+
+      .btn-note {
+        font-size: 11px;
+        color: #97a0af;
+        align-self: center;
+      }
+
+      /* Info box */
+      .info-box {
+        background: #deebff;
+        border-left: 3px solid #0052cc;
+        border-radius: 0 3px 3px 0;
+        padding: 12px 16px;
+        font-size: 13px;
+        color: #172b4d;
+        line-height: 1.6;
+      }
+
+      .info-box strong { color: #0052cc; }
+
+      /* Footer */
+      footer {
+        text-align: center;
+        padding: 24px 16px 40px;
+        font-size: 11px;
+        color: #97a0af;
+        line-height: 1.8;
+      }
+
+      footer a { color: #5e6c84; text-decoration: none; }
+
+      @media (max-width: 600px) {
+        header { padding: 0 16px; }
+        .subnav { padding: 0 16px; }
+        .meta-grid { grid-template-columns: repeat(2, 1fr); }
+        .meta-cell:nth-child(3n) { border-right: 1px solid #dfe1e6; }
+        .meta-cell:nth-child(2n) { border-right: none; }
+        .meta-cell:nth-child(n+5) { border-bottom: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="top-bar"></div>
+
+    <header>
+      <div class="logo-group">
+        <div class="logo-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24">
+            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/>
+          </svg>
+        </div>
+        <span class="logo-text">Acme Inc</span>
+        <div class="logo-divider"></div>
+        <span class="logo-product">Document Portal</span>
+      </div>
+      <div class="header-user">
+        <span>William He</span>
+        <div class="avatar">WH</div>
+      </div>
+    </header>
+
+    <nav class="subnav">
+      <a href="#">My Requests</a>
+      <a href="#" class="active">Review Queue</a>
+      <a href="#">Completed</a>
+      <a href="#">Templates</a>
+    </nav>
+
+    <main>
+      <div class="breadcrumb">
+        Review Queue <span>›</span> Document Change Requests <span>›</span> {refNumber}
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-header-left">
+            <h1>Q2 Policy Update — Acceptable Use Review</h1>
+            <div class="ref">Reference: {refNumber} &nbsp;·&nbsp; Submitted {today}</div>
+          </div>
+          <div class="status-badge">
+            <div class="status-dot"></div>
+            Awaiting Review
+          </div>
+        </div>
+
+        <div class="card-body">
+          <div class="meta-grid">
+            <div class="meta-cell">
+              <div class="meta-label">Submitted by</div>
+              <div class="meta-value">John Smith</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-label">Department</div>
+              <div class="meta-value">Information Security</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-label">Due date</div>
+              <div class="meta-value">June 6, 2026</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-label">Review type</div>
+              <div class="meta-value">Standard Approval</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-label">Priority</div>
+              <div class="meta-value">Normal</div>
+            </div>
+            <div class="meta-cell">
+              <div class="meta-label">Assigned to</div>
+              <div class="meta-value">William He</div>
+            </div>
+          </div>
+
+          <div class="section-title">Description</div>
+          <div class="description-box">
+            The Information Security team has prepared an update to the Acceptable Use Policy
+            (AUP) for the upcoming Q2 cycle. The revised document incorporates feedback from
+            the February all-hands session and aligns language with the new remote-work
+            guidelines issued by HR in March. Please review the attached draft and indicate
+            your approval or return comments by the due date above.
+          </div>
+
+          <div class="section-title">Attached documents</div>
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>File name</th>
+                <th>Version</th>
+                <th>Last modified</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <div class="doc-icon">
+                    <span class="doc-icon-badge">DOC</span>
+                    AUP-v2.4-DRAFT-2026-Q2.docx
+                  </div>
+                </td>
+                <td>v2.4-draft</td>
+                <td>May 21, 2026</td>
+                <td><span class="pill pill-yellow">Pending review</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="doc-icon">
+                    <span class="doc-icon-badge">PDF</span>
+                    AUP-v2.3-APPROVED-2025-Q4.pdf
+                  </div>
+                </td>
+                <td>v2.3</td>
+                <td>Nov 14, 2025</td>
+                <td><span class="pill pill-green">Approved</span></td>
+              </tr>
+              <tr>
+                <td>
+                  <div class="doc-icon">
+                    <span class="doc-icon-badge">DOC</span>
+                    Change-Summary-Q2-2026.docx
+                  </div>
+                </td>
+                <td>v1.0</td>
+                <td>May 21, 2026</td>
+                <td><span class="pill pill-blue">Reference</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="info-box" style="margin-bottom: 24px;">
+            <strong>Note:</strong> This is a read-only view. Action buttons are disabled in this
+            demonstration. In a live environment, reviewers would use the controls below to
+            approve, return, or escalate the request.
+          </div>
+
+          <div class="section-title">Actions</div>
+          <div class="action-row">
+            <button class="btn btn-primary" disabled>Approve</button>
+            <button class="btn btn-secondary" disabled>Return with comments</button>
+            <button class="btn btn-secondary" disabled>Escalate</button>
+            <span class="btn-note">Actions disabled — demonstration page</span>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      Acme Inc &mdash; Document Portal &nbsp;|&nbsp;
+      <a href="#">Privacy</a> &nbsp;·&nbsp;
+      <a href="#">Acceptable Use</a> &nbsp;·&nbsp;
+      <a href="#">Help</a>
+      <br />
+      This page is a static demonstration created for an academic lab exercise.
+      No data is collected or transmitted.
+    </footer>
+  </body>
+</html>
